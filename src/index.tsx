@@ -7,7 +7,7 @@ import App from "./App";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import { getAccessToken } from "./services/api-user-service";
-import { store } from "./store";
+import store from "./store";
 import { AuthUser } from "./store/action-creators/userActions";
 
 const token = getAccessToken();

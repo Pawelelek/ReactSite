@@ -3,7 +3,7 @@ import { Dispatch } from "redux"
 import { toast } from "react-toastify"
 import jwtDecode from "jwt-decode"
 // Import services
-import { createUser, deletebyid, getallusers, login, logout, removeTokens, setAccessToken, setRefreshToken } from "../../../services/api-user-service";
+import { convertandfetchvideo, createUser, deletebyid, deletesong, getallusers, getsongs, login, logout, removeTokens, setAccessToken, setRefreshToken } from "../../../services/api-user-service";
 
 export const LoginUser = (user : any) => {
     return async(dispatch: Dispatch<UserActions>) => {
@@ -28,6 +28,69 @@ export const LoginUser = (user : any) => {
          }
     }
 }
+
+export const ConvertAndFetchVideo = (link: string, userId: string) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      const data = await convertandfetchvideo(link, userId);
+      console.log("data in convert method: ",data.data.message);
+      if (data != null) {
+        //toast.success(data.data.message);
+        dispatch({
+          type: UserActionTypes.CONVERT_AND_FETCH_VIDEO_SUCCESS,
+          payload: data,
+        });
+        //toast.success(data.data.message);
+      }
+    } catch (error) {
+      dispatch({
+        type: UserActionTypes.SERVER_ERROR,
+        payload: "Помилка сервера при конвертації та отриманні відео",
+      });
+    }
+  };
+};
+
+
+export const GetSongsAsync = (userId: string) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      const data = await getsongs(userId);
+      if (data != null) {
+        dispatch({
+          type: UserActionTypes.GET_SONGS,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: UserActionTypes.SERVER_ERROR,
+        payload: "Помилка сервера при конвертації та отриманні відео",
+      });
+    }
+  };
+};
+
+export const DeleteSongAsync = (songId: number) => {
+  return async (dispatch: Dispatch<UserActions>) => { 
+    try {
+      const data = await deletesong(songId);
+      if (data != null) {
+        dispatch({
+          type: UserActionTypes.DELETE_SONGS,
+          payload: songId,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: UserActionTypes.SERVER_ERROR,
+        payload: "Помилка сервера при видаленні відео",
+      });
+    }
+  };
+};
+
+
 
 export const GetAllUsers = () => {
    return async (dispatch: Dispatch<UserActions>) => {
@@ -76,11 +139,27 @@ export const LogOut = (id: string) => {
   };
 };
 
-export const Create = async (user : any) => {
-    const data = createUser(user)
-    if (data !== null || data !== undefined) {
-      window.location.href = '/dashboard/users';
-    }    
+export const Create = (user : any) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      const data = await createUser(user);
+      if (data != null) {
+        dispatch({
+          type: UserActionTypes.CREATE_USER,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: UserActionTypes.SERVER_ERROR,
+        payload: error,
+      });
+    }
+  };   
+  // const data = createUser(user)
+  //     if (data !== null || data !== undefined) {
+  //       window.location.href = '/dashboard';
+  //     } 
 };
 
 export const AuthUser = (token: string, message: string, dispatch: Dispatch<UserActions>) => {

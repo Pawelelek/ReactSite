@@ -1,6 +1,7 @@
 #notfound{
     position: relative;
     height: 100vh;
+    background: linear-gradient(to right, #000428, #6a0dad);
 }
 #notfound a {
     text-decoration: none;

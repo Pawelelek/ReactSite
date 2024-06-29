@@ -55,7 +55,7 @@ console.log("user id: " + user.Id);
               <TableCell align="center">{user.role === 'Administrator' && user.Id !== row.id && (
                   <Button
                     onClick={() => FuncDelete(row.id)}
-                    style={{ backgroundColor: '#FF0000', color: '#00FF00' }}
+                    style={{ backgroundColor: '#FF0000', color: '#f5fafa', textTransform: 'none' }}
                   >
                     Delete
                   </Button>

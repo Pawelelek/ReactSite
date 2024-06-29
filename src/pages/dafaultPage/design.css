@@ -1,0 +1,38 @@
+/* Add this to your CSS file or in your component */
+
+body {
+    background-color: #f2f2f2; /* Set a background color */
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto; /* Center your content */
+    padding: 20px;
+  }
+  
+  .playlist-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Add more styles as needed */
+/* Add this to your CSS file or in your component */
+
+.audio-player-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* Set a background color for the player */
+    padding: 10px;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  /* Add more styles as needed */
+    

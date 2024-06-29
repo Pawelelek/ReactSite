@@ -1,0 +1,22 @@
+.audio-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  audio {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .play-pause {
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  

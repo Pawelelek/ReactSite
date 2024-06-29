@@ -19,6 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useActions } from "../../hooks/useActions";
 import { Link, Outlet } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import {useNavigate} from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -89,13 +90,14 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+//const defaultTheme = createTheme();
 const mdTheme = createTheme();
 
 export default function DashboardLayout() {
   const { user } = useTypedSelector((store) => store.UserReducer);
   const [anchorEl, setAnchorEl]: any = useState(null);
   const openProfileMenu = Boolean(anchorEl);
+  const navigator = useNavigate();
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -107,6 +109,7 @@ export default function DashboardLayout() {
 
   const Logout = () => {
     LogOut(user.Id);
+    navigator("/");
   };
 
   const [open, setOpen] = React.useState(true);
@@ -143,7 +146,7 @@ export default function DashboardLayout() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              MusicPlaylist
             </Typography>
             <div>
               {" "}
@@ -200,10 +203,12 @@ export default function DashboardLayout() {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            // backgroundColor: (theme) =>
+            //   theme.palette.mode === "light"
+            //     ? theme.palette.grey[100]
+            //     : theme.palette.grey[900],
+            background: (theme) =>
+      `linear-gradient(to bottom, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",

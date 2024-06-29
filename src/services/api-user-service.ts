@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 const instance = axios.create({
     baseURL: "https://localhost:5001/api/User",
@@ -16,6 +17,7 @@ instance.interceptors.request.use(
       return config;
     },
     (error) => {
+      //window.location.reload();
       return Promise.reject(error);
     }
   );
@@ -80,7 +82,38 @@ const User = {
     logout: (userId: string) => requests.get(`/logout?userId=` + userId),
     getallusers: () => requests.get(`/GetAll`),
     deletebyid: (userId: string) => requests.post(`/DeleteById?id=` + userId),
-    create: (user: any) => requests.post(`/Create`, user)
+    create: (user: any) => requests.post(`/Create`, user),
+    convertandfetchvideo: (link: string, userId: string) => requests.post(`/ConvertAndFetchVideo?userId=${userId}`, link),
+    getsongs: (userId: string) => requests.get(`/GetSongs?userId=` + userId),
+    deletesong: (songId: number) => requests.post(`/DeleteSong?songId=${songId}`)
+}
+
+export async function deletesong(songId: number) {
+  const data = await User.deletesong(songId);
+  //console.log("data", data);
+  return data;
+}
+
+export async function convertandfetchvideo(link: string, userId: string) {
+  const data = await User.convertandfetchvideo(link, userId);
+  let data2 = data as any;
+  //console.log("data2", data2.message);
+  if (data2.success === true)
+  {
+    toast.success(data2.message);
+  }
+  else
+  {
+    toast.error(data2.message);
+  }
+  //toast.success(data.data.message);
+  return data;
+}
+
+export async function getsongs(userId: string) {
+  const data = await User.getsongs(userId);
+  console.log("data songs: ", data);
+  return data;
 }
 
 export async function login(user: any){
@@ -109,17 +142,19 @@ export async function logout(userId: string){
     return data
 }
 
-export async function createUser(user: any){
-  const data = await User.create(user)
-  .then((response) => {
-      return {
-          response
-      }
-  })
-  .catch((error) => {
-      return error.response
-  } )
-  return data
+export function createUser(user: any){
+  console.log("user", user);
+  return User.create(user);
+  // .then((response) => {
+  //     return {
+  //         response
+  //     }
+  // })
+  // .catch((error) => {
+  //      return error.response
+  //     //console.log(error.response);
+  // } )
+  //return data;
 }
 
 export async function getallusers(){

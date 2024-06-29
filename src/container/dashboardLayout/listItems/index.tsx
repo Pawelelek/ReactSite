@@ -9,60 +9,65 @@ import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import List from "@mui/material/List";
 import { Link } from "react-router-dom";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
+import { makeStyles } from "@mui/styles";
+import { Theme } from "@mui/material/styles";
+
+const useStyles = makeStyles((theme: Theme) => ({
+  menu: {
+    background: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+    borderRadius: theme.shape.borderRadius,
+    transition: "background-color 0.5s ease-in-out",
+    "&:hover": {
+      backgroundColor: theme.palette.grey[300],
+    },
+  },
+}));
+
+interface IAdminMenuProps {
+  items: React.ReactNodeArray;
+}
+
+const AdminMenu: React.FC<IAdminMenuProps> = ({ items }) => {
+  const classes = useStyles();
+
+  return (
+    <List className={classes.menu} component="nav" aria-labelledby="nested-list-subheader">
+      {items}
+    </List>
+  );
+};
 
 export const adminMenu = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <Link to="">
-        <ListItemText primary="Dashboard" />
-      </Link>
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <Link to="users">
-        <ListItemText primary="Users" />
-      </Link>
-    </ListItemButton>
-    <ListItemButton>
-    <ListItemIcon>
-        <AddIcon />
-      </ListItemIcon>
-        <Link to="create">
+    <AdminMenu
+      items={[
+        <ListItemButton component={Link} to="/" key={1}>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </ListItemButton>,
+        <ListItemButton component={Link} to="users" key={2}>
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Users" />
+        </ListItemButton>,
+        <ListItemButton component={Link} to="create" key={3}>
+          <ListItemIcon>
+            <AddIcon />
+          </ListItemIcon>
           <ListItemText primary="Create User" />
-        </Link>
-      </ListItemButton>
+        </ListItemButton>,
+      ]}
+    />
   </React.Fragment>
 );
 
 export const userMenu = (
   <React.Fragment>
-    <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
   </React.Fragment>
 );

@@ -8,6 +8,8 @@ const initialState: UserState = {
   isAuth: false,
   selectedUser: null,
   allUsers: [],
+  base64Content: null,
+  success: false
 };
 
 const UserReducer = (state = initialState, action: UserActions): UserState => {
@@ -37,9 +39,57 @@ const UserReducer = (state = initialState, action: UserActions): UserState => {
         isAuth: false,
         selectedUser: null,
         allUsers: [],
+        base64Content: null,
+        success: true
       };
       case UserActionTypes.GET_ALL_USERS:
         return { ...state, loading: false, allUsers: action.payload.allUsers , message: action.payload.message};
+      case UserActionTypes.CONVERT_AND_FETCH_VIDEO_SUCCESS:
+        console.log("action payload:                           ", action.payload);
+        console.log("action payload.payload dawdawdwadwdawwa dawdawdwadwa :                           ", action.payload.payload);
+        console.log("data message:", action.payload.message);
+
+        return {
+          ...state,
+          loading: false,
+          message: action.payload.message,
+          base64Content: action.payload.payload,
+          success: action.payload.success
+          
+          };  
+          case UserActionTypes.GET_SONGS:
+            //console.log("action payload:                           ", action.payload);
+            console.log("action payload.payload dawdawdwadwdawwa dawdawdwadwa :                           ", action.payload.payload);
+            return {
+              ...state,
+              loading: false,
+              message: action.payload.message,
+              allUsers: action.payload.payload,
+              
+              };      
+              case UserActionTypes.DELETE_SONGS:
+                console.log("action!: ",action);
+                //console.log("action payload:                           ", action.payload);
+                //console.log("action payload.payload dawdawdwadwdawwa dawdawdwadwa :                           ", action.payload.payload);
+                return {
+                  ...state,
+                  loading: false,
+                  message: "Пісня видалена",
+                  allUsers: state.allUsers.filter(x => x.id !== action.payload)
+                  //allUsers: action.payload.payload,
+                  
+                  };    
+
+                  case UserActionTypes.CREATE_USER:
+                    //console.log("action payload:                           ", action.payload);
+                    //console.log("action payload.payload dawdawdwadwdawwa dawdawdwadwa :                           ", action.payload.payload);
+                    return {
+                      ...state,
+                      loading: false,
+                      message: "Користувач доданий",
+                      //allUsers: action.payload.payload,
+                      
+                      };                  
     default:
       return state;
   }

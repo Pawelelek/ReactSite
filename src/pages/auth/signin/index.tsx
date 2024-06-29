@@ -66,6 +66,16 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Box
+      component="main"
+      sx={{
+        background: (theme) =>
+          `linear-gradient(to bottom, ${theme.palette.primary.main} 45%, ${theme.palette.secondary.main} 55%)`,
+        flexGrow: 1,
+        height: "100vh",
+        overflow: "auto",
+      }}
+    >
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -134,9 +144,9 @@ export default function SignIn() {
                   Sign In
                 </Button>
                 <Grid container>
-                  <Grid item xs>
+                  {/* <Grid item xs>
                     <Link to="/">Forgot password?</Link>
-                  </Grid>
+                  </Grid> */}
                   <Grid item>
                     <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
                   </Grid>
@@ -147,6 +157,7 @@ export default function SignIn() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
+     </Box>  
     </ThemeProvider>
   );
 }

@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import SignIn from "./pages/auth/signin";
+import SignUp from "./pages/auth/signup";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import NotFound from "./pages/notFound";
 import DashboardLayout from "./container/dashboardLayout";
@@ -24,6 +25,7 @@ function App() {
           )}
           {user.role === "User" && (
             <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<DefaultPage />} />
               <Route path="users" element={<AllUsers />} />
             </Route>
           )}
@@ -32,6 +34,7 @@ function App() {
 
       <Route path="/" element={<SignIn />} />
       <Route path="/dashboard" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp/>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

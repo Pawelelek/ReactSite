@@ -1,7 +1,7 @@
 import { UserActionTypes, UserActions } from "../../reducers/userReducer/types";
 import { Dispatch } from "redux"
 import { toast } from "react-toastify"
-import jwtDecode from "jwt-decode"
+import {jwtDecode} from "jwt-decode"
 // Import services
 import { convertandfetchvideo, createUser, deletebyid, deletesong, getallusers, getsongs, login, logout, removeTokens, setAccessToken, setRefreshToken } from "../../../services/api-user-service";
 

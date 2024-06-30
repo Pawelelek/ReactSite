@@ -81,7 +81,8 @@ const User = {
     getallusers: () => requests.get(`/GetAll`),
     deletebyid: (userId: string) => requests.delete(`/DeleteById?id=` + userId),
     create: (user: any) => requests.post(`/Create`, user),
-    update: (user: any) => requests.put(`/Update` + user)
+    update: (user: any) => requests.put(`/Update`, user),
+    getbyid: (userId: string) => requests.get(`/GetById?Id=` + userId)
 }
 
 export async function login(user: any){
@@ -126,6 +127,33 @@ export async function getallusers(){
   } )
   return data
 }
+
+export async function getbyid(userId: string){
+  const data = await User.getbyid(userId)
+  .then((response) => { 
+    return {
+          response
+      }
+  })
+  .catch((error) => {
+      return error.response
+  } )
+  return data
+}
+
+// export async function getbyid(userId: string){
+//   try {
+//     const response = await User.getbyid(userId);
+//     return {
+//       success: true,
+//       payload: response,
+//     };
+//   } catch (error) {
+//     return {
+//       success: false,
+//     };
+//   }
+// }
 
 export async function updateUser(user: any){
   const data = await User.update(user)

@@ -16,9 +16,12 @@ const AllUsers = () => {
      DeleteById(id);
   }
 
+  // const handleUpdate = (id: string) => {
+  //   navigate(`/dashboard/update/${id}`);
+  // };
   const handleUpdate = (id: string) => {
-    navigate(`/dashboard/update/${id}`);
-  };
+    navigate('/dashboard/update', { state: { userId: id } });
+ };
 
   return (
     <TableContainer component={Paper}>

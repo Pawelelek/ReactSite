@@ -22,7 +22,7 @@ function App() {
               <Route path="users" element={<AllUsers />} />
               <Route path="create" element={<CreateUser />} />
               {/* <Route path="update" element={<UpdateUser />} /> */}
-              <Route path="/dashboard/update/:id" element={<UpdateUser />} />
+              <Route path="/dashboard/update" element={<UpdateUser />} />
             </Route>
           )}
           {user.role === "User" && (

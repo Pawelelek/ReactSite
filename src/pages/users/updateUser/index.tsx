@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Button, Paper, TextField } from '@mui/material';
 import { useActions } from '../../../hooks/useActions';
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { useLocation } from 'react-router-dom';
+import { getbyid } from '../../../services/api-user-service';
 
 const UpdateUser = () => {
   const { GetAllUsers } = useActions();
-  const { Update } = useActions();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { Update  } = useActions();
+  //const { user } = useTypedSelector((store) => store.UserReducer);
+  const location = useLocation();
+  const { userId } = location.state || {};
+  //const response = GetById(userId);
 
   useEffect(() => {
     GetAllUsers()
   }, []);
 
   const [user, setUser] = useState({
-    id: searchParams.get('id'),
+    id: userId,
     firstName: '',
     lastName: '',
     email: '',
@@ -23,7 +28,7 @@ const UpdateUser = () => {
   });
 
   const [errors, setErrors] = useState({
-    id: searchParams.get('id'),
+    id: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -31,6 +36,41 @@ const UpdateUser = () => {
     confirmPassword: '',
     phoneNumber: ''
   });
+
+  useEffect(() => {
+    const fetchUser = async (id: string) => {
+      const result = await getbyid(id);
+      console.log(result);
+      //console.log("user: " + result.response.payload.firstName);
+      // if (result.success) {
+      //   setUser({
+      //     id: userId,
+      //     firstName: result.response.payload.firstName || '',
+      //     lastName: result.response.payload.lastName || '',
+      //     email: result.response.payload.email || '',
+      //     password: '',
+      //     confirmPassword: '',
+      //     phoneNumber: result.response.payload.phoneNumber || '',
+      //   });
+        
+      // } else {
+      //   //console.error('Failed to fetch user:', result.error);
+      // }
+      setUser({
+        id: userId,
+        firstName: result.response.payload.firstName || '',
+        lastName: result.response.payload.lastName || '',
+        email: result.response.payload.email || '',
+        password: '',
+        confirmPassword: '',
+        phoneNumber: result.response.payload.phoneNumber || '',
+      });
+    };
+
+    if (userId) {
+      fetchUser(userId);
+    }
+  }, [userId]);
 
   const isFormValid = () => {
     return Object.values(user).every((value) => value !== '') && !Object.values(errors).some((error) => error !== '');
@@ -87,9 +127,10 @@ const UpdateUser = () => {
   };
 
   const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log('Дані для оновлення користувача:', user);
-    Update(user);
+     e.preventDefault();
+     //console.log('response:', response);
+     Update(user);
+    //console.log("selected user:" + user.id);
   };
 
   return (
@@ -175,7 +216,7 @@ const UpdateUser = () => {
           variant="contained"
           color="primary"
           style={{ marginTop: 10 }}
-          //disabled={!isFormValid()}
+          disabled={!isFormValid()}
         >
           Update User
         </Button>

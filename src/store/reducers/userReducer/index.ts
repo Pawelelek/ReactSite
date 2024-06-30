@@ -49,6 +49,24 @@ const UserReducer = (state = initialState, action: UserActions): UserState => {
                       loading: false,
                       message: "Користувач доданий",
                       };      
+                      case UserActionTypes.UPDATE_USER:
+      return {
+        ...state,
+        loading: false,
+        message: "Користувач оновлений",
+        allUsers: state.allUsers.map(user => user.id === action.payload.id ? action.payload : user),
+      };
+    case UserActionTypes.UPDATE_USER_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+      case UserActionTypes.GET_USER_BY_ID:
+      return {
+        ...state,
+        user: action.payload
+      };
     default:
       return state;
   }

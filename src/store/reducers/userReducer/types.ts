@@ -1,10 +1,3 @@
-import { AxiosResponse } from 'axios';
-
-interface ISong {
-  id: number;
-  name: string;
-  songUrl: string;
-}
 export interface UserState{
     user: any,
     message: null | string,
@@ -12,8 +5,7 @@ export interface UserState{
     error: null | string,
     isAuth: boolean,
     selectedUser: any,
-    allUsers: ISong[],
-    base64Content: string | null, 
+    allUsers: [],
     success: boolean
 }
 
@@ -25,31 +17,13 @@ export enum UserActionTypes {
     SERVER_ERROR = "SERVER_ERROR",
     LOGOUT_USER = "LOGOUT_USER",
     GET_ALL_USERS = "GET_ALL_USERS",
-    CONVERT_AND_FETCH_VIDEO_SUCCESS = " CONVERT_AND_FETCH_VIDEO_SUCCESS",
-    GET_SONGS = "GET_SONGS",
-    DELETE_SONGS = "DELETE_SONGS",
-    CREATE_USER = "CREATE_USER"
+    CREATE_USER = "CREATE_USER",
 }
 
 interface CreateUserAction {
   type: UserActionTypes.CREATE_USER,
   payload: any
 } 
-
-interface DeleteSongsAction {
-    type: UserActionTypes.DELETE_SONGS,
-    payload: any
-  } 
-
-interface GetSongsAction {
-    type: UserActionTypes.GET_SONGS,
-    payload: any
-  } 
-
-interface ConvertAndFetchVideoSuccessAction {
-    type: UserActionTypes.CONVERT_AND_FETCH_VIDEO_SUCCESS,
-    payload: any
-  }  
 
 interface StartRequestAction {
     type: UserActionTypes.START_REQUEST
@@ -83,5 +57,5 @@ interface ServerErrorAction{
     payload: any
 }
 
-export type UserActions = CreateUserAction | DeleteSongsAction | GetSongsAction | GetAllUsersAction | LogoutUserAction |  StartRequestAction | FinishRequestAction | LoginUserSuccessAction | LoginUserErrorAction | ServerErrorAction | ConvertAndFetchVideoSuccessAction
+export type UserActions =  CreateUserAction | GetAllUsersAction | LogoutUserAction |  StartRequestAction | FinishRequestAction | LoginUserSuccessAction | LoginUserErrorAction | ServerErrorAction 
 

@@ -1,5 +1,4 @@
 import axios from "axios"
-import { toast } from "react-toastify";
 
 const instance = axios.create({
     baseURL: "https://localhost:5001/api/User",
@@ -17,7 +16,6 @@ instance.interceptors.request.use(
       return config;
     },
     (error) => {
-      //window.location.reload();
       return Promise.reject(error);
     }
   );
@@ -29,11 +27,9 @@ instance.interceptors.request.use(
     async (err) => {
       const originalConfig = err.config;
       if (err.response) {
-        // Validation failed, ...
         if (err.response.status === 400 && err.response.data) {
           return Promise.reject(err.response.data);
         }
-        // Access Token was expired
         if (
           err.response.status === 401 &&
           !originalConfig._retry &&
@@ -74,46 +70,18 @@ const responseBody: any = (response: any) => response.data;
 
 const requests = {
     get: (url: string) => instance.get(url).then().then(responseBody),
-    post: (url: string, body?: any) => instance.post(url, body).then().then(responseBody)
+    post: (url: string, body?: any) => instance.post(url, body).then().then(responseBody),
+    put: (url: string, body?: any) => instance.put(url,body).then().then(responseBody),
+    delete: (url: string) => instance.delete(url).then().then(responseBody)
 }
 
 const User = {
     login: (user: any) => requests.post(`/login`, user),
     logout: (userId: string) => requests.get(`/logout?userId=` + userId),
     getallusers: () => requests.get(`/GetAll`),
-    deletebyid: (userId: string) => requests.post(`/DeleteById?id=` + userId),
+    deletebyid: (userId: string) => requests.delete(`/DeleteById?id=` + userId),
     create: (user: any) => requests.post(`/Create`, user),
-    convertandfetchvideo: (link: string, userId: string) => requests.post(`/ConvertAndFetchVideo?userId=${userId}`, link),
-    getsongs: (userId: string) => requests.get(`/GetSongs?userId=` + userId),
-    deletesong: (songId: number) => requests.post(`/DeleteSong?songId=${songId}`)
-}
-
-export async function deletesong(songId: number) {
-  const data = await User.deletesong(songId);
-  //console.log("data", data);
-  return data;
-}
-
-export async function convertandfetchvideo(link: string, userId: string) {
-  const data = await User.convertandfetchvideo(link, userId);
-  let data2 = data as any;
-  //console.log("data2", data2.message);
-  if (data2.success === true)
-  {
-    toast.success(data2.message);
-  }
-  else
-  {
-    toast.error(data2.message);
-  }
-  //toast.success(data.data.message);
-  return data;
-}
-
-export async function getsongs(userId: string) {
-  const data = await User.getsongs(userId);
-  console.log("data songs: ", data);
-  return data;
+    update: (user: any) => requests.put(`/Update` + user)
 }
 
 export async function login(user: any){
@@ -143,24 +111,26 @@ export async function logout(userId: string){
 }
 
 export function createUser(user: any){
-  console.log("user", user);
   return User.create(user);
-  // .then((response) => {
-  //     return {
-  //         response
-  //     }
-  // })
-  // .catch((error) => {
-  //      return error.response
-  //     //console.log(error.response);
-  // } )
-  //return data;
 }
 
 export async function getallusers(){
   const data = await User.getallusers()
   .then((response) => {
       return {
+          response
+      }
+  })
+  .catch((error) => {
+      return error.response
+  } )
+  return data
+}
+
+export async function updateUser(user: any){
+  const data = await User.update(user)
+  .then((response) => { 
+    return {
           response
       }
   })

@@ -11,7 +11,6 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Formik, Field } from "formik";
 import { RegisterSchema } from "../validation";
-import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Loader from "../../../components/loader";
 import { useDispatch } from "react-redux";
@@ -43,10 +42,8 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  //const { LoginUser } = useActions();
   const navigator = useNavigate();
   const dispatch = useDispatch();
-  //const {Create} = useActions();
   const { isAuth, loading } = useTypedSelector((store) => store.UserReducer);
 
   if (isAuth) {
@@ -69,7 +66,6 @@ export default function SignIn() {
       phoneNumber: data.get("phoneNumber"),
       role: "User"
     };
-    //Create(user);
     try {
         const data = await createUser(user);
         if (data != null) {
@@ -85,7 +81,6 @@ export default function SignIn() {
           payload: error,
         });
       }
-    /// data from server
   };
 
   return (

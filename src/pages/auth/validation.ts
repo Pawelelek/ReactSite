@@ -45,8 +45,6 @@ export const ResetPasswordSchema = Yup.object().shape({
     .max(20)
     .min(9)
     .required("Phone number is required"),
-    // roles: Yup.string()
-    // .required("Required Role")
   });
   
   export const ChangePasswordSchema = Yup.object().shape({

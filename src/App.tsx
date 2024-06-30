@@ -8,10 +8,10 @@ import DashboardLayout from "./container/dashboardLayout";
 import DefaultPage from "./pages/dafaultPage";
 import AllUsers from "./pages/users/allUsers";
 import CreateUser from "./pages/users/createUser";
+import UpdateUser from "./pages/users/updateUser";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
-  //console.log("user " + user);
   return (
     <Routes>
       {isAuth && (
@@ -21,12 +21,13 @@ function App() {
               <Route index element={<DefaultPage />} />
               <Route path="users" element={<AllUsers />} />
               <Route path="create" element={<CreateUser />} />
+              {/* <Route path="update" element={<UpdateUser />} /> */}
+              <Route path="/dashboard/update/:id" element={<UpdateUser />} />
             </Route>
           )}
           {user.role === "User" && (
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<DefaultPage />} />
-              <Route path="users" element={<AllUsers />} />
             </Route>
           )}
         </>

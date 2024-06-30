@@ -1,36 +1,35 @@
 import { useEffect, useState } from 'react';
-import { Button, Paper, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { Button, Paper, TextField } from '@mui/material';
 import { useActions } from '../../../hooks/useActions';
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
-const CreateUser = () => {
-  const { allUsers } = useTypedSelector((store) => store.UserReducer);
+const UpdateUser = () => {
   const { GetAllUsers } = useActions();
-  const { Create } = useActions();
-  const roles = Array.from(new Set(allUsers.map((user: any) => user.role)));
+  const { Update } = useActions();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     GetAllUsers()
   }, []);
 
   const [user, setUser] = useState({
+    id: searchParams.get('id'),
     firstName: '',
     lastName: '',
     email: '',
-    role: '',
     password: '',
     confirmPassword: '',
-    phoneNumber: '',
+    phoneNumber: ''
   });
 
   const [errors, setErrors] = useState({
+    id: searchParams.get('id'),
     firstName: '',
     lastName: '',
     email: '',
-    role: '',
     password: '',
     confirmPassword: '',
-    phoneNumber: '',
+    phoneNumber: ''
   });
 
   const isFormValid = () => {
@@ -89,13 +88,13 @@ const CreateUser = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log('Дані для створення користувача:', user);
-    Create(user);
+    console.log('Дані для оновлення користувача:', user);
+    Update(user);
   };
 
   return (
     <Paper style={{ padding: 20, maxWidth: 400, margin: '0 auto' }}>
-      <h1>Create User</h1>
+      <h1>Update User</h1>
       <form onSubmit={handleSubmit}>
         <TextField
           label="First Name"
@@ -133,16 +132,6 @@ const CreateUser = () => {
           style={{ marginBottom: 10 }}
           required
         />
-        <FormControl variant="outlined" fullWidth style={{ marginBottom: 10 }}>
-          <InputLabel>Role</InputLabel>
-          <Select name="role" value={user.role} onChange={handleChange} error={!!errors.role} required>
-            {roles.map((role) => (
-              <MenuItem key={role} value={role}>
-                {role}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
         <TextField
           label="Password"
           name="password"
@@ -186,13 +175,13 @@ const CreateUser = () => {
           variant="contained"
           color="primary"
           style={{ marginTop: 10 }}
-          disabled={!isFormValid()}
+          //disabled={!isFormValid()}
         >
-          Create User
+          Update User
         </Button>
       </form>
     </Paper>
   );
 };
 
-export default CreateUser;
+export default UpdateUser;

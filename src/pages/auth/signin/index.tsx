@@ -61,7 +61,6 @@ export default function SignIn() {
       password: data.get("password"),
     };
     LoginUser(user);
-    /// data from server
   };
 
   return (

@@ -90,7 +90,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 // TODO remove, this demo shouldn't need to reset the theme.
-//const defaultTheme = createTheme();
 const mdTheme = createTheme();
 
 export default function DashboardLayout() {
@@ -124,7 +123,7 @@ export default function DashboardLayout() {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "24px", // keep right padding when drawer closed
+              pr: "24px",
             }}
           >
             <IconButton
@@ -146,7 +145,7 @@ export default function DashboardLayout() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              MusicPlaylist
+              Go1Bet
             </Typography>
             <div>
               {" "}
@@ -203,10 +202,6 @@ export default function DashboardLayout() {
         <Box
           component="main"
           sx={{
-            // backgroundColor: (theme) =>
-            //   theme.palette.mode === "light"
-            //     ? theme.palette.grey[100]
-            //     : theme.palette.grey[900],
             background: (theme) =>
       `linear-gradient(to bottom, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
             flexGrow: 1,

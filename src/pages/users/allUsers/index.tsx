@@ -2,11 +2,12 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useEffect } from "react";
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useActions } from "../../../hooks/useActions";
+import { useNavigate } from 'react-router-dom';
 
 const AllUsers = () => {
    const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
-   const { GetAllUsers } = useActions();
-   const { DeleteById } = useActions();
+   const { GetAllUsers, DeleteById, Update } = useActions();
+   const navigate = useNavigate();
   useEffect(() => {
     GetAllUsers()
   }, []);
@@ -15,14 +16,11 @@ const AllUsers = () => {
      DeleteById(id);
   }
 
-  for (const row of allUsers) {
-    console.log("User Data:", row);
-  }
-
-console.log("user id: " + user.Id);
+  const handleUpdate = (id: string) => {
+    navigate(`/dashboard/update/${id}`);
+  };
 
   return (
-    // <h1>All users</h1>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -34,7 +32,10 @@ console.log("user id: " + user.Id);
             <TableCell align="center">Phone Number</TableCell>
             <TableCell align="center">Role</TableCell>
             {user.role === 'Administrator' && (
-                  <TableCell align="center">Action</TableCell>
+                  <TableCell align="center">Delete</TableCell>
+                )}
+                {user.role === 'Administrator' && (
+                  <TableCell align="center">Update</TableCell>
                 )}
           </TableRow>
         </TableHead>
@@ -58,6 +59,17 @@ console.log("user id: " + user.Id);
                     style={{ backgroundColor: '#FF0000', color: '#f5fafa', textTransform: 'none' }}
                   >
                     Delete
+                  </Button>
+                )}</TableCell>
+                <TableCell align="center">{user.role === 'Administrator' && user.Id !== row.id && (
+                  <Button
+                    // onClick={
+                    //   () => window.location.href = '/dashboard/update'
+                    // }
+                    onClick={() => handleUpdate(row.id)}
+                    style={{ backgroundColor: '#d95a11', color: '#f5fafa', textTransform: 'none' }}
+                  >
+                    Update
                   </Button>
                 )}</TableCell>
             </TableRow>

@@ -94,6 +94,7 @@ const mdTheme = createTheme();
 
 export default function DashboardLayout() {
   const { user } = useTypedSelector((store) => store.UserReducer);
+  console.log("user role: " + user.role);
   const [anchorEl, setAnchorEl]: any = useState(null);
   const openProfileMenu = Boolean(anchorEl);
   const navigator = useNavigate();
@@ -108,7 +109,7 @@ export default function DashboardLayout() {
 
   const Logout = () => {
     LogOut(user.Id);
-    navigator("/");
+    navigator("/dashboard");
   };
 
   const [open, setOpen] = React.useState(true);
@@ -167,14 +168,24 @@ export default function DashboardLayout() {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem>
-                  <Link to="profile" style={{ textDecoration: "none" }}>
-                    Profile
+                {/* <MenuItem>
+                  <Link to="/signin" style={{ textDecoration: "none" }}>
+                    SignIn
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={Logout}>
                 Logout
-                </MenuItem>
+                </MenuItem> */}
+                { user.role === 'Administrator' || user.role === 'User' ? (
+                  <MenuItem onClick={Logout}>Logout</MenuItem>
+                ) : (
+                  
+                  <MenuItem>
+                    <Link to="/signin" style={{ textDecoration: "none" }}>
+                      SignIn
+                    </Link>
+                  </MenuItem>
+                )}
               </Menu>
             </div>
           </Toolbar>

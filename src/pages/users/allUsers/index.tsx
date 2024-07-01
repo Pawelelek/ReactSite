@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AllUsers = () => {
    const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
-   const { GetAllUsers, DeleteById, Update } = useActions();
+   const { GetAllUsers, DeleteById } = useActions();
    const navigate = useNavigate();
   useEffect(() => {
     GetAllUsers()
@@ -16,11 +16,8 @@ const AllUsers = () => {
      DeleteById(id);
   }
 
-  // const handleUpdate = (id: string) => {
-  //   navigate(`/dashboard/update/${id}`);
-  // };
   const handleUpdate = (id: string) => {
-    navigate('/dashboard/update', { state: { userId: id } });
+    navigate('/dashboard/update/' + id);
  };
 
   return (
@@ -66,9 +63,6 @@ const AllUsers = () => {
                 )}</TableCell>
                 <TableCell align="center">{user.role === 'Administrator' && user.Id !== row.id && (
                   <Button
-                    // onClick={
-                    //   () => window.location.href = '/dashboard/update'
-                    // }
                     onClick={() => handleUpdate(row.id)}
                     style={{ backgroundColor: '#d95a11', color: '#f5fafa', textTransform: 'none' }}
                   >

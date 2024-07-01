@@ -111,8 +111,17 @@ export async function logout(userId: string){
     return data
 }
 
-export function createUser(user: any){
-  return User.create(user);
+export async function createUser(user: any){
+  const data = await User.create(user)
+  .then((response) => { 
+    return {
+          response
+      }
+  })
+  .catch((error) => {
+      return error.response
+  } )
+  return data
 }
 
 export async function getallusers(){
@@ -140,20 +149,6 @@ export async function getbyid(userId: string){
   } )
   return data
 }
-
-// export async function getbyid(userId: string){
-//   try {
-//     const response = await User.getbyid(userId);
-//     return {
-//       success: true,
-//       payload: response,
-//     };
-//   } catch (error) {
-//     return {
-//       success: false,
-//     };
-//   }
-// }
 
 export async function updateUser(user: any){
   const data = await User.update(user)

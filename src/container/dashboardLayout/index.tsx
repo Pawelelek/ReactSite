@@ -21,23 +21,23 @@ import { Link, Outlet } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {useNavigate} from "react-router-dom";
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" to="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// function Copyright(props: any) {
+//   return (
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       align="center"
+//       {...props}
+//     >
+//       {"Copyright © "}
+//       <Link color="inherit" to="https://mui.com/">
+//         Your Website
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 const drawerWidth: number = 240;
 
@@ -223,7 +223,7 @@ export default function DashboardLayout() {
               </Box>
             </Box>
           </Box>
-          <Copyright sx={{ pt: 4 }} />
+          {/* <Copyright sx={{ pt: 4 }} /> */}
         </Box>
       </Box>
     </ThemeProvider>

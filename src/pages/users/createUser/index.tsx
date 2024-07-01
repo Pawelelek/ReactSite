@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { Button, Paper, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
+import { useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {
   const { allUsers } = useTypedSelector((store) => store.UserReducer);
   const { GetAllUsers } = useActions();
   const { Create } = useActions();
   const roles = Array.from(new Set(allUsers.map((user: any) => user.role)));
+  const navigate = useNavigate();
 
   useEffect(() => {
     GetAllUsers()
@@ -89,8 +91,8 @@ const CreateUser = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log('Дані для створення користувача:', user);
     Create(user);
+    navigate('/dashboard/users');
   };
 
   return (

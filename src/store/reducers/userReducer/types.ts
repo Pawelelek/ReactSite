@@ -30,25 +30,7 @@ export enum UserActionTypes {
     LOGOUT_USER = "LOGOUT_USER",
     GET_ALL_USERS = "GET_ALL_USERS",
     CREATE_USER = "CREATE_USER",
-    UPDATE_USER = 'UPDATE_USER',
-    UPDATE_USER_ERROR = 'UPDATE_USER_ERROR',
-    GET_USER_BY_ID = 'GET_USER_BY_ID'
 }
-
-interface GetByIdUserAction {
-    type: UserActionTypes.GET_USER_BY_ID;
-    payload: any;
-  }
-
-interface UpdateUserAction {
-    type: UserActionTypes.UPDATE_USER;
-    payload: User;
-  }
-  
-  interface UpdateUserErrorAction {
-    type: UserActionTypes.UPDATE_USER_ERROR;
-    payload: string;
-  }
 
 interface CreateUserAction {
   type: UserActionTypes.CREATE_USER,
@@ -87,5 +69,5 @@ interface ServerErrorAction{
     payload: any
 }
 
-export type UserActions = GetByIdUserAction | CreateUserAction | GetAllUsersAction | LogoutUserAction |  StartRequestAction | FinishRequestAction | LoginUserSuccessAction | LoginUserErrorAction | ServerErrorAction | UpdateUserAction | UpdateUserErrorAction
+export type UserActions = CreateUserAction | GetAllUsersAction | LogoutUserAction |  StartRequestAction | FinishRequestAction | LoginUserSuccessAction | LoginUserErrorAction | ServerErrorAction 
 

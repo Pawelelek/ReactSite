@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { UserActionTypes } from "../../../store/reducers/userReducer/types";
 import { createUser} from "../../../services/api-user-service";
 import { useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Grid";
 
 const initialValues = { email: "", password: "", firstName: "", lastName: "", confirmPassword: "", phoneNumber: ""};
 
@@ -217,6 +218,11 @@ export default function SignIn() {
                 >
                   Sign Up
                 </Button>
+                <Grid container>
+                  <Grid item>
+                    <Link to="/signin">{"Have an account? Sign in"}</Link>
+                  </Grid>
+                </Grid>
               </Box>
             )}
           </Formik>

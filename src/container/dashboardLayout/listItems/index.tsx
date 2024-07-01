@@ -39,7 +39,7 @@ export const adminMenu = (
   <React.Fragment>
     <AdminMenu
       items={[
-        <ListItemButton component={Link} to="/" key={1}>
+        <ListItemButton component={Link} to="/dashboard" key={1}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>

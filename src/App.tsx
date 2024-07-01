@@ -31,9 +31,9 @@ function App() {
           )}
         </>
       )}
-
-      <Route path="/" element={<SignIn />} />
-      <Route path="/dashboard" element={<SignIn />} />
+      <Route path="/" element={<DashboardLayout/>} />
+      <Route path="/dashboard" element={<DashboardLayout/>} />
+      <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp/>} />
       <Route path="*" element={<NotFound />} />
     </Routes>

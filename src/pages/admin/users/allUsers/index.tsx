@@ -1,7 +1,7 @@
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useEffect } from "react";
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useActions } from "../../../hooks/useActions";
+import { useActions } from "../../../../hooks/useActions";
 import { useNavigate } from 'react-router-dom';
 
 const AllUsers = () => {

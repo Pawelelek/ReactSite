@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Paper, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { useActions } from '../../../hooks/useActions';
+import { useTypedSelector } from '../../../../hooks/useTypedSelector';
+import { useActions } from '../../../../hooks/useActions';
 import { useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {

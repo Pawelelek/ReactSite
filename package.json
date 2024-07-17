@@ -34,9 +34,6 @@
     "styled-components": "^6.1.11",
     "typescript": "^5.5.2",
     "web-vitals": "^4.2.0",
-    "youtube-dl-exec": "^3.0.6",
-    "youtube-mp3-downloader": "^0.7.11",
-    "ytdl-core": "^4.11.5",
     "yup": "^1.4.0"
   },
   "scripts": {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button, Paper, TextField } from '@mui/material';
-import { useActions } from '../../../hooks/useActions';
+import { useActions } from '../../../../hooks/useActions';
 import { useParams } from 'react-router-dom';
-import { getbyid } from '../../../services/api-user-service';
+import { getbyid } from '../../../../services/api-user-service';
 import { useNavigate } from 'react-router-dom';
 
 const UpdateUser = () => {

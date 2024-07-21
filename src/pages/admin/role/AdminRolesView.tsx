@@ -6,20 +6,31 @@ import { useNavigate } from 'react-router-dom';
 import { Modal } from "bootstrap"
 import { http } from "../../../http"
 
-const AllUsers = () => {
+const AllRoles = () => {
    const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
    const [deleteId, setId] = useState<any>();
-   const { GetAllUsers, DeleteById } = useActions();
+   //const { GetAllUsers, DeleteById } = useActions();
+   const [roles, setRoles] = useState<any>();
    const navigate = useNavigate();
+   const loadRoles = () => {
+  
+    http.get("api/Role/get")
+      .then(resp => {
+        const {payload} = resp.data;
+
+        setRoles(payload);
+        console.log(payload);
+      });
+  }
   useEffect(() => {
-    GetAllUsers()
+    loadRoles();
   }, []);
   const FuncDelete = (id: string) => {
-     DeleteById(id);
+     //DeleteById(id);
   }
 
   const handleUpdate = (id: string) => {
-    navigate('/dashboard/user/update/' + id);
+    navigate('/dashboard/role/update/' + id);
  };
  const deleteUser = (id: string) => {
   console.log(id);
@@ -31,35 +42,15 @@ const AllUsers = () => {
   return (
     <TableContainer component={Paper}>
       <Button
-                    href="/dashboard/user/create"
+                    href="/dashboard/role/create"
                     style={{ backgroundColor: '#d95a11', color: '#f5fafa', textTransform: 'none' }}
                   >
-                    Create New User
+                    Create New Role
                   </Button>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-      <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-dialog">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="exampleModalLabel">Confirm delete</h5>
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
-                                    <button type="button" onClick={() => FuncDelete(deleteId)} className="btn btn-primary" data-bs-dismiss="modal">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
         <TableHead>
           <TableRow>
             <TableCell align="center">Name</TableCell>
-            <TableCell align="center">Surname</TableCell>
-            <TableCell align="center">Email</TableCell>
-            <TableCell align="center">Confirm email</TableCell>
-            <TableCell align="center">Phone Number</TableCell>
-            <TableCell align="center">Role</TableCell>
             {user.role === 'Administrator' && (
                   <TableCell align="center">Delete</TableCell>
                 )}
@@ -69,19 +60,13 @@ const AllUsers = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {allUsers.map((row: any, index) => (
+          {roles?.map((row: any) => (
             <TableRow
-              key={index}
+              
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row" align="center">
-                {row.firstName}
-              </TableCell>
-              <TableCell align="center">{row.lastName}</TableCell>
-              <TableCell align="center">{row.email}</TableCell>
-              <TableCell align="center">{row.emailConfirmed ? "True" : "False"}</TableCell>
-              <TableCell align="center">{row.phoneNumber}</TableCell>
-              <TableCell align="center">{row.roles[0].roleName}</TableCell>
+              <TableCell align="center">{row.roleName}</TableCell>
+              
               <TableCell align="center">{user.role === 'Administrator' && user.Id !== row.id && (
                   <Button
                     onClick={() => deleteUser(row.id)}
@@ -107,4 +92,4 @@ const AllUsers = () => {
    );
 };
 
-export default AllUsers;
+export default AllRoles;

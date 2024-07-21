@@ -51,11 +51,11 @@ export const adminMenu = (
           </ListItemIcon>
           <ListItemText primary="Users" />
         </ListItemButton>,
-        <ListItemButton component={Link} to="create" key={3}>
+        <ListItemButton component={Link} to="roles" key={3}>
           <ListItemIcon>
-            <AddIcon />
+            <PeopleIcon />
           </ListItemIcon>
-          <ListItemText primary="Create User" />
+          <ListItemText primary="Roles" />
         </ListItemButton>,
       ]}
     />

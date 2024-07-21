@@ -6,9 +6,9 @@ import { useTypedSelector } from "./hooks/useTypedSelector";
 import NotFound from "./pages/notFound";
 import DashboardLayout from "./container/dashboardLayout";
 import DefaultPage from "./pages/dafaultPage";
-import AllUsers from "./pages/admin/users/allUsers";
-import CreateUser from "./pages/admin/users/createUser";
-import UpdateUser from "./pages/admin/users/updateUser";
+import AllUsers from "./pages/admin/users/AdminUsersView";
+import CreateUser from "./pages/admin/users/AdminUsersCreate";
+import UpdateUser from "./pages/admin/users/AdminUsersUpdate";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);

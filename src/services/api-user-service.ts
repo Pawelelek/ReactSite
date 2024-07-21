@@ -1,7 +1,7 @@
 import axios from "axios"
-
+import { APP_ENV } from "../env";
 const instance = axios.create({
-    baseURL: "https://localhost:5001/api/User",
+    baseURL: APP_ENV.BASE_URL+"api/User",
     headers: {
         "Content-Type" : "application/json"
     }
@@ -81,7 +81,7 @@ const User = {
     getallusers: () => requests.get(`/GetAll`),
     deletebyid: (userId: string) => requests.delete(`/DeleteById?id=` + userId),
     create: (user: any) => requests.post(`/Create`, user),
-    update: (user: any) => requests.put(`/Update`, user),
+    update: (user: any) => requests.put(`/UpdatePersonalInfo`, user),
     getbyid: (userId: string) => requests.get(`/GetById?Id=` + userId)
 }
 

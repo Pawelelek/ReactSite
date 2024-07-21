@@ -3,16 +3,28 @@ import { Button, Paper, TextField, Select, MenuItem, FormControl, InputLabel } f
 import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 import { useActions } from '../../../../hooks/useActions';
 import { useNavigate } from 'react-router-dom';
+import { http } from "../../../../http"
 
 const CreateUser = () => {
   const { allUsers } = useTypedSelector((store) => store.UserReducer);
   const { GetAllUsers } = useActions();
   const { Create } = useActions();
-  const roles = Array.from(new Set(allUsers.map((user: any) => user.role)));
+  //const roles = Array.from(new Set(allUsers.map((user: any) => user.role)));
+  const [roles, setRoles] = useState<any>();
   const navigate = useNavigate();
+  const loadRoles = () => {
+  
+    http.get("api/Role/get")
+      .then(resp => {
+        const {payload} = resp.data;
 
+        setRoles(payload);
+        console.log(payload);
+      });
+  }
   useEffect(() => {
     GetAllUsers()
+    loadRoles()
   }, []);
 
   const [user, setUser] = useState({
@@ -138,9 +150,9 @@ const CreateUser = () => {
         <FormControl variant="outlined" fullWidth style={{ marginBottom: 10 }}>
           <InputLabel>Role</InputLabel>
           <Select name="role" value={user.role} onChange={handleChange} error={!!errors.role} required>
-            {roles.map((role) => (
-              <MenuItem key={role} value={role}>
-                {role}
+            {roles?.map((role:any) => (
+              <MenuItem key={role.roleName} value={role.roleName}>
+                {role.roleName}
               </MenuItem>
             ))}
           </Select>

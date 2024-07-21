@@ -18,6 +18,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.2",
+    "bootstrap": "^5.3.0",
     "formik": "^2.4.6",
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
@@ -59,5 +60,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.6"
   }
 }

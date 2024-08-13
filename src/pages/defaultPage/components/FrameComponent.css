@@ -1,0 +1,226 @@
+.teams-icon {
+  height: 50.6px;
+  width: 50.6px;
+  border-radius: 25.29px;
+  object-fit: cover;
+}
+.div5 {
+  flex: 1;
+  position: relative;
+}
+.match-item {
+  width: 237.2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.country-flag-icon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.div6 {
+  align-self: stretch;
+  position: relative;
+}
+.country-flag-parent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-4xl);
+  min-width: 66px;
+}
+.empty-date {
+  align-self: stretch;
+  position: relative;
+  white-space: nowrap;
+}
+.div7 {
+  position: relative;
+  text-align: left;
+  display: inline-block;
+  min-width: 65px;
+}
+.date {
+  width: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-3xl);
+}
+.denmark-flag-child {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.div8 {
+  align-self: stretch;
+  position: relative;
+}
+.denmark-flag,
+.flags {
+  display: flex;
+  justify-content: flex-start;
+}
+.denmark-flag {
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-4xl);
+  min-width: 66px;
+}
+.flags {
+  width: 329.2px;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: var(--gap-11xl);
+  max-width: 100%;
+  text-align: center;
+}
+.div9,
+.empty-germany {
+  position: relative;
+  display: inline-block;
+}
+.div9 {
+  width: 92px;
+  flex-shrink: 0;
+}
+.empty-germany {
+  color: var(--color-aquamarine);
+  min-width: 32px;
+}
+.group {
+  flex: 1;
+  border-radius: var(--br-11xs);
+  background-color: var(--color-darkslategray-100);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-xl);
+  box-sizing: border-box;
+  min-width: 123px;
+  gap: var(--gap-0);
+  row-gap: 20px;
+}
+.div10,
+.empty-draw {
+  position: relative;
+  display: inline-block;
+}
+.div10 {
+  width: 92px;
+  flex-shrink: 0;
+}
+.empty-draw {
+  color: var(--color-aquamarine);
+  min-width: 32px;
+}
+.draw-score {
+  flex: 1;
+  border-radius: var(--br-11xs);
+  background-color: var(--color-darkslategray-100);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-xl);
+  box-sizing: border-box;
+  min-width: 123px;
+  gap: var(--gap-0);
+  row-gap: 20px;
+}
+.div11,
+.empty-denmark {
+  position: relative;
+  display: inline-block;
+}
+.div11 {
+  width: 92px;
+  flex-shrink: 0;
+}
+.empty-denmark {
+  color: var(--color-aquamarine);
+  min-width: 32px;
+}
+.germany-score,
+.parent1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.parent1 {
+  flex: 1;
+  border-radius: var(--br-11xs);
+  background-color: var(--color-darkslategray-100);
+  justify-content: space-between;
+  padding: var(--padding-xl);
+  box-sizing: border-box;
+  min-width: 123px;
+  gap: var(--gap-0);
+  row-gap: 20px;
+}
+.germany-score {
+  width: 508px;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+  max-width: 100%;
+}
+.star-1-icon {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.frame-wrapper,
+.match-item-parent {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+.match-item-parent {
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: var(--gap-31xl);
+}
+.frame-wrapper {
+  background: linear-gradient(-90deg, #2d2d2d 76%, #da0037);
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--padding-9xl-5) var(--padding-16xl) var(--padding-9xl-6);
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+  font-family: var(--font-roboto);
+}
+@media screen and (max-width: 1300px) {
+  .match-item-parent {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 800px) {
+  .germany-score {
+    flex-wrap: wrap;
+  }
+  .match-item-parent {
+    gap: var(--gap-6xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .flags {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,95 @@
+.go1bet {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+}
+.company-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-12xs);
+}
+.blank-line,
+.go1bet1,
+.go1bet2 {
+  margin: 0;
+}
+.go1bet-container {
+  height: 80.1px;
+  flex: 1;
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+.go1bet-wrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 0 0 var(--padding-12xs);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.frame-child3 {
+  height: 128.9px;
+  width: 1321.5px;
+  position: relative;
+  background: linear-gradient(0deg, #171717 54%, rgba(23, 23, 23, 0));
+  display: none;
+  max-width: 100%;
+}
+.free-icon-font-angle-left-3916 {
+  height: 52.8px;
+  width: 53.8px;
+  border-radius: var(--br-21xl);
+  overflow: hidden;
+  flex-shrink: 0;
+  object-fit: contain;
+  z-index: 2;
+}
+.company-description,
+.footer,
+.rectangle-parent2 {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.rectangle-parent2 {
+  background: linear-gradient(0deg, #171717 54%, rgba(23, 23, 23, 0));
+  flex-direction: row;
+  justify-content: center;
+  padding: var(--padding-48xl-3) var(--padding-xl) var(--padding-4xs-8)
+    var(--padding-2xl);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  z-index: 1;
+  margin-top: -46.1px;
+}
+.company-description,
+.footer {
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+}
+.footer {
+  padding: 0 0 var(--padding-40xl-2);
+  box-sizing: border-box;
+  gap: var(--gap-sm-7);
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-crimson-200);
+  font-family: var(--font-roboto);
+}
+@media screen and (max-width: 450px) {
+  .go1bet {
+    font-size: var(--font-size-lgi);
+  }
+}

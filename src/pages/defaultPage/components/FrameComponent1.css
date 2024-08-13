@@ -1,0 +1,50 @@
+.empty-withdrawal {
+  position: relative;
+  white-space: nowrap;
+  z-index: 1;
+}
+.h32,
+.p6,
+.p7 {
+  margin: 0;
+}
+.h32 {
+  position: relative;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  z-index: 1;
+}
+.empty-withdrawal-parent,
+.quick-withdrawal {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.quick-withdrawal {
+  flex-direction: column;
+  padding: var(--padding-6xs-4) 0 0;
+  font-size: var(--font-size-5xl);
+  color: var(--color-white);
+}
+.empty-withdrawal-parent {
+  flex-direction: row;
+  gap: var(--gap-base-8);
+  text-align: left;
+  font-size: var(--font-size-45xl);
+  color: var(--color-crimson-200);
+  font-family: var(--font-roboto);
+}
+@media screen and (max-width: 800px) {
+  .empty-withdrawal {
+    font-size: var(--font-size-32xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .empty-withdrawal {
+    font-size: var(--font-size-19xl);
+  }
+  .h32 {
+    font-size: var(--font-size-lgi);
+  }
+}

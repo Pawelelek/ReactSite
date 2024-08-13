@@ -4,8 +4,7 @@ import SignIn from "./pages/auth/signin";
 import SignUp from "./pages/auth/signup";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import NotFound from "./pages/notFound";
-import DashboardLayout from "./container/dashboardLayout";
-import DefaultPage from "./pages/dafaultPage";
+import DefaultPage from "./pages/defaultPage/DefaultPage";
 import AllUsers from "./pages/admin/users/AdminUsersView";
 import CreateUser from "./pages/admin/users/AdminUsersCreate";
 import UpdateUser from "./pages/admin/users/AdminUsersUpdate";
@@ -19,8 +18,8 @@ function App() {
     <Routes>
       {isAuth && (
         <>
-          {user.role === "Administrator" && (
-            <Route path="/dashboard" element={<DashboardLayout />}>
+          {user.role === "Admin" && (
+            <Route path="/dashboard" element={<DefaultPage />}>
               <Route index element={<DefaultPage />} />
               <Route path="users" element={<AllUsers />} />
               <Route path="/dashboard/user/create" element={<CreateUser />} />
@@ -31,14 +30,14 @@ function App() {
             </Route>
           )}
           {user.role === "User" && (
-            <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<DefaultPage />}>
               <Route index element={<DefaultPage />} />
             </Route>
           )}
         </>
       )}
-      <Route path="/" element={<DashboardLayout/>} />
-      <Route path="/dashboard" element={<DashboardLayout/>} />
+      <Route path="/" element={<DefaultPage/>} />
+      <Route path="/dashboard" element={<DefaultPage/>} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp/>} />
       <Route path="*" element={<NotFound />} />

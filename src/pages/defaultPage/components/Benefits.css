@@ -1,0 +1,104 @@
+.benefits-list-child {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-11xs);
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+}
+.h13 {
+  position: relative;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+  max-width: 64%;
+  z-index: 1;
+}
+.h13,
+.h31,
+.p4,
+.p5 {
+  margin: 0;
+}
+.h31 {
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+  z-index: 1;
+}
+.benefits-list1,
+.frame {
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.frame {
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0 var(--padding-mid) 0 var(--padding-base);
+  max-width: 64%;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+}
+.benefits-list1 {
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-82xl-5) var(--padding-xl) var(--padding-16xl);
+  position: relative;
+  gap: var(--gap-6xs-5);
+  max-width: 100%;
+}
+.benefits,
+.benefits-list-parent {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+.benefits-list-parent {
+  flex: 1;
+  display: grid;
+  gap: var(--gap-lgi-5);
+  grid-template-columns: repeat(3, minmax(320px, 1fr));
+}
+.benefits {
+  align-self: stretch;
+  display: flex;
+  padding: 0 var(--padding-11xs) var(--padding-48xl-1) var(--padding-12xs);
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--font-size-21xl);
+  color: var(--color-white);
+  font-family: var(--font-roboto);
+}
+@media screen and (max-width: 1125px) {
+  .benefits-list-parent {
+    justify-content: center;
+    grid-template-columns: repeat(2, minmax(320px, 555px));
+  }
+}
+@media screen and (max-width: 800px) {
+  .h13 {
+    font-size: var(--font-size-13xl);
+  }
+  .benefits-list-parent {
+    grid-template-columns: minmax(320px, 1fr);
+  }
+}
+@media screen and (max-width: 450px) {
+  .h13 {
+    font-size: var(--font-size-5xl);
+  }
+  .h31 {
+    font-size: var(--font-size-lgi);
+  }
+}

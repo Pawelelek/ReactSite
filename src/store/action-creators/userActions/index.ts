@@ -13,10 +13,10 @@ export const LoginUser = (user : any) => {
             const { response } = data;
             if(!response.success){
                dispatch({type: UserActionTypes.LOGIN_USER_ERROR, payload: response.message})
-               toast.error(response.message)
+               //toast.error(response.message)
             }
             else{
-               toast.success(response.message)
+               //toast.success("Вхід успішний!")
                const { accessToken, refreshToken, message } = response;
                setAccessToken(accessToken);
                setRefreshToken(refreshToken);

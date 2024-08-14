@@ -18,7 +18,7 @@ const DefaultPage = () => {
     <div className="root">
       {/* <Counter /> */}
       {/* <Counter2/> */}
-      {(user.role === "User") ? (
+      {(user.role === "User" || user.role === "Admin") ? (
         <Counter2 />
       ) : (
         <Counter />

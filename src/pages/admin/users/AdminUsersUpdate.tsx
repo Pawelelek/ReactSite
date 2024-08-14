@@ -27,12 +27,14 @@ const UpdateUser = () => {
   useEffect(() => {
     const fetchUser = async (id: string) => {
       const result = await getbyid(id);
+      //console.log("Our result: ", result.response.payload[0]);
       setUser({
         id: userId,
-        firstName: result.response.payload.firstName || '',
-        lastName: result.response.payload.lastName || '',
-        phoneNumber: result.response.payload.phoneNumber || '',
+        firstName: result.response.payload[0].firstName || '',
+        lastName: result.response.payload[0].lastName || '',
+        phoneNumber: result.response.payload[0].phoneNumber || '',
       });
+      
     };
 
     if (userId) {
@@ -78,8 +80,9 @@ const UpdateUser = () => {
 
   const handleSubmit = (e: any) => {
      e.preventDefault();
+     //console.log(userId);
      Update(user);
-     navigate('/dashboard/users');
+     navigate('/admin');
   };
 
   return (

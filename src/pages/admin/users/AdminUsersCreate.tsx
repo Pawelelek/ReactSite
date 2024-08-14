@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button, Paper, TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useActions } from '../../../hooks/useActions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { http } from "../../../http"
 
 const CreateUser = () => {
@@ -104,7 +104,7 @@ const CreateUser = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     Create(user);
-    navigate('/dashboard/users');
+    navigate('/admin');
   };
 
   return (
@@ -206,6 +206,7 @@ const CreateUser = () => {
         </Button>
       </form>
     </Paper>
+    
   );
 };
 

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import SignIn from "./pages/auth/signin";
 import SignUp from "./pages/auth/signup";
 import { useTypedSelector } from "./hooks/useTypedSelector";
@@ -19,21 +19,30 @@ function App() {
       {isAuth && (
         <>
           {user.role === "Admin" && (
+            // <Route path="/admin" element={<AllUsers />}>
+            //   <Route index element={<AllUsers />} />
+            //   <Route path="users" element={<AllUsers />} />
+            //   <Route path="user/create" element={<CreateUser />} />
+            //   <Route path="user/update/:userId" element={<UpdateUser />} />
+            //   <Route path="roles" element={<AllRoles />} />
+            //   <Route path="role/create" element={<CreateRole />} />
+            //   <Route path="role/update/:userId" element={<UpdateRole />} />
+            // </Route>
+            <Route path="/admin" element={<Outlet />}>
+               <Route index element={<AllUsers />} />
+               <Route path="user/create" element={<CreateUser />} />
+               <Route path="user/update/:userId" element={<UpdateUser />} />
+               <Route path="roles" element={<AllRoles />} />
+               <Route path="role/create" element={<CreateRole />} />
+               <Route path="role/update/:userId" element={<UpdateRole />} />
+            </Route>
+            
+          )}
+          {/* {user.role === "User" && (
             <Route path="/dashboard" element={<DefaultPage />}>
               <Route index element={<DefaultPage />} />
-              <Route path="users" element={<AllUsers />} />
-              <Route path="/dashboard/user/create" element={<CreateUser />} />
-              <Route path="/dashboard/user/update/:userId" element={<UpdateUser />} />
-              <Route path="roles" element={<AllRoles />} />
-              <Route path="/dashboard/role/create" element={<CreateRole />} />
-              <Route path="/dashboard/role/update/:userId" element={<UpdateRole />} />
             </Route>
-          )}
-          {user.role === "User" && (
-            <Route path="/dashboard" element={<DefaultPage />}>
-              <Route index element={<DefaultPage />} />
-            </Route>
-          )}
+          )} */}
         </>
       )}
       <Route path="/" element={<DefaultPage/>} />

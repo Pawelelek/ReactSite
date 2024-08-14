@@ -27,12 +27,12 @@ const UpdateRole = () => {
   useEffect(() => {
     const fetchUser = async (id: string) => {
       const result = await getbyid(id);
-      setUser({
-        id: userId,
-        firstName: result.response.payload.firstName || '',
-        lastName: result.response.payload.lastName || '',
-        phoneNumber: result.response.payload.phoneNumber || '',
-      });
+      // setUser({
+      //   id: userId,
+      //   firstName: result.response.payload.firstName || '',
+      //   lastName: result.response.payload.lastName || '',
+      //   phoneNumber: result.response.payload.phoneNumber || '',
+      // });
     };
 
     if (userId) {

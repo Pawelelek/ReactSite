@@ -7,7 +7,6 @@ export type FrameComponent1Type = {
   prop?: string;
   prop1?: string;
 
-  /** Style props */
   propGap?: CSSProperties["gap"];
   propFlex?: CSSProperties["flex"];
 };

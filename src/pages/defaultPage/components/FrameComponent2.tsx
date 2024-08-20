@@ -1,5 +1,6 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import "./FrameComponent2.css";
+import RegistrationModal from '../Modal/RegistrationModal';
 
 export type FrameComponent2Type = {
   className?: string;
@@ -8,6 +9,9 @@ export type FrameComponent2Type = {
 const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
   className = "",
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
   return (
     <div className={`bonus-offer-wrapper ${className}`}>
       <div className="bonus-offer">
@@ -34,17 +38,13 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
             </div>
           </div>
           <div className="register-now-button">
-          <button className="register-now-link">
+          <button className="register-now-link" onClick={handleOpenModal}>
             <b className="b">Зареєструйся зараз</b>
           </button>
         </div>
         </div>
-        {/* <div className="register-now-button">
-          <button className="register-now-link">
-            <b className="b">Зареєструйся зараз</b>
-          </button>
-        </div> */}
       </div>
+      <RegistrationModal show={showModal} onClose={handleCloseModal} />
     </div>
   );
 };

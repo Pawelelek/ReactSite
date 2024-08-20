@@ -6,6 +6,9 @@ export type CopyrightType = {
 };
 
 const Copyright: FunctionComponent<CopyrightType> = ({ className = "" }) => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   return (
     <div className={`copyright ${className}`}>
       <div className="g01bet-parent">
@@ -22,7 +25,7 @@ const Copyright: FunctionComponent<CopyrightType> = ({ className = "" }) => {
               © 2024 ТОВ «БУКМЕКЕРСЬКА КОМПАНІЯ «G01BET». Всі права захищені.
             </div>
             <div className="free-icon-font-angle-left-3916-wrapper">
-              <img
+              <img onClick={scrollToTop}
                 className="free-icon-font-angle-left-39161"
                 loading="lazy"
                 alt=""

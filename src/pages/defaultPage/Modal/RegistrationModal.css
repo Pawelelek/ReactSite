@@ -1,0 +1,205 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .error-message {
+    color: #e74c3c; 
+    font-size: 12px; 
+    margin-top: 5px;
+  }
+
+  .modal-content {
+    background: #333;
+    padding: 40px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    color: #fff;
+    width: 420px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    
+  }
+  
+  .input-label {
+    color: #fff; 
+        font-family: "Roboto";
+        font-size: 13px;
+        font-weight: 550;
+        padding-bottom: 20px;
+  }
+
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .eye-icon {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 18px; 
+    height: 18px; 
+  }
+  
+  .password-requirement {
+    font-size: 12px;
+    color: #fff;
+    margin-bottom: 20px;
+    margin-top: 0px;
+  }
+  
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: 200;
+    font-family: "Roboto";
+  }
+
+  .checkbox-link {
+    color: #1a73e8;
+    text-decoration: underline; 
+
+  }
+
+  input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    background-color: #333; 
+    border: 1px solid #fff; 
+    cursor: pointer;
+    position: relative;
+    appearance: none; 
+    -webkit-appearance: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 14px;
+  }
+
+  .checkbox-label span {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  input[type="checkbox"]::after {
+    content: "";
+    width: 9px;
+    height: 9px;
+    background-color: #DA0037; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  input[type="checkbox"]:checked::after {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .checkbox-label input {
+    margin-right: 10px;
+  }
+  
+  .checkbox-group {
+    margin-bottom: 20px;
+  }
+  
+  .register-button2 {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #DA0037;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .or-divider {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  
+  .line {
+    flex: 1;
+    height: 1px;
+    background-color: #fff;
+  }
+  
+  .or-text {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  .google-button {
+    width: 100%;
+    padding: 12px;
+    padding-right: 140px;
+    background-color: #D82250;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .google-icon {
+    height: 20px;
+    margin-right: 110px;
+  }
+  
+  .signin-prompt {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 30px;
+    font-weight: 200;
+    font-family: "Roboto";
+  }
+  
+  .signin-link {
+    color: #fff;
+    text-decoration:underline;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  

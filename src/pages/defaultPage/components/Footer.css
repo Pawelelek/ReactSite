@@ -25,6 +25,7 @@
   display: inline-block;
   flex-shrink: 0;
   max-width: 100%;
+  transition: max-height 0.3s ease;
 }
 .go1bet-wrapper {
   align-self: stretch;
@@ -35,6 +36,9 @@
   padding: 0 0 0 var(--padding-12xs);
   box-sizing: border-box;
   max-width: 100%;
+  max-height: 100px; 
+  overflow: hidden;
+  transition: max-height 0.5s ease;
 }
 .frame-child3 {
   height: 128.9px;
@@ -52,6 +56,19 @@
   flex-shrink: 0;
   object-fit: contain;
   z-index: 2;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.free-icon-font-angle-left-3916.rotated {
+  transform: rotate(180deg); 
+}
+.go1bet-wrapper.collapsed {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.go1bet-wrapper.expanded {
+  overflow: visible;
+  transition: max-height 0.5s ease;
 }
 .company-description,
 .footer,
@@ -62,7 +79,7 @@
   max-width: 100%;
 }
 .rectangle-parent2 {
-  background: linear-gradient(0deg, #171717 54%, rgba(23, 23, 23, 0));
+  background: linear-gradient(0deg, #171717 64%, rgba(23, 23, 23, 0));
   flex-direction: row;
   justify-content: center;
   padding: var(--padding-48xl-3) var(--padding-xl) var(--padding-4xs-8)
@@ -71,6 +88,9 @@
   flex-shrink: 0;
   z-index: 1;
   margin-top: -46.1px;
+}
+.rectangle-parent2.toggled-background {
+  background: linear-gradient(0deg, #171717 0%, rgba(23, 23, 23, 0));
 }
 .company-description,
 .footer {

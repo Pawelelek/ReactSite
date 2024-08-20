@@ -31,12 +31,6 @@ const Benefits: FunctionComponent<BenefitsType> = ({ className = "" }) => {
             </h3>
           </div>
         </div>
-        {/* <BenefitsList
-          benefitIcon="/fans.png"
-          prop="АКЦІЇ"
-          prop1="Отримуй круті "
-          prop2="пропозиції щодня "
-        /> */}
         <div className="benefits-list1">
           <img
             className="benefits-list-child"

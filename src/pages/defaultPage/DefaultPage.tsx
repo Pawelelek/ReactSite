@@ -16,8 +16,6 @@ const DefaultPage = () => {
   const {user} = useTypedSelector((store) => store.UserReducer);
   return (
     <div className="root">
-      {/* <Counter /> */}
-      {/* <Counter2/> */}
       {(user.role === "User" || user.role === "Admin") ? (
         <Counter2 />
       ) : (

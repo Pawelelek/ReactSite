@@ -16,6 +16,8 @@
   overflow: hidden;
   flex-shrink: 0;
   object-fit: contain;
+  cursor: pointer;
+  
 }
 .free-icon-font-angle-left-3916-wrapper {
   align-self: stretch;
@@ -24,6 +26,13 @@
   align-items: flex-start;
   justify-content: center;
   padding: 0 var(--padding-2xl) 0 var(--padding-xl);
+}
+.free-icon-font-angle-left-3916-wrapper img {
+  transition: transform 0.2s ease; 
+}
+
+.free-icon-font-angle-left-3916-wrapper img:hover {
+  transform: scale(1.1); 
 }
 .g01bet-group,
 .legal-info {

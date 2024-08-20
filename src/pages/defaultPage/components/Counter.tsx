@@ -1,13 +1,18 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import "./Counter.css";
 import { Link } from 'react-router-dom';
+import RegistrationModal from '../Modal/RegistrationModal';
 
 export type CounterType = {
   className?: string;
 };
 
 const Counter: FunctionComponent<CounterType> = ({ className = "" }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
   return (
+    // <>
     <header className={`counter ${className}`}>
       <div className="counter-child" />
       <div className="counter-inner">
@@ -45,14 +50,13 @@ const Counter: FunctionComponent<CounterType> = ({ className = "" }) => {
             />
           </div> */}
         </div>
-        {/* <button className="register-button">
-          <a className="a4">Реєстрація</a>
-        </button> */}
-        <Link to="/signup" className="register-button">
+        <Link to="/" className="register-button" onClick={handleOpenModal}>
           Реєстрація
         </Link>
       </div>
+      <RegistrationModal show={showModal} onClose={handleCloseModal} />
     </header>
+    
   );
 };
 

@@ -53,15 +53,15 @@ export default function SignIn() {
     return <Loader />;
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const user = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-    LoginUser(user);
-  };
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   const user = {
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   };
+  //   LoginUser(user);
+  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -98,7 +98,7 @@ export default function SignIn() {
           >
             {({ errors, touched, isSubmitting, isValid, dirty }) => (
               <Box
-                onSubmit={handleSubmit}
+                //onSubmit={handleSubmit}
                 component="form"
                 noValidate
                 sx={{ mt: 1 }}

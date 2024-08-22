@@ -1,18 +1,30 @@
-import { FunctionComponent, useState } from "react";
+import React, { useState } from "react";
 import "./Counter.css";
-import { Link } from 'react-router-dom';
-import RegistrationModal from '../Modal/RegistrationModal';
+import { Link, useNavigate } from 'react-router-dom';
+import RegistrationModal from '../Modal/Register/RegistrationModal';
+import LoginModal from "../Modal/Login/LoginModal";
 
 export type CounterType = {
   className?: string;
 };
 
-const Counter: FunctionComponent<CounterType> = ({ className = "" }) => {
-  const [showModal, setShowModal] = useState(false);
-  const handleOpenModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+const Counter: React.FC<CounterType> = ({ className = "" }) => {
+  const [showRegModal, setShowRegModal] = useState(false);
+  const [showLogModal, setShowLogModal] = useState(false);
+  const navigator = useNavigate();
+  const handleOpenRegModal = () => {
+    setShowLogModal(false);
+    setShowRegModal(true);
+  };
+
+  const handleCloseRegModal = () => setShowRegModal(false);
+  const handleOpenLogModal = () => {
+    setShowRegModal(false);
+    setShowLogModal(true);
+  };
+  const handleCloseLogModal = () => setShowLogModal(false);
+
   return (
-    // <>
     <header className={`counter ${className}`}>
       <div className="counter-child" />
       <div className="counter-inner">
@@ -22,6 +34,8 @@ const Counter: FunctionComponent<CounterType> = ({ className = "" }) => {
             loading="lazy"
             alt=""
             src="Homeimg/asset-24x-1@2x.png"
+            onClick={()=>navigator("/")}
+            style={{ cursor: "pointer" }}
           />
           <nav className="counter-parent">
             <nav className="live-label">
@@ -35,28 +49,25 @@ const Counter: FunctionComponent<CounterType> = ({ className = "" }) => {
       </div>
       <div className="account">
         <div className="login-button-parent">
-        <Link to="/signin" className="login-button">
-          Увійти
-        </Link>
-          {/* <div className="login-button">
-            <a className="a3">Увійти</a>
-          </div> */}
-          {/* <div className="globe-1">
-            <img
-              className="vector-icon"
-              loading="lazy"
-              alt=""
-              src="/vector.svg"
-            />
-          </div> */}
+          <Link to="/" className="login-button" onClick={handleOpenLogModal}>
+            Увійти
+          </Link>
         </div>
-        <Link to="/" className="register-button" onClick={handleOpenModal}>
+        <Link to="/" className="register-button" onClick={handleOpenRegModal}>
           Реєстрація
         </Link>
       </div>
-      <RegistrationModal show={showModal} onClose={handleCloseModal} />
+      <RegistrationModal
+        show={showRegModal}
+        onClose={handleCloseRegModal}
+        onSwitchToLogin={handleOpenLogModal}
+      />
+      <LoginModal
+        show={showLogModal}
+        onClose={handleCloseLogModal}
+        onSwitchToRegister={handleOpenRegModal}
+      />
     </header>
-    
   );
 };
 

@@ -46,9 +46,9 @@ function App() {
         </>
       )}
       <Route path="/" element={<DefaultPage/>} />
-      <Route path="/dashboard" element={<DefaultPage/>} />
+      {/* <Route path="/dashboard" element={<DefaultPage/>} />
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/signup" element={<SignUp/>} />
+      <Route path="/signup" element={<SignUp/>} /> */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

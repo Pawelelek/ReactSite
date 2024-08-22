@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import "./RegistrationModal.css";
+import "../mainModal.css"
 
 interface RegistrationModalProps {
   show: boolean;
   onClose: () => void;
+  onSwitchToLogin?: () => void;
 }
 
-const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose }) => {
+const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, onSwitchToLogin }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   if (!show) return null;
@@ -121,7 +123,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose }) 
 
               <button 
                 type="submit"
-                className="register-button2" 
+                className="register-login-button" 
                 disabled={!isValid}
                 style={{ 
                   backgroundColor: isValid ? "#DA0037" : "#555",
@@ -145,7 +147,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose }) 
           Вхід через Google
         </button>
 
-        <p className="signin-prompt">Маєте акаунт? <a href="#" className="signin-link">Увійти</a></p>
+        <p className="signin-signup-prompt">Маєте акаунт? <a href="#" className="text-link" onClick={onSwitchToLogin}>Увійти</a></p>
       </div>
     </div>
   );

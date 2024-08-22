@@ -39,8 +39,10 @@ instance.interceptors.request.use(
           try {
             const rs = await refreshAccessToken();
             const { accessToken, refreshToken } = rs.data;
-            setRefreshToken(refreshToken);
-            setAccessToken(accessToken);
+            const persist = shouldPersist();
+
+          setRefreshToken(refreshToken, persist);
+          setAccessToken(accessToken, persist);
             instance.defaults.headers.common["Authorization"] =
               "Bearer " + accessToken;
             return instance(originalConfig);
@@ -64,6 +66,11 @@ instance.interceptors.request.use(
       return Promise.reject(err);
     }
   );
+
+  function shouldPersist(): boolean {
+    const persist = window.localStorage.getItem("rememberMe") === "true";
+    return persist;
+  }
 
 
 const responseBody: any = (response: any) => response.data;
@@ -184,26 +191,35 @@ function refreshAccessToken() {
     });
   }
 
-
-export function setAccessToken(token: string){
-    window.localStorage.setItem("accessToken", token)
+export function setAccessToken(token: string, persist: boolean) {
+  if (persist) {
+    window.localStorage.setItem("accessToken", token);
+  } else {
+    window.sessionStorage.setItem("accessToken", token);
+  }
 }
 
-export function setRefreshToken(refreshToken: string){
-    window.localStorage.setItem("refreshToken", refreshToken)
+export function setRefreshToken(refreshToken: string, persist: boolean) {
+  if (persist) {
+    window.localStorage.setItem("refreshToken", refreshToken);
+  } else {
+    window.sessionStorage.setItem("refreshToken", refreshToken);
+  }
 }
 
-export function getAccessToken(): null | string{
-    const token = window.localStorage.getItem("accessToken")
-    return token;
+export function getAccessToken(): null | string {
+  const token = window.localStorage.getItem("accessToken") || window.sessionStorage.getItem("accessToken");
+  return token;
 }
 
-export function getRefreshToken(): null | string{
-    const token = window.localStorage.getItem("refreshToken")
-    return token;
+export function getRefreshToken(): null | string {
+  const token = window.localStorage.getItem("refreshToken") || window.sessionStorage.getItem("refreshToken");
+  return token;
 }
 
-export function removeTokens(){
-    window.localStorage.removeItem("accessToken")
-    window.localStorage.removeItem("refreshToken")
+export function removeTokens() {
+  window.localStorage.removeItem("accessToken");
+  window.localStorage.removeItem("refreshToken");
+  window.sessionStorage.removeItem("accessToken");
+  window.sessionStorage.removeItem("refreshToken");
 }

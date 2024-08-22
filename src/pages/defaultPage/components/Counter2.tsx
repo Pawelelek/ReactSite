@@ -16,7 +16,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
   const { LogOut } = useActions();
   const Logout = () => {
     LogOut(user.Id);
-    navigator("/dashboard");
+    navigator("/");
   };
   const {user} = useTypedSelector((store) => store.UserReducer);
   return (
@@ -24,11 +24,13 @@ const Counter2: FunctionComponent<Counter2Type> = ({
       <div className="counter-child" />
       <div className="counter-inner">
         <div className="asset-24x-1-parent">
-          <img
+        <img
             className="asset-24x-1"
             loading="lazy"
             alt=""
             src="Homeimg/asset-24x-1@2x.png"
+            onClick={()=>navigator("/")}
+            style={{ cursor: "pointer" }}
           />
           <nav className="counter-parent">
             <nav className="live-label">

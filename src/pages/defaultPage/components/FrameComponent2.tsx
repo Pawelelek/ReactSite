@@ -1,6 +1,8 @@
 import { FunctionComponent, useState } from "react";
 import "./FrameComponent2.css";
-import RegistrationModal from '../Modal/RegistrationModal';
+import RegistrationModal from '../Modal/Register/RegistrationModal';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import LoginModal from '../Modal/Login/LoginModal';
 
 export type FrameComponent2Type = {
   className?: string;
@@ -9,9 +11,19 @@ export type FrameComponent2Type = {
 const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
   className = "",
 }) => {
-  const [showModal, setShowModal] = useState(false);
-  const handleOpenModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const { isAuth } = useTypedSelector((state) => state.UserReducer);
+
+  const handleOpenRegistrationModal = () => setShowRegistrationModal(true);
+  const handleCloseRegistrationModal = () => setShowRegistrationModal(false);
+
+  const handleCloseLoginModal = () => setShowLoginModal(false);
+  console.log("User is authenticated:", isAuth);
+  const onSwitchToLogin = () => {
+    setShowRegistrationModal(false); 
+    setShowLoginModal(true); 
+  };
   return (
     <div className={`bonus-offer-wrapper ${className}`}>
       <div className="bonus-offer">
@@ -37,14 +49,28 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
               <b className="empty-bonus">3000$</b>
             </div>
           </div>
-          <div className="register-now-button">
-          <button className="register-now-link" onClick={handleOpenModal}>
-            <b className="b">Зареєструйся зараз</b>
-          </button>
-        </div>
+          <div 
+            className="register-now-button"
+            style={{ opacity: isAuth ? 0 : 1, pointerEvents: isAuth ? 'none' : 'auto' }}
+          >
+            <button 
+              className="register-now-link" 
+              onClick={handleOpenRegistrationModal}
+            >
+              <b className="b">Зареєструйся зараз</b>
+            </button>
+          </div>
         </div>
       </div>
-      <RegistrationModal show={showModal} onClose={handleCloseModal} />
+      <RegistrationModal 
+        show={showRegistrationModal} 
+        onClose={handleCloseRegistrationModal} 
+        onSwitchToLogin={onSwitchToLogin}
+      />
+      <LoginModal 
+        show={showLoginModal} 
+        onClose={handleCloseLoginModal} 
+      />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import {jwtDecode} from "jwt-decode"
 import { createUser, deletebyid, getallusers, login, logout, removeTokens, setAccessToken, setRefreshToken, updateUser } from "../../../services/api-user-service";
 
 
-export const LoginUser = (user : any) => {
+export const LoginUser = (user: { email: string; password: string; rememberMe: boolean }) => {
     return async(dispatch: Dispatch<UserActions>) => {
          try{
             dispatch({type: UserActionTypes.START_REQUEST});
@@ -13,14 +13,20 @@ export const LoginUser = (user : any) => {
             const { response } = data;
             if(!response.success){
                dispatch({type: UserActionTypes.LOGIN_USER_ERROR, payload: response.message})
-               //toast.error(response.message)
+               toast.error("Невірні дані для входу")
             }
             else{
-               //toast.success("Вхід успішний!")
-               const { accessToken, refreshToken, message } = response;
-               setAccessToken(accessToken);
-               setRefreshToken(refreshToken);
+               toast.success("Вхід успішний!")
+              const { accessToken, refreshToken, message } = response;
+        if (user.rememberMe) {
+          setAccessToken(accessToken, true);  
+          setRefreshToken(refreshToken, true); 
+        } else {
+          setAccessToken(accessToken, false);  
+          setRefreshToken(refreshToken, false); 
+        }
                AuthUser(accessToken, message, dispatch);
+              
             }
          }
          catch(e){

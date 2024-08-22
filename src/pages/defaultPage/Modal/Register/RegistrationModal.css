@@ -1,0 +1,13 @@
+  .checkbox-link {
+    color: #1a73e8;
+    text-decoration: underline; 
+  }
+
+  .checkbox-label span {
+    display: inline-block;
+    vertical-align: top;
+  }
+     
+  .checkbox-group {
+    margin-bottom: 20px;
+  }

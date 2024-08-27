@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import "../mainModal.css"
 import "./LoginModal.css"
@@ -30,6 +31,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, onSwitchToRegist
       .min(8, 'Пароль повинен містити не менше 8 символів')
       .max(20, 'Пароль не може містити більше 20 символів')
       .matches(/^(?=.*[a-z])(?=.*[A-Z]).*$/, 'Пароль повинен містити принаймні одну велику літеру і одну малу літеру англійського алфавіту')
+      .matches(/\d/, 'Пароль повинен містити принаймні одну цифру')
       .required('Обов’язкове поле'),
   });
 
@@ -92,7 +94,7 @@ const handleSubmit = async(values: { email: string; password: string; rememberMe
                   className="input-field password-input" 
                 />
                 <img 
-                  src={passwordVisible ? "/Registerimg/open-icon.png" : "/Registerimg/hide-icon.png"} 
+                  src={passwordVisible ? "/Registerimg/hide-icon.png" : "/Registerimg/open-icon.png"} 
                   alt={passwordVisible ? "Hide Password" : "Show Password"} 
                   className="eye-icon" 
                   onClick={togglePasswordVisibility}
@@ -125,7 +127,7 @@ const handleSubmit = async(values: { email: string; password: string; rememberMe
             </Form>
           )}
         </Formik>
-        <p className="signin-signup-prompt">Не маєте акаунта? <a href="#" className="text-link" onClick={onSwitchToRegister}>Зареєструватись</a></p>
+        <p className="signin-signup-prompt">Не маєте акаунта? <Link to="/" className="text-link" onClick={onSwitchToRegister}>Зареєструватись</Link></p>
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
   .deposit-button {
     cursor: pointer;
     border: 0;
-    padding: var(--padding-3xs) var(--padding-xl);
+    padding: var(--padding-2xs) var(--padding-xl);
+    padding-right: 10px;
     background-color: var(--color-crimson-200);
     border-radius: var(--br-11xs);
     display: flex;
@@ -75,8 +76,8 @@
     align-items: center;
   }
   /* .group-wrapper, .uah-wrapper, .group-container {
-    padding: 0; 
-    margin: 0; 
+    padding: 0;
+    margin: 0;
     display: flex;
-    align-items: center; 
+    align-items: center;
 } */

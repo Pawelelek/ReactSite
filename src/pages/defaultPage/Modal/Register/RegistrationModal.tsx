@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import "./RegistrationModal.css";
 import "../mainModal.css"
@@ -27,11 +28,14 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
       .min(8, 'Пароль повинен містити не менше 8 символів')
       .max(20, 'Пароль не може містити більше 20 символів')
       .matches(/^(?=.*[a-z])(?=.*[A-Z]).*$/, 'Пароль повинен містити принаймні одну велику літеру і одну малу літеру англійського алфавіту')
+      .matches(/\d/, 'Пароль повинен містити принаймні одну цифру')
       .required('Обов’язкове поле'),
     firstCheckbox: Yup.boolean()
       .oneOf([true], 'Потрібно підтвердити, що вам є 21 рік'),
     secondCheckbox: Yup.boolean()
-      .oneOf([true], 'Потрібно погодитись з умовами')
+      .oneOf([true], 'Потрібно погодитись з умовами'),
+    thirdCheckbox: Yup.boolean()
+      .oneOf([true], 'Згода на обробку даних')
   });
 
   const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -51,6 +55,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
             password: '',
             firstCheckbox: false,
             secondCheckbox: false,
+            thirdCheckbox: false
           }}
           validationSchema={validationSchema}
           validateOnMount={true}
@@ -80,7 +85,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
                   className="input-field password-input" 
                 />
                 <img 
-                  src={passwordVisible ? "/Registerimg/open-icon.png" : "/Registerimg/hide-icon.png"} 
+                  src={passwordVisible ? "/Registerimg/hide-icon.png" : "/Registerimg/open-icon.png"} 
                   alt={passwordVisible ? "Hide Password" : "Show Password"} 
                   className="eye-icon" 
                   onClick={togglePasswordVisibility}
@@ -147,7 +152,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
           Вхід через Google
         </button>
 
-        <p className="signin-signup-prompt">Маєте акаунт? <a href="#" className="text-link" onClick={onSwitchToLogin}>Увійти</a></p>
+        <p className="signin-signup-prompt">Маєте акаунт? <Link to="/" className="text-link" onClick={onSwitchToLogin}>Увійти</Link></p>
       </div>
     </div>
   );

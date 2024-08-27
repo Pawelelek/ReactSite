@@ -21,8 +21,13 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
   const handleCloseLoginModal = () => setShowLoginModal(false);
   console.log("User is authenticated:", isAuth);
   const onSwitchToLogin = () => {
-    setShowRegistrationModal(false); 
-    setShowLoginModal(true); 
+    setShowRegistrationModal(false);
+    setShowLoginModal(true);
+  };
+
+  const onSwitchToRegister = () => {
+    setShowLoginModal(false);
+    setShowRegistrationModal(true);
   };
   return (
     <div className={`bonus-offer-wrapper ${className}`}>
@@ -70,6 +75,7 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
       <LoginModal 
         show={showLoginModal} 
         onClose={handleCloseLoginModal} 
+        onSwitchToRegister={onSwitchToRegister}
       />
     </div>
   );

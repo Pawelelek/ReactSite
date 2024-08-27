@@ -66,7 +66,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
           />
         </div>
         <button className="deposit-button">
-          <a className="a4"> ДЕПОЗИТ</a>
+          <a className="a4">ДЕПОЗИТ</a>
         </button>
       </div>
     </header>

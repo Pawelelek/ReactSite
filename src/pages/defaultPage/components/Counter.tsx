@@ -62,7 +62,10 @@ const Counter: React.FC<CounterType> = ({ className = "" }) => {
         onClose={handleCloseRegModal}
         onSwitchToLogin={handleOpenLogModal}
       />
+      
       <LoginModal
+      
+        setShowModal={setShowLogModal}
         show={showLogModal}
         onClose={handleCloseLogModal}
         onSwitchToRegister={handleOpenRegModal}

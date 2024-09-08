@@ -1,26 +1,26 @@
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import "./index.css";
+import React from 'react';
+import './index.css';
+import ErrorContent from '../notFound/ErrorContent';
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import Counter from "../defaultPage/components/Counter";
+import Counter2 from "../defaultPage/components/Counter2";
 
-const NotFound = () => {
+const Page404: React.FC = () => {
+  const {user} = useTypedSelector((store) => store.UserReducer);
   return (
-    <div id="notfound">
-      <div className="notfound">
-        <div className="notfound-404">
-          <h3>Ooops! Page not found!</h3>
-          <h1>
-            <span>4</span>
-            <span>0</span>
-            <span>4</span>
-          </h1>
-        </div>
-        <h2>We are sorry, but the page you requested was not found.</h2>
-        <Button variant="contained">
-          <Link to="/">Back home</Link>
-        </Button>
-      </div>
+    <div>
+      {(user.role === "User" || user.role === "Admin") ? (
+        <Counter2 />
+      ) : (
+        <Counter />
+      )}
+    <div className="page404">
+      <main className="mainContent">
+        <ErrorContent />
+      </main>
+    </div>
     </div>
   );
 };
 
-export default NotFound;
+export default Page404;

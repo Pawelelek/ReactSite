@@ -81,6 +81,5 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
   />
   </>
   );
-};
 
 export default FrameComponent2;

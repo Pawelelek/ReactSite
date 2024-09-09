@@ -30,6 +30,7 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
     setShowRegistrationModal(true);
   };
   return (
+    <>
     <div className={`bonus-offer-wrapper ${className}`}>
       <div className="bonus-offer">
         <img
@@ -67,17 +68,18 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
           </div>
         </div>
       </div>
-      <RegistrationModal 
-        show={showRegistrationModal} 
-        onClose={handleCloseRegistrationModal} 
-        onSwitchToLogin={onSwitchToLogin}
-      />
-      <LoginModal 
-        show={showLoginModal} 
-        onClose={handleCloseLoginModal} 
-        onSwitchToRegister={onSwitchToRegister}
-      />
     </div>
+    <RegistrationModal 
+    show={showRegistrationModal} 
+    onClose={handleCloseRegistrationModal} 
+    onSwitchToLogin={onSwitchToLogin}
+  />
+  <LoginModal 
+    show={showLoginModal} 
+    onClose={handleCloseLoginModal} 
+    onSwitchToRegister={onSwitchToRegister}
+  />
+  </>
   );
 };
 

@@ -75,11 +75,12 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
     onSwitchToLogin={onSwitchToLogin}
   />
   <LoginModal 
-    show={showLoginModal} 
-    onClose={handleCloseLoginModal} 
-    onSwitchToRegister={onSwitchToRegister}
-  />
+  show={showLoginModal} 
+  setShowModal={setShowLoginModal}
+  onClose={handleCloseLoginModal} 
+  onSwitchToRegister={onSwitchToRegister}
+/>
   </>
   );
-
+}
 export default FrameComponent2;

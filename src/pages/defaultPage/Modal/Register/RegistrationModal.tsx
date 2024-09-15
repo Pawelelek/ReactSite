@@ -152,7 +152,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
           Вхід через Google
         </button>
 
-        <p className="signin-signup-prompt">Маєте акаунт? <Link to="/" className="text-link" onClick={onSwitchToLogin}>Увійти</Link></p>
+        <p className="signin-signup-prompt">Маєте акаунт? <button className="text-link" onClick={onSwitchToLogin}>Увійти</button></p>
       </div>
     </div>
   );

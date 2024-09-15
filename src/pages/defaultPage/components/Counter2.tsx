@@ -28,7 +28,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
             className="asset-24x-1"
             loading="lazy"
             alt=""
-            src="Homeimg/asset-24x-1@2x.png"
+            src="/Homeimg/asset-24x-1@2x.png"
             onClick={()=>navigator("/")}
             style={{ cursor: "pointer" }}
           />
@@ -44,7 +44,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
       </div>
       <div className="account">
       <div className="group-wrapper" onClick={Logout} style={{ cursor: 'pointer' }}>
-          <img className="group-icon" loading="lazy" alt="" src="Homeimg/exit.png" />
+          <img className="group-icon" loading="lazy" alt="" src="/Homeimg/exit.png" />
       </div>
         {/* <div className="vector-wrapper">
           <img
@@ -62,7 +62,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
             className="group-icon1"
             loading="lazy"
             alt=""
-            src="Homeimg/account.png"
+            src="/Homeimg/account.png"
           />
         </div>
         <button className="deposit-button">

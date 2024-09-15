@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { useActions } from "../../../hooks/useActions";
 import { useNavigate } from 'react-router-dom';
+import Counter from "../../defaultPage/components/Counter";
+import Counter2 from "../../defaultPage/components/Counter2";
 
 const AllUsers = () => {
    const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
@@ -42,23 +44,16 @@ const AllUsers = () => {
   const handleUpdate = (id: string) => {
     navigate('/admin/user/update/' + id);
  };
-//  const deleteUser = (id: string) => {
-//   console.log(id);
-//   const myElement = document.getElementById("exampleModal") as HTMLElement;
-//   setId(id);
-//   const myModal = new Modal(myElement);
-//   myModal.show();
-// }
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-       <div style={{ maxWidth: '1000px', width: '100%', margin: '0 auto' }}>
+    <>
+    {(user.role === "User" || user.role === "Admin") ? (
+      <Counter2 />
+    ) : (
+      <Counter />
+    )}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor:"darkslategray",paddingTop:30 }}>
+       <div style={{ maxWidth: '1000px', width: '100%', margin: '0 auto', background:"darkslategray" }}>
     <TableContainer component={Paper}>
-      {/* <Button
-                    href="/dashboard/user/create"
-                    style={{ backgroundColor: '#d95a11', color: '#f5fafa', textTransform: 'none' }}
-                  >
-                    Create New User
-                  </Button> */}
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -68,12 +63,20 @@ const AllUsers = () => {
             <TableCell align="center">Confirm email</TableCell>
             <TableCell align="center">Phone Number</TableCell>
             <TableCell align="center">Role</TableCell>
-            {/* {user.role === 'Administrator' && (
-                  <TableCell align="center">Delete</TableCell>
-                )}
-                {user.role === 'Administrator' && (
-                  <TableCell align="center">Update</TableCell>
-                )} */}
+            <TableCell align="center" colSpan={2} style={{ padding: 0 }}> 
+          <Button
+            onClick={handleCreateUser}
+            style={{
+              backgroundColor: '#4287f5',
+              color: '#f5fafa',
+              textTransform: 'none',
+              width: '80%', 
+              height: '100%', 
+            }}
+          >
+            Create New User
+          </Button>
+        </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -90,13 +93,7 @@ const AllUsers = () => {
               <TableCell align="center">{row.emailConfirmed ? "True" : "False"}</TableCell>
               <TableCell align="center">{row.phoneNumber}</TableCell>
               <TableCell align="center">{row.roles[0].roleName}</TableCell>
-              <TableCell align="center">{user.role === 'Admin' && user.Id !== row.id && (
-                  // <Button
-                  //   onClick={() => FuncDelete(row.id)}
-                  //   style={{ backgroundColor: '#FF0000', color: '#f5fafa', textTransform: 'none' }}
-                  // >
-                  //   Delete
-                  // </Button>
+              <TableCell align="center" style={{ borderTop: '1px solid #ddd'}}>{user.role === 'Admin' && user.Id !== row.id && (
                   <Button
                          onClick={() => handleClickOpen(row.id)}
                          style={{ backgroundColor: '#FF0000', color: '#f5fafa', textTransform: 'none' }}
@@ -104,7 +101,7 @@ const AllUsers = () => {
                          Delete
                        </Button>
                 )}</TableCell>
-                <TableCell align="center">{user.role === 'Admin' && (
+                <TableCell align="center" style={{ borderTop: '1px solid #ddd'}}>{user.role === 'Admin' && (
                   <Button
                     onClick={() => handleUpdate(row.id)}
                     style={{ backgroundColor: '#d95a11', color: '#f5fafa', textTransform: 'none' }}
@@ -118,12 +115,6 @@ const AllUsers = () => {
       </Table>
     </TableContainer>
     </div>
-       <Button
-         onClick={handleCreateUser}
-         style={{ marginTop: '20px', backgroundColor: '#4287f5', color: '#f5fafa', textTransform: 'none' }}
-       >
-         Create New User
-       </Button>
        <Dialog
          open={open}
          onClose={handleClose}
@@ -143,8 +134,8 @@ const AllUsers = () => {
            </Button>
          </DialogActions>
        </Dialog>
-
      </div>
+     </>
    );
 };
 

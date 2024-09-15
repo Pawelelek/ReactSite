@@ -153,6 +153,9 @@
     text-decoration:underline;
     font-weight: bold;
     margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 
   input[type="checkbox"] {

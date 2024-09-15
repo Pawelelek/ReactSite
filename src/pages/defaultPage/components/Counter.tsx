@@ -33,7 +33,7 @@ const Counter: React.FC<CounterType> = ({ className = "" }) => {
             className="asset-24x-1"
             loading="lazy"
             alt=""
-            src="Homeimg/asset-24x-1@2x.png"
+            src="/Homeimg/asset-24x-1@2x.png"
             onClick={()=>navigator("/")}
             style={{ cursor: "pointer" }}
           />
@@ -49,13 +49,17 @@ const Counter: React.FC<CounterType> = ({ className = "" }) => {
       </div>
       <div className="account">
         <div className="login-button-parent">
-          <Link to="/" className="login-button" onClick={handleOpenLogModal}>
+          {/* <Link to="/" className="login-button" onClick={handleOpenLogModal}>
             Увійти
-          </Link>
+          </Link> */}
+          <button className="login-button" onClick={handleOpenLogModal}>
+  Увійти
+</button>
         </div>
-        <Link to="/" className="register-button" onClick={handleOpenRegModal}>
+        {/* <Link to="/" className="register-button" onClick={handleOpenRegModal}>
           Реєстрація
-        </Link>
+        </Link> */}
+        <button className="register-button" onClick={handleOpenRegModal}>Реєстрація</button>
       </div>
       <RegistrationModal
         show={showRegModal}

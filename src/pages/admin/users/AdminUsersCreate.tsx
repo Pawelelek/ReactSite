@@ -104,7 +104,7 @@ const CreateUser = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     Create(user);
-    navigate('/admin');
+    navigate('/admin/users');
   };
 
   return (

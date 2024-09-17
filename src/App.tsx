@@ -9,8 +9,10 @@ import AllUsers from "./pages/admin/users/AdminUsersView";
 import CreateUser from "./pages/admin/users/AdminUsersCreate";
 import UpdateUser from "./pages/admin/users/AdminUsersUpdate";
 import AllRoles from "./pages/admin/role/AdminRolesView";
-import CreateRole from "./pages/admin/role/AdminRolesCreate";
 import UpdateRole from "./pages/admin/role/AdminRolesUpdate";
+import AdminHomePage from "./pages/admin/AdminHomePage";
+import CreateRole from "./pages/admin/role/AdminRolesCreate";
+import CreateRole1 from "./pages/admin/role/AdminRolesCreate";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
@@ -29,12 +31,13 @@ function App() {
             //   <Route path="role/update/:userId" element={<UpdateRole />} />
             // </Route>
             <Route path="/admin" element={<Outlet />}>
-               <Route index element={<AllUsers />} />
+               <Route index element={<AdminHomePage />} />
+               <Route path="users" element={<AllUsers />} />
                <Route path="user/create" element={<CreateUser />} />
                <Route path="user/update/:userId" element={<UpdateUser />} />
                <Route path="roles" element={<AllRoles />} />
                <Route path="role/create" element={<CreateRole />} />
-               <Route path="role/update/:userId" element={<UpdateRole />} />
+               <Route path="role/update" element={<UpdateRole />} />
             </Route>
             
           )}

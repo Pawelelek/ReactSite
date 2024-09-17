@@ -1,124 +1,88 @@
 import { useEffect, useState } from 'react';
 import { Button, Paper, TextField } from '@mui/material';
 import { useActions } from '../../../hooks/useActions';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { getbyid } from '../../../services/api-user-service';
 import { useNavigate } from 'react-router-dom';
+import { http } from '../../../http';
 
 const UpdateRole = () => {
-  const { Update } = useActions();
   const { userId } = useParams();
   const navigate = useNavigate();
-
-  const [user, setUser] = useState({
-    id: userId,
-    firstName: '',
-    lastName: '',
-    phoneNumber: ''
+  // const [role, setRole] = useState<any>();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [role, setRole] = useState({
+    id: searchParams.get('id'),
+    roleName: '',
+    concurrencyStamp: '',
   });
 
-  const [errors, setErrors] = useState({
-    id: '',
-    firstName: '',
-    lastName: '',
-    phoneNumber: ''
-  });
+  // const [errors, setErrors] = useState({
+  //   id: '',
+  //   firstName: '',
+  //   lastName: '',
+  //   phoneNumber: ''
+  // });
+  const loadingRoleOnFormik = () => {
+    console.log("id: " + searchParams.get('id'));
+    http.get('api/Role/get/' + searchParams.get('id'))
+      .then((res) =>
+      {
+        {
+          
+          var data = res.data.payload[0];
+          console.log("Role:", data)        
+          setRole(data);
+          //role.roleName = data.roleName,
+          setRole({
+            id: data.id,
+            roleName: data.roleName || '',
+            concurrencyStamp: data.concurrencyStamp || '',
+          });
+          console.log("SetRole:", role) 
+        }
+      })
+  }
 
   useEffect(() => {
-    const fetchUser = async (id: string) => {
-      const result = await getbyid(id);
-      // setUser({
-      //   id: userId,
-      //   firstName: result.response.payload.firstName || '',
-      //   lastName: result.response.payload.lastName || '',
-      //   phoneNumber: result.response.payload.phoneNumber || '',
-      // });
-    };
+    loadingRoleOnFormik();
 
-    if (userId) {
-      fetchUser(userId);
-    }
-  }, [userId]);
 
+  }, []);
   const isFormValid = () => {
-    return Object.values(user).every((value) => value !== '') && !Object.values(errors).some((error) => error !== '');
+    return Object.values(role).every((value) => value !== null);
   };
+
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setUser((prevUser) => ({
+    setRole((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
-    validateField(name, value);
-  };
-
-  const validateField = (name: any, value: any) => {
-    let errorMessage = '';
-    switch (name) {
-      case 'firstName':
-      case 'lastName':
-        if (value.length > 50 || value.length < 6) {
-          errorMessage = 'Забагато або замало символів';
-        }
-        break;
-      case 'phoneNumber':
-        if (value.length < 9 || value.length > 20) {
-          errorMessage = 'Телефонний номер повинен бути від 9 до 20 символів';
-        }
-        break;
-      default:
-        break;
-    }
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: errorMessage,
-    }));
+    //validateField(name, value);
   };
 
   const handleSubmit = (e: any) => {
      e.preventDefault();
-     Update(user);
-     navigate('/dashboard/users');
+     http.put("api/Role/edit", role).then(() => {
+      console.log("Submit", role);
+      navigate('/admin/roles');
+      navigate(0);
+  });
   };
 
   return (
     <Paper style={{ padding: 20, maxWidth: 400, margin: '0 auto' }}>
-      <h1>Update User</h1>
+      <h1>Update Role</h1>
       <form onSubmit={handleSubmit}>
         <TextField
           label="First Name"
-          name="firstName"
-          value={user.firstName}
+          name="roleName"
+          value={role.roleName}
           onChange={handleChange}
           variant="outlined"
           fullWidth
-          error={!!errors.firstName}
-          helperText={errors.firstName}
-          style={{ marginBottom: 10 }}
-          required
-        />
-        <TextField
-          label="Last Name"
-          name="lastName"
-          value={user.lastName}
-          onChange={handleChange}
-          variant="outlined"
-          fullWidth
-          error={!!errors.lastName}
-          helperText={errors.lastName}
-          style={{ marginBottom: 10 }}
-          required
-        />
-        <TextField
-          label="Phone Number"
-          name="phoneNumber"
-          value={user.phoneNumber}
-          onChange={handleChange}
-          variant="outlined"
-          fullWidth
-          error={!!errors.phoneNumber}
-          helperText={errors.phoneNumber}
           style={{ marginBottom: 10 }}
           required
         />
@@ -129,7 +93,7 @@ const UpdateRole = () => {
           style={{ marginTop: 10 }}
           disabled={!isFormValid()}
         >
-          Update User
+          Update Role
         </Button>
       </form>
     </Paper>

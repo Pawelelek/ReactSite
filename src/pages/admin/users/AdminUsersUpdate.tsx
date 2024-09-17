@@ -82,7 +82,8 @@ const UpdateUser = () => {
      e.preventDefault();
      //console.log(userId);
      Update(user);
-     navigate('/admin');
+     navigate('/admin/users');
+     //navigate(0);
   };
 
   return (

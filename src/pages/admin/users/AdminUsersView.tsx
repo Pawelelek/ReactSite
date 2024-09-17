@@ -5,6 +5,7 @@ import { useActions } from "../../../hooks/useActions";
 import { useNavigate } from 'react-router-dom';
 import Counter from "../../defaultPage/components/Counter";
 import Counter2 from "../../defaultPage/components/Counter2";
+import AdmNavbar from "../AdmNavbar";
 
 const AllUsers = () => {
    const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
@@ -14,7 +15,7 @@ const AllUsers = () => {
    const [deleteId, setDeleteId] = useState<string | null>(null);
    const navigate = useNavigate();
   useEffect(() => {
-    GetAllUsers()
+    GetAllUsers()  
   }, []);
   // const FuncDelete = (id: string) => {
   //    DeleteById(id);
@@ -46,11 +47,12 @@ const AllUsers = () => {
  };
   return (
     <>
-    {(user.role === "User" || user.role === "Admin") ? (
+    <AdmNavbar/>
+    {/* {(user.role === "User" || user.role === "Admin") ? (
       <Counter2 />
     ) : (
       <Counter />
-    )}
+    )} */}
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor:"darkslategray",paddingTop:30 }}>
        <div style={{ maxWidth: '1000px', width: '100%', margin: '0 auto', background:"darkslategray" }}>
     <TableContainer component={Paper}>
@@ -92,7 +94,8 @@ const AllUsers = () => {
               <TableCell align="center">{row.email}</TableCell>
               <TableCell align="center">{row.emailConfirmed ? "True" : "False"}</TableCell>
               <TableCell align="center">{row.phoneNumber}</TableCell>
-              <TableCell align="center">{row.roles[0].roleName}</TableCell>
+              <TableCell align="center">{row.roles[0] != null ? row.roles[0].roleName: "None"}</TableCell>
+              {/* {item.id} [{ item.permissions[0] != null ? item.permissions[0].roleName : "None"}] */}
               <TableCell align="center" style={{ borderTop: '1px solid #ddd'}}>{user.role === 'Admin' && user.Id !== row.id && (
                   <Button
                          onClick={() => handleClickOpen(row.id)}

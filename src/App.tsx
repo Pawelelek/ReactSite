@@ -12,7 +12,9 @@ import AllRoles from "./pages/admin/role/AdminRolesView";
 import UpdateRole from "./pages/admin/role/AdminRolesUpdate";
 import AdminHomePage from "./pages/admin/AdminHomePage";
 import CreateRole from "./pages/admin/role/AdminRolesCreate";
-import CreateRole1 from "./pages/admin/role/AdminRolesCreate";
+import CategoriesView from "./pages/admin/categories/AdminCategoryView";
+import CategoriesCreate from "./pages/admin/categories/AdminCategoryCreate";
+import CategoriesUpdate from "./pages/admin/categories/AdminCategoryUpdate";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
@@ -38,6 +40,9 @@ function App() {
                <Route path="roles" element={<AllRoles />} />
                <Route path="role/create" element={<CreateRole />} />
                <Route path="role/update" element={<UpdateRole />} />
+               <Route path="categories" element={<CategoriesView />} />
+               <Route path="category/create" element={<CategoriesCreate />} />
+               <Route path="category/update" element={<CategoriesUpdate />} />
             </Route>
             
           )}

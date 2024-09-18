@@ -88,7 +88,7 @@ const User = {
     getallusers: () => requests.get(`/GetAll`),
     deletebyid: (userId: string) => requests.delete(`/DeleteById?id=` + userId),
     create: (user: any) => requests.post(`/Create`, user),
-    update: (user: any) => requests.put(`/UpdatePersonalInfo`, user),
+    update: (user: any) => requests.put(`/Edit`, user),
     getbyid: (userId: string) => requests.get(`/GetById?Id=` + userId)
 }
 

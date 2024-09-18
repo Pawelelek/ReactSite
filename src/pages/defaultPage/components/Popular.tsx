@@ -43,7 +43,7 @@ const Popular: FunctionComponent<PopularType> = ({ className = "" }) => {
           <div className="promotion-header-parent">
             <div className="promotion-header">
               <div className="all-promotions-button">
-                <div className="div3">Усі акції</div>
+                <div className="div3" style={{ cursor: "pointer" }}>Усі акції</div>
               </div>
               <div className="risk-free">
                 <div className="risk-free-child" />
@@ -60,7 +60,7 @@ const Popular: FunctionComponent<PopularType> = ({ className = "" }) => {
               </div>
             </div>
             <div className="show-all-button">
-              <div className="div4">Показати усі</div>
+              <div className="div4" style={{ cursor: "pointer" }}>Показати усі</div>
             </div>
           </div>
         </div>

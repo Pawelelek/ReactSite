@@ -11,7 +11,7 @@ const Events: FunctionComponent<EventsType> = ({ className = "" }) => {
       <div className="events-title">
         <div className="div12">Популярні події</div>
         <div className="events-button">
-          <div className="div13">Показати усі</div>
+          <div className="div13" style={{ cursor: "pointer" }}>Показати усі</div>
         </div>
       </div>
       <div className="leagues">

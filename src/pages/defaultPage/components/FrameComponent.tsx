@@ -84,7 +84,7 @@ const FrameComponent: FunctionComponent<FrameComponentType> = ({
             <div className="empty-denmark">{odd3}</div>
           </div>
         </div>
-        <img className="star-1-icon" loading="lazy" alt="" src={star1} />
+        <img className="star-1-icon" loading="lazy" alt="" src={star1} style={{ cursor: "pointer" }}/>
       </div>
     </div>
   );

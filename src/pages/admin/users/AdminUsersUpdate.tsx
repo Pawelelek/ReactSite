@@ -1,38 +1,56 @@
 import { useEffect, useState } from 'react';
-import { Button, Paper, TextField } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material';
 import { useActions } from '../../../hooks/useActions';
 import { useParams } from 'react-router-dom';
 import { getbyid } from '../../../services/api-user-service';
 import { useNavigate } from 'react-router-dom';
+import { http } from '../../../http';
 
 const UpdateUser = () => {
   const { Update } = useActions();
   const { userId } = useParams();
+  const [roles, setRoles] = useState<any>();
   const navigate = useNavigate();
 
+  const loadRoles = () => {
+  
+    http.get("api/Role/get")
+      .then(resp => {
+        const {payload} = resp.data;
+
+        setRoles(payload);
+        console.log(payload);
+      });
+  }
   const [user, setUser] = useState({
     id: userId,
+    email: '',
     firstName: '',
     lastName: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    roleName: ''
   });
 
   const [errors, setErrors] = useState({
     id: '',
+    email: '',
     firstName: '',
     lastName: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    roleName: ''
   });
 
   useEffect(() => {
     const fetchUser = async (id: string) => {
       const result = await getbyid(id);
-      //console.log("Our result: ", result.response.payload[0]);
+      loadRoles();
       setUser({
         id: userId,
+        email: result.response.payload[0].email || '',
         firstName: result.response.payload[0].firstName || '',
         lastName: result.response.payload[0].lastName || '',
         phoneNumber: result.response.payload[0].phoneNumber || '',
+        roleName: result.response.payload[0].roles[0].roleName || '',
       });
       
     };
@@ -114,6 +132,28 @@ const UpdateUser = () => {
           style={{ marginBottom: 10 }}
           required
         />
+        <TextField
+          label="Last Name"
+          name="email"
+          value={user.email}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          error={!!errors.email}
+          helperText={errors.email}
+          style={{ marginBottom: 10 }}
+          required
+        />
+        <FormControl variant="outlined" fullWidth style={{ marginBottom: 10 }}>
+          <InputLabel>Role</InputLabel>
+          <Select name="roleName" value={user.roleName} onChange={handleChange} error={!!errors.roleName} required>
+            {roles?.map((role:any) => (
+              <MenuItem key={role.roleName} value={role.roleName}>
+                {role.roleName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <TextField
           label="Phone Number"
           name="phoneNumber"

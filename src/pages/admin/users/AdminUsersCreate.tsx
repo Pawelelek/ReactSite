@@ -105,6 +105,7 @@ const CreateUser = () => {
     e.preventDefault();
     Create(user);
     navigate('/admin/users');
+    navigate(0);
   };
 
   return (

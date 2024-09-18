@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import "./Counter2.css";
 import "./Counter.css";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
@@ -24,6 +24,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
       <div className="counter-child" />
       <div className="counter-inner">
         <div className="asset-24x-1-parent">
+        <Link to="/admin" className="a3">Admin</Link>
         <img
             className="asset-24x-1"
             loading="lazy"
@@ -33,13 +34,17 @@ const Counter2: FunctionComponent<Counter2Type> = ({
             style={{ cursor: "pointer" }}
           />
           <nav className="counter-parent">
+            
             <nav className="live-label">
-              <a className="live">LIVE</a>
-              <a className="a">СПОРТ</a>
-              <a className="a1">КІБЕРСПОРТ</a>
-              <a className="a2">АКЦІЇ</a>
+              <a className="live" style={{ cursor: "pointer" }}>LIVE</a>
+              <a className="a" style={{ cursor: "pointer" }}>СПОРТ</a>
+              <a className="a1" style={{ cursor: "pointer" }}>КІБЕРСПОРТ</a>
+              <a className="a2" style={{ cursor: "pointer" }}>АКЦІЇ</a>
+              
             </nav>
+            
           </nav>
+          
         </div>
       </div>
       <div className="account">
@@ -63,6 +68,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
             loading="lazy"
             alt=""
             src="/Homeimg/account.png"
+            style={{ cursor: "pointer" }}
           />
         </div>
         <button className="deposit-button">

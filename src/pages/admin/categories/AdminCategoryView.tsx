@@ -73,8 +73,9 @@ const CategoriesView = () => {
         <TableHead>
           <TableRow>
             <TableCell align="center">Name</TableCell>
-            <TableCell align="center">Parent</TableCell>
-            
+            <TableCell align="center">Description</TableCell>
+            <TableCell align="center">ParentName</TableCell>
+            <TableCell align="center">Subcategories</TableCell>
             <TableCell align="center" colSpan={2} style={{ padding: 0 }}> 
           <Button
             onClick={handleCreateRole}
@@ -101,7 +102,13 @@ const CategoriesView = () => {
                 {row.name}
               </TableCell>
               <TableCell component="th" scope="row" align="center">
+                {row.description}
+              </TableCell>
+              <TableCell component="th" scope="row" align="center">
                 {row.parentName}
+              </TableCell>
+              <TableCell component="th" scope="row" align="center">
+                {row.countSubcategories}
               </TableCell>
               <TableCell align="center" style={{ borderTop: '1px solid #ddd'}}>{user.role === 'Admin' && user.Id !== row.id && (
                   <Button

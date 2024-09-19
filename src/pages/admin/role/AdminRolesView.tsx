@@ -97,7 +97,7 @@ const AllRoles = () => {
               
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell align="center">{row.concurrencyStamp}</TableCell>
+              <TableCell align="center">{row.concurrencyStamp != null ? row.concurrencyStamp: "None"}</TableCell>
               <TableCell component="th" scope="row" align="center">
                 {row.roleName}
               </TableCell>

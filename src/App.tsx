@@ -15,6 +15,9 @@ import CreateRole from "./pages/admin/role/AdminRolesCreate";
 import CategoriesView from "./pages/admin/categories/AdminCategoryView";
 import CategoriesCreate from "./pages/admin/categories/AdminCategoryCreate";
 import CategoriesUpdate from "./pages/admin/categories/AdminCategoryUpdate";
+import PromocodesView from "./pages/admin/promocodes/AdminPromocodeView";
+import PromocodeCreate from "./pages/admin/promocodes/AdminPromocodeCreate";
+import PromocodeUpdate from "./pages/admin/promocodes/AdminPromocodeUpdate";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
@@ -23,26 +26,21 @@ function App() {
       {isAuth && (
         <>
           {user.role === "Admin" && (
-            // <Route path="/admin" element={<AllUsers />}>
-            //   <Route index element={<AllUsers />} />
-            //   <Route path="users" element={<AllUsers />} />
-            //   <Route path="user/create" element={<CreateUser />} />
-            //   <Route path="user/update/:userId" element={<UpdateUser />} />
-            //   <Route path="roles" element={<AllRoles />} />
-            //   <Route path="role/create" element={<CreateRole />} />
-            //   <Route path="role/update/:userId" element={<UpdateRole />} />
-            // </Route>
             <Route path="/admin" element={<Outlet />}>
-               <Route index element={<AdminHomePage />} />
-               <Route path="users" element={<AllUsers />} />
-               <Route path="user/create" element={<CreateUser />} />
-               <Route path="user/update/:userId" element={<UpdateUser />} />
-               <Route path="roles" element={<AllRoles />} />
-               <Route path="role/create" element={<CreateRole />} />
-               <Route path="role/update" element={<UpdateRole />} />
-               <Route path="categories" element={<CategoriesView />} />
-               <Route path="category/create" element={<CategoriesCreate />} />
-               <Route path="category/update" element={<CategoriesUpdate />} />
+              <Route index element={<AdminHomePage />} />
+              <Route path="users" element={<AllUsers />} />
+              <Route path="user/create" element={<CreateUser />} />
+              <Route path="user/update/:userId" element={<UpdateUser />} />
+              <Route path="roles" element={<AllRoles />} />
+              <Route path="role/create" element={<CreateRole />} />
+              <Route path="role/update" element={<UpdateRole />} />
+              <Route path="categories" element={<CategoriesView />} />
+              <Route path="category/create" element={<CategoriesCreate />} />
+              <Route path="category/update" element={<CategoriesUpdate />} />
+              <Route path='promocodes' element={<PromocodesView/>}/>
+              <Route path="promocode/create" element={<PromocodeCreate/>} />
+              <Route path="promocode/update" element={<PromocodeUpdate />} />
+
             </Route>
             
           )}

@@ -17,28 +17,11 @@ import { LoginSchema } from "../validation";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import Loader from "../../../components/loader";
+import { jwtDecode } from "jwt-decode";
+import { gapi } from "gapi-script";
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
 
 const initialValues = { email: "", password: "", rememberMe: false };
-
-// function Copyright(props: any) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" to="/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
-
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignIn() {
@@ -46,7 +29,7 @@ export default function SignIn() {
   const { isAuth, loading } = useTypedSelector((store) => store.UserReducer);
 
   if (isAuth) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/" />;
   }
 
   if (loading) {

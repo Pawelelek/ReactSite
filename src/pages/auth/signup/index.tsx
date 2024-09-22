@@ -18,28 +18,13 @@ import { UserActionTypes } from "../../../store/reducers/userReducer/types";
 import { createUser} from "../../../services/api-user-service";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import { jwtDecode } from "jwt-decode";
+import { gapi } from "gapi-script";
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
+import { APP_ENV } from "../../../env";
 
 const initialValues = { email: "", password: "", firstName: "", lastName: "", confirmPassword: "", phoneNumber: ""};
 
-// function Copyright(props: any) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" to="/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
-
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignIn() {

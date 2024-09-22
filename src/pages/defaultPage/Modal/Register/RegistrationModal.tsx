@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import "./RegistrationModal.css";
 import "../mainModal.css"
+import { jwtDecode } from "jwt-decode";
+import { gapi } from "gapi-script";
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
+import { APP_ENV } from '../../../../env';
+import { http } from '../../../../http';
+import { useActions } from '../../../../hooks/useActions';
+import { useDispatch } from 'react-redux';
 
 interface RegistrationModalProps {
   show: boolean;
@@ -13,13 +20,44 @@ interface RegistrationModalProps {
 
 const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, onSwitchToLogin }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+  const navigator = useNavigate();
+  useEffect(() => {
+    const start = () => {
+      gapi.client.init({ //Init key for google
+        clientId: APP_ENV.GOOGLE_AUTH_CLIENT_ID,
+        scope: ''
+      })
+    }
+  }, []);
+  const dispatch = useDispatch();
   if (!show) return null;
-
+  
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-
+  const responseGoogle = (responce: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    const model = {
+      provider: "Google",
+      token: (responce as GoogleLoginResponse).tokenId //Google account token
+    }
+    //Sends the model to the server, and the server must validate the model
+    console.log("Send data to googleExtLogin",model)
+    http.post("api/User/GoogleExternalLogin", model)
+      .then(x =>
+      {
+        console.log("x.Data.Payload ", x.data.payload);
+        const user = jwtDecode(x.data.payload.token);
+        console.log("UserJWTDecode: ", user)
+        localStorage.token = x.data.payload;
+        
+        // dispatch({
+        //   type: AuthReducerActionType.LOGIN_USER,
+        //   payload: IUserPayload(user)
+        // });
+        navigator("/");
+      });
+    console.log("Login google response", responce);
+  }
   const validationSchema = Yup.object({
     email: Yup.string()
       .email('Невірна електронна адреса')
@@ -53,14 +91,29 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
           initialValues={{
             email: '',
             password: '',
+            phoneNumber: '',
             firstCheckbox: false,
             secondCheckbox: false,
             thirdCheckbox: false
           }}
+          
           validationSchema={validationSchema}
           validateOnMount={true}
           onSubmit={(values) => {
-            alert('Хелоу ворлд');
+            //alert('Хелоу ворлд');
+            const user = {
+              firstName: '',
+              lastName: '',
+              email: values.email,
+              role: '',
+              password: values.password,
+              confirmPassword: values.password,
+              phoneNumber: '',
+            };
+            http.post("api/User/Create", user).then(() => {
+              navigator("/");
+            });
+            // Create(values);
           }}
         >
           {({ isValid }) => (
@@ -84,6 +137,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
                   placeholder="* * * * * * * *" 
                   className="input-field password-input" 
                 />
+                
                 <img 
                   src={passwordVisible ? "/Registerimg/hide-icon.png" : "/Registerimg/open-icon.png"} 
                   alt={passwordVisible ? "Hide Password" : "Show Password"} 
@@ -151,7 +205,11 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
           <img src="/Registerimg/google.png" alt="Google" className="google-icon" />
           Вхід через Google
         </button>
-
+        <GoogleLogin clientId={APP_ENV.GOOGLE_AUTH_CLIENT_ID}
+                  buttonText="Login with google"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                />
         <p className="signin-signup-prompt">Маєте акаунт? <button className="text-link" onClick={onSwitchToLogin}>Увійти</button></p>
       </div>
     </div>

@@ -37,10 +37,16 @@ const AdmNavbar: FunctionComponent<AdmNavbar> = ({
           <nav className="counter-parent">
             <nav className="live-label">
             <a>
-            <Link to={"/admin/users"} className="live">Users</Link>
+              <Link to={"/admin/users"} className="live">Users</Link>
+              <Link to={"/admin/roles"} className="a">Roles</Link>
+              <Link to={"/admin/categories"} className="a1">Categories</Link>
+              <Link to={"/admin/promocodes"} className="a2">Promocodes</Link>
+              <Link to={"/admin/sports"} className="a3">SportAPI</Link>
+            {/* <Link to={"/admin/users"} className="live">Users</Link>
             <Link to={"/admin/roles"} className="a">Roles</Link>
             <Link to={"/admin/categories"} className="a1">Categories</Link>
             <Link to={"/admin/promocodes"} className="a2">Promocodes</Link>
+            <Link to={"/admin/sports"} className="a3">Sports</Link> */}
             </a>
             </nav>
           </nav>

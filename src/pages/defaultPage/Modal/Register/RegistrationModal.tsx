@@ -102,13 +102,9 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
           onSubmit={(values) => {
             //alert('Хелоу ворлд');
             const user = {
-              firstName: '',
-              lastName: '',
               email: values.email,
-              role: '',
               password: values.password,
               confirmPassword: values.password,
-              phoneNumber: '',
             };
             http.post("api/User/Create", user).then(() => {
               navigator("/");

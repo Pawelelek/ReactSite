@@ -2,6 +2,7 @@ import { UserActionTypes, UserActions } from "../../reducers/userReducer/types";
 import { Dispatch } from "redux"
 import { toast } from "react-toastify"
 import {jwtDecode} from "jwt-decode"
+import 'react-toastify/dist/ReactToastify.css';
 import { createUser, deletebyid, getallusers, login, logout, removeTokens, setAccessToken, setRefreshToken, updateUser } from "../../../services/api-user-service";
 
 
@@ -13,10 +14,20 @@ export const LoginUser = (user: { email: string; password: string; rememberMe: b
             const { response } = data;
             if(!response.success){
                dispatch({type: UserActionTypes.LOGIN_USER_ERROR, payload: response.message})
-               toast.error("Невірні дані для входу")
+               toast.error("Невірні дані для входу", {
+                style: {
+                  backgroundColor: '#333',
+                  color: '#fff',
+                },
+              })
             }
             else{
-               toast.success("Вхід успішний!")
+              toast.success("Вхід успішний!", {
+                style: {
+                  backgroundColor: '#333',
+                  color: '#fff',
+                },
+              })
               const { accessToken, refreshToken, message } = response;
         if (user.rememberMe) {
           setAccessToken(accessToken, true);  

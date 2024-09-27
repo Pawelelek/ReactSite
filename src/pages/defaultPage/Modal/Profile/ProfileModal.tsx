@@ -7,26 +7,27 @@ import BetHistory from './tabs/betHistory';
 import Favourite from './tabs/Favourite';
 import { http } from '../../../../http';
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useBalance } from './BalanceContext';
 
 interface ProfileModalProps {
   show: boolean;
   onClose: () => void;
   activeTab?: 'profile' | 'balance' | 'bonuses' | 'betHistory' | 'favourite';
-  balanceTab?: 'myBalance' | 'Deposit' | 'transactionHistory';
+  balanceTab?: 'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal';
 }
 
 const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='profile', balanceTab='myBalance' }) => {
   const [activeMainTab, setActiveMainTab] = useState<'profile' | 'balance' | 'bonuses' | 'betHistory' | 'favourite'>(activeTab);
-  const [activeBalanceTab, setActiveBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory'>(balanceTab);
+  const [activeBalanceTab, setActiveBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal'>(balanceTab);
   const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
-
+  const { balanceRef } = useBalance();
   // useEffect(() => {
   //   if (show) {
-  //     // При кожному відкритті модалки оновлюємо вкладку на активну
+  //     
   //     setActiveMainTab(activeTab);
   //   }
   // }, [show, activeTab]);
@@ -46,21 +47,24 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='p
     money: 0
   });
 
-  const getBalanceByUserId = () => {
-    console.log("userId: " + user.Id);
-    http.get('api/Balance/getByUserId?userId=' + user.Id)
-      .then((res) =>
-      {
-        {
-          var data = res.data.payload[0];
-          setBalance(data);
-        }
-      })
-  }
+  // var balanceRef = useRef(balance);
 
-  useEffect(() => {
-    getBalanceByUserId();
-  }, []);
+  // const getBalanceByUserId = () => {
+  //   console.log("userId: " + user.Id);
+  //   http.get('api/Balance/getByUserId?userId=' + user.Id)
+  //     .then((res) =>
+  //     {
+  //       {
+  //         var data = res.data.payload[0];
+  //         setBalance(data);
+  //         balanceRef.current.money = data.money;
+  //       }
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   getBalanceByUserId();
+  // }, []);
 
   if (!show) return null;
 
@@ -122,7 +126,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='p
             <div className="custom-frame-429">
               <div className="custom-frame-428">
                 <div className="custom-div4">БАЛАНС</div>
-                <div className="custom-_0-00-uah">{balance.money} UAH</div>
+                <div className="custom-_0-00-uah">{balanceRef.current.money} UAH</div>
               </div>
               <div className="custom-frame-427">
                 <div className="custom-frame-63">
@@ -132,7 +136,10 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='p
                   }}>ДЕПОЗИТ</div>
                 </div>
                 <div className="custom-frame-64">
-                  <div className="custom-div">ВИВЕСТИ</div>
+                  <div className="custom-div" onClick={() => {
+                  setActiveMainTab('balance');
+                  setActiveBalanceTab('Withdrawal');
+                  }}>ВИВЕСТИ</div>
                 </div>
               </div>
             </div>
@@ -143,7 +150,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='p
             )}
 
             {activeMainTab === 'balance' && (
-            <Balance activeTab={activeBalanceTab}></Balance>
+            <Balance activeTab={activeBalanceTab} ></Balance>
             )}
 
             {activeMainTab === 'bonuses' && (

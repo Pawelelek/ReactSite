@@ -17,7 +17,7 @@ const FrameComponent2: FunctionComponent<FrameComponent2Type> = ({
   const { isAuth } = useTypedSelector((state) => state.UserReducer);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [activeTab, setActiveTab] = useState<'profile' | 'balance' | 'bonuses' | 'betHistory' | 'favourite'>('profile');
-  const [balanceTab, setBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory'>('myBalance');
+  const [balanceTab, setBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal'>('myBalance');
   const handleOpenRegistrationModal = () => setShowRegistrationModal(true);
   const handleCloseRegistrationModal = () => setShowRegistrationModal(false);
 

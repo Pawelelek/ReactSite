@@ -101,7 +101,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, setShowModal, on
             >
               {({ isValid }) => (
                 <Form>
-                  <button className="google-button">
+                  {/* <button className="google-button">
                     <img src="/Registerimg/google.png" alt="Google" className="google-icon" />
                     Вхід через Google
                   </button>
@@ -110,7 +110,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, setShowModal, on
                     <span className="line"></span>
                     <span className="or-text">або</span>
                     <span className="line"></span>
-                  </div>
+                  </div> */}
 
                   <label className="input-label" htmlFor="email">Адреса електронної пошти</label>
                   <Field 
@@ -165,6 +165,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, setShowModal, on
                 </Form>
               )}
             </Formik>
+            <div className="or-divider">
+                    <span className="line"></span>
+                    <span className="or-text">або</span>
+                    <span className="line"></span>
+                  </div>
             <p className="signin-signup-prompt">Не маєте акаунта? <button className="text-link" onClick={onSwitchToRegister}>Зареєструватись</button></p>
           </div>
         </div>

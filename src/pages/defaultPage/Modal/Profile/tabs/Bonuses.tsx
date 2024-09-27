@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import '../style.css';
 import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { useTypedSelector } from "../../../../../hooks/useTypedSelector";
+import { http } from '../../../../../http';
+import { useBalance } from '../BalanceContext';
 
 interface BonusesProps {
   onDepositClick: () => void;
@@ -10,34 +13,35 @@ interface BonusesProps {
 const Bonuses: React.FC<BonusesProps> = ({ onDepositClick }) => {
   const [activeProfileTab, setActiveProfileTab] = useState<'Funds' | 'Promocode'>('Funds');
   const [promo, setPromo] = useState('');
-
-  const initialHours = 7; // You can change this to any initial hours
+  const {user} = useTypedSelector((store) => store.UserReducer);
+  const initialHours = 7; 
   const [timeLeft, setTimeLeft] = useState({ hours: 7, minutes: 0, seconds: 0 });
+  const { refreshBalance } = useBalance();
 
   useEffect(() => {
     const getInitialTime = () => {
       const savedEndTime = localStorage.getItem('endTime');
       
       if (savedEndTime) {
-        return new Date(parseInt(savedEndTime)); // Convert savedEndTime string to a number
+        return new Date(parseInt(savedEndTime)); 
       } else {
         const newEndTime = new Date();
-        newEndTime.setHours(newEndTime.getHours() + initialHours); // Add 7 hours initially
-        localStorage.setItem('endTime', newEndTime.getTime().toString()); // Store as string in localStorage
+        newEndTime.setHours(newEndTime.getHours() + initialHours); 
+        localStorage.setItem('endTime', newEndTime.getTime().toString()); 
         return newEndTime;
       }
     };
   
-    const endTime = getInitialTime().getTime(); // Convert to timestamp (number)
+    const endTime = getInitialTime().getTime();
   
     const updateTimer = () => {
-      const currentTime = new Date().getTime(); // Convert current time to number
-      const timeDifference = endTime - currentTime; // Now both are numbers
+      const currentTime = new Date().getTime(); 
+      const timeDifference = endTime - currentTime; 
   
       if (timeDifference <= 0) {
         // Reset countdown
         const newEndTime = new Date();
-        newEndTime.setHours(newEndTime.getHours() + initialHours); // Reset to 7 hours
+        newEndTime.setHours(newEndTime.getHours() + initialHours); 
         localStorage.setItem('endTime', newEndTime.getTime().toString());
         setTimeLeft({ hours: initialHours, minutes: 0, seconds: 0 });
       } else {
@@ -49,10 +53,8 @@ const Bonuses: React.FC<BonusesProps> = ({ onDepositClick }) => {
       }
     };
   
-    // Start the countdown interval
     const intervalId = setInterval(updateTimer, 1000);
   
-    // Cleanup interval on unmount
     return () => clearInterval(intervalId);
   }, []);
 
@@ -61,23 +63,23 @@ const Bonuses: React.FC<BonusesProps> = ({ onDepositClick }) => {
     {
         return;
     }
-    if (promo.trim().toLowerCase() === '2024go1bet')
-    {
-        toast("Промокод зараховано", {
-            style: {
-              backgroundColor: '#333',
-              color: '#fff',
-            },
-          })
-    }
-    else
-    {
-        toast.error("Невірний промокод", {
-            style: {
-              backgroundColor: '#333',
-              color: '#fff',
-            }})
-    }
+    const setPromocode = {
+      userId: user.Id,
+      key: promo.trim()
+    };
+    http.post('api/Bonus/ActivePromocodeByUser', setPromocode).then((res) =>
+        {
+          {
+            refreshBalance();
+            var data = res.data;
+            toast(data.message, {
+              style: {
+                backgroundColor: '#333',
+                color: '#fff',
+              },
+            })
+          }
+        })
   }
   return (
     <div>

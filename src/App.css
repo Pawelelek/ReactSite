@@ -6,10 +6,8 @@ body {
   background-color:#2F4F4F
 }
 :root {
-  /* fonts */
   --font-roboto: Roboto;
 
-  /* font sizes */
   --font-size-xl: 20px;
   --font-size-base: 16px;
   --font-size-5xl: 24px;
@@ -24,7 +22,6 @@ body {
   --font-size-11xl: 30px;
   --font-size-31xl: 50px;
 
-  /* Colors */
   --color-white: #fff;
   --color-crimson-100: #ff265e;
   --color-crimson-200: #da0037;
@@ -35,7 +32,6 @@ body {
   --color-gainsboro: #d9d9d9;
   --color-aquamarine: #48ffbd;
 
-  /* Gaps */
   --gap-xs: 12px;
   --gap-xl: 20px;
   --gap-8xs: 5px;
@@ -69,7 +65,6 @@ body {
   --gap-27xl-5: 46.5px;
   --gap-4xs-2: 8.2px;
 
-  /* Paddings */
   --padding-xl: 20px;
   --padding-2xl: 21px;
   --padding-11xs: 2px;
@@ -134,7 +129,6 @@ body {
   --padding-7xs-7: 5.7px;
   --padding-8xs-7: 4.7px;
 
-  /* Border radiuses */
   --br-21xl: 40px;
   --br-11xs: 2px;
   --br-6xl-3: 25.3px;

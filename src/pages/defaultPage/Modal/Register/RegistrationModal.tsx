@@ -21,9 +21,10 @@ interface RegistrationModalProps {
 const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, onSwitchToLogin }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigator = useNavigate();
+  const { LoginUser } = useActions();
   useEffect(() => {
     const start = () => {
-      gapi.client.init({ //Init key for google
+      gapi.client.init({ 
         clientId: APP_ENV.GOOGLE_AUTH_CLIENT_ID,
         scope: ''
       })
@@ -38,9 +39,9 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
   const responseGoogle = (responce: GoogleLoginResponse | GoogleLoginResponseOffline) => {
     const model = {
       provider: "Google",
-      token: (responce as GoogleLoginResponse).tokenId //Google account token
+      token: (responce as GoogleLoginResponse).tokenId 
     }
-    //Sends the model to the server, and the server must validate the model
+
     console.log("Send data to googleExtLogin",model)
     http.post("api/User/GoogleExternalLogin", model)
       .then(x =>
@@ -82,6 +83,11 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
     }
   };
 
+  const handleSubmit = async (values: { email: string; password: string; rememberMe: boolean }) => {
+    await LoginUser(values);
+    onClose();
+  };
+
   return (
     <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div className="modal-content">
@@ -106,9 +112,14 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
               password: values.password,
               confirmPassword: values.password,
             };
+            const values2 = { email: user.email, password: user.password, rememberMe: false }
             http.post("api/User/Create", user).then(() => {
+              handleSubmit(values2);
               navigator("/");
+              onClose();
             });
+            
+            
             // Create(values);
           }}
         >
@@ -197,7 +208,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
           <span className="line"></span>
         </div>
 
-        <button className="google-button">
+        {/* <button className="google-button">
           <img src="/Registerimg/google.png" alt="Google" className="google-icon" />
           Вхід через Google
         </button>
@@ -205,7 +216,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
                   buttonText="Login with google"
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
-                />
+                /> */}
         <p className="signin-signup-prompt">Маєте акаунт? <button className="text-link" onClick={onSwitchToLogin}>Увійти</button></p>
       </div>
     </div>

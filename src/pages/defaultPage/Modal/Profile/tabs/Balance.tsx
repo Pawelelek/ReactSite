@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import '../style.css';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { http } from '../../../../../http';
-import { useTypedSelector } from "../../../../../hooks/useTypedSelector";
 import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { useBalance } from '../BalanceContext';
 
 const validationSchemaDeposit = Yup.object({
     amount: Yup.number()
@@ -15,9 +15,16 @@ const validationSchemaDeposit = Yup.object({
       .min(100, 'Мінімальна сума 100 ГРН')
       .max(100000, 'Максимальна сума 100000 ГРН')
       .required('Сума є обов\'язковою'),
+    amount2: Yup.number()
+      .typeError('Введіть коректну суму')
+      .max(100000, 'Максимальна сума 100000 ГРН')
+      .required('Сума є обов\'язковою'),
     cardNumber: Yup.string()
       .matches(/^\d{16}$/, 'Номер картки повинен містити 16 цифр')
       .required('Номер картки є обов\'язковим'),
+    cardNumber2: Yup.string()
+      .matches(/^\d{16}$/, 'Номер картки повинен містити 16 цифр')
+      .required('Номер картки є обов\'язковим'),  
     month: Yup.number()
       .min(1, 'Місяць повинен бути між 1 та 12')
       .max(12, 'Місяць повинен бути між 1 та 12')
@@ -35,8 +42,18 @@ const validationSchemaDeposit = Yup.object({
       .required('Ім\'я власника картки є обов\'язковим')
   });
 
-  const Balance: React.FC<{ activeTab: 'myBalance' | 'Deposit' | 'transactionHistory' }> = ({ activeTab }) => {
-  const [activeProfileTab, setActiveProfileTab] = useState<'myBalance' | 'Deposit'| 'transactionHistory'>('myBalance');
+  const validationSchemaWithdrawal = Yup.object({
+    amount2: Yup.number()
+      .typeError('Введіть коректну суму')
+      .max(100000, 'Максимальна сума 100000 ГРН')
+      .required('Сума є обов\'язковою'),
+    cardNumber2: Yup.string()
+      .matches(/^\d{16}$/, 'Номер картки повинен містити 16 цифр')
+      .required('Номер картки є обов\'язковим'),  
+  });
+
+  const Balance: React.FC<{ activeTab: 'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal'}> = ({ activeTab}) => {
+  const [activeProfileTab, setActiveProfileTab] = useState<'myBalance' | 'Deposit'| 'transactionHistory' | 'Withdrawal'>('myBalance');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('Усі');
@@ -45,7 +62,8 @@ const validationSchemaDeposit = Yup.object({
   const [endDate, setEndDate] = useState(new Date());
   const [calendarStartOpen, setCalendarStartOpen] = useState(false);
   const [calendarEndOpen, setCalendarEndOpen] = useState(false);
-  var balUpdate;
+  const { balanceRef, refreshBalance } = useBalance();
+
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -73,9 +91,9 @@ const validationSchemaDeposit = Yup.object({
     }
   };
 
-useEffect(() => {
-    getBalanceByUserId();
-}, []);
+// useEffect(() => {
+//     getBalanceByUserId();
+// }, []);
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
@@ -88,26 +106,63 @@ useEffect(() => {
     setActiveProfileTab(activeTab);
   }, [activeTab]);
 
-  const {user} = useTypedSelector((store) => store.UserReducer);
+  // window.onload = function() {
+  //   getBalanceByUserId();
+  // };
 
-  const [balance, setBalance] = useState({
-    money: 0,
-    id: ''
-  });
+  // const [balance2, setBalance] = useState({
+  //   money: 0,
+  //   id: ''
+  // });
+  
+  //const balanceRef = useRef({ money: 0, id:'' });
+  // var balanceRef = useRef(balance2);
 
-  const getBalanceByUserId = () => {
-    console.log("userId: " + user.Id);
-    http.get('api/Balance/getByUserId?userId=' + user.Id)
-      .then((res) =>
+  // const getBalanceByUserId = () => {
+  //   console.log("userId: " + user.Id);
+  //   http.get('api/Balance/getByUserId?userId=' + user.Id)
+  //     .then((res) =>
+  //     {
+  //       {
+  //         var data = res.data.payload[0];
+  //         console.log("money:", data.money);
+  //         setBalance(data);
+  //         balanceRef.current.id = data.id;
+  //         balanceRef.current.money = data.money;
+  //       }
+  //     })
+  // }
+
+  const handleSubmitClick = () => {
+    const setWithdrawal = {
+      balanceId: balanceRef.current.id,
+      money: parseInt(formikWithdrawal.values.amount2)
+    };
+    console.log(setWithdrawal);
+  http.put('api/Balance/Withdrawal', setWithdrawal).then(() =>
       {
+        console.log(setWithdrawal);
+        //getBalanceByUserId();
+        refreshBalance();
+        if (parseInt(formikWithdrawal.values.amount2) > balanceRef.current.money)
         {
-          var data = res.data.payload[0];
-          console.log("money:", data.money);
-          setBalance(data);
+          toast.error("Помилка!", {
+            style: {
+              backgroundColor: '#333',
+              color: '#fff',
+            },
+          })
+          return;
         }
+        toast.success("Успішне зняття!", {
+          style: {
+            backgroundColor: '#333',
+            color: '#fff',
+          },
+        })
       })
   }
-
+  
   const formikDeposit = useFormik({
     initialValues: {
       amount: '100',
@@ -120,14 +175,15 @@ useEffect(() => {
     validationSchema: validationSchemaDeposit,
     validateOnMount: true, 
     onSubmit: (values) => {
-        console.log(parseInt(values.amount))
+        // console.log(parseInt(values.amount))
         const setTransaction = {
-            balanceId: balance.id,
-            money: 100
+            balanceId: balanceRef.current.id,
+            money: parseInt(values.amount)
           };
-          balUpdate = setTransaction;
         http.put('api/Balance/Deposit', setTransaction).then(() =>
             {
+              //getBalanceByUserId();
+              refreshBalance();
                 toast("Успішне поповнення!", {
                     style: {
                       backgroundColor: '#da0037',
@@ -135,6 +191,19 @@ useEffect(() => {
                     },
                   })
             })
+    }
+  });
+
+  const formikWithdrawal = useFormik({
+    initialValues: {
+      amount2: '',
+      cardNumber2: ''
+    },
+    validationSchema: validationSchemaWithdrawal,
+    validateOnMount: true, 
+    onSubmit: (values) => {
+        // console.log(parseInt(values.amount))
+        
         
     }
   });
@@ -150,10 +219,21 @@ useEffect(() => {
       formikDeposit.setFieldValue('cardNumber', value);
   };
 
-  const handleAmountChange = (e: any) => {
+  const handleCardChange2 = (e: any) => {
     let value = e.target.value.replace(/\D/g, ''); 
 
     if (value === '') {
+        formikWithdrawal.setFieldValue('cardNumber2', '');
+        return;
+      }
+
+      formikWithdrawal.setFieldValue('cardNumber2', value);
+  };
+
+  const handleAmountChange = (e: any) => {
+    let value = e.target.value.replace(/\D/g, ''); 
+
+    if (value === '' || value === '0') {
       formikDeposit.setFieldValue('amount', '');
       return;
     }
@@ -163,6 +243,21 @@ useEffect(() => {
     }
 
     formikDeposit.setFieldValue('amount', value);
+  };
+
+  const handleAmountChange2 = (e: any) => {
+    let value = e.target.value.replace(/\D/g, ''); 
+
+    if (value === '0') {
+      formikWithdrawal.setFieldValue('amount2', '');
+      return;
+    }
+
+    if (parseInt(value) > 100000) {
+      value = '100000';
+    }
+
+    formikWithdrawal.setFieldValue('amount2', value);
   };
 
   const handleMonthChange = (e: any) => {
@@ -249,6 +344,12 @@ useEffect(() => {
                 >
                   Історія транзакцій
                 </div>
+                <div
+                  className={`custom-choice ${activeProfileTab === 'Withdrawal' ? 'active-tab' : ''}`}
+                  onClick={() => setActiveProfileTab('Withdrawal')}
+                >
+                  Вивід
+                </div>
               </div>
 
               {activeProfileTab === 'myBalance' && (
@@ -256,15 +357,11 @@ useEffect(() => {
                 <div className="balance-container">
                   <div className="balance-row">
                     <span className="balance-label">Реальні гроші:</span>
-                    <span className="balance-value">{balance.money} UAH</span>
-                  </div>
-                  <div className="balance-row">
-                    <span className="balance-label">Бонусний баланс:</span>
-                    <span className="balance-value">0.00 UAH</span>
+                    <span className="balance-value">{balanceRef.current.money} UAH</span>
                   </div>
                   <div className="balance-row">
                     <span className="balance-label">Доступно на виведення:</span>
-                    <span className="balance-value">0.00 UAH</span>
+                    <span className="balance-value">{balanceRef.current.money} UAH</span>
                   </div>
                 </div>
               </div>
@@ -276,7 +373,7 @@ useEffect(() => {
                 <div className="deposit-form">
                   <div className="custom-input-row">
                     <label className="custom-input-label" style={{paddingTop: '0px'}}>Введіть суму</label>
-                    <label className="custom-input-label" style={{paddingTop: '0px',marginRight:'-25px'}}>мін.сумма 100.00 ГРН</label>
+                    <label className="custom-input-label" style={{paddingTop: '0px',marginRight:'-25px'}}>мін.сума 100.00 ГРН</label>
                   </div>
                   <input
                     type="text"
@@ -401,6 +498,7 @@ useEffect(() => {
                 </div>
               </form>
               )}
+
               {activeProfileTab === 'transactionHistory' && ( 
                 <>
                 <div className='custom-frame-425'>
@@ -534,6 +632,71 @@ useEffect(() => {
                 </div>
               </div>
               </>
+              )}
+
+{activeProfileTab === 'Withdrawal' && (
+                <form onSubmit={formikDeposit.handleSubmit}>
+                <div className="custom-frame-425">
+                <div className="deposit-form">
+                  <div className="custom-input-row">
+                    <label className="custom-input-label" style={{paddingTop: '0px'}}>Введіть суму</label>
+                    <label className="custom-input-label" style={{paddingTop: '0px',marginRight:'-25px'}}>макс.сума 100000.00 ГРН</label>
+                  </div>
+                  <input
+                    type="text"
+                    className="custom-input-field"
+                    placeholder="10000"
+                    name="amount2"
+                    value={formikWithdrawal.values.amount2}
+                    onChange={handleAmountChange2} 
+                    onBlur={formikWithdrawal.handleBlur} 
+                    maxLength={6} 
+                  />
+                  {formikWithdrawal.touched.amount2 && formikWithdrawal.errors.amount2 && (
+                    <div className="error-text">{formikWithdrawal.errors.amount2}</div>
+                  )}
+      
+                  <div className="custom-input-row">
+                    <label className="custom-input-label">Номер картки</label>
+                  </div>
+                  <input
+                    type="text"
+                    className="custom-input-field"
+                    placeholder="0000 0000 0000 0000"
+                    name="cardNumber2"
+                    value={formikWithdrawal.values.cardNumber2}
+                    onChange={handleCardChange2}
+                    onBlur={formikWithdrawal.handleBlur}
+                    maxLength={16}
+                  />
+                  {formikWithdrawal.touched.cardNumber2 && formikWithdrawal.errors.cardNumber2 && (
+                    <div className="error-text">{formikWithdrawal.errors.cardNumber2}</div>
+                  )}
+                </div>
+                </div>
+                <div className="custom-modal-footer">
+                  <div className="custom-frame-2" style={{
+                        backgroundColor: formikWithdrawal.isValid ? '#da0037' : '#aaa',
+                        cursor: formikWithdrawal.isValid ? 'pointer' : 'not-allowed',
+                        pointerEvents: formikWithdrawal.isValid ? 'auto' : 'none',
+                        left: '1170px'
+                      }}>
+                    <button
+                      onClick={handleSubmitClick}
+                      disabled={!formikWithdrawal.isValid}
+                      style={{
+                          backgroundColor: formikWithdrawal.isValid ? '#da0037' : '#aaa',
+                          cursor: formikWithdrawal.isValid ? 'pointer' : 'not-allowed',
+                          pointerEvents: formikWithdrawal.isValid ? 'auto' : 'none',
+                          border: 'none',
+                          color: '#fff'
+                        }}
+                    >
+                      ВИВЕСТИ
+                    </button>
+                  </div>
+                </div>
+              </form>
               )}
             </div>
   );

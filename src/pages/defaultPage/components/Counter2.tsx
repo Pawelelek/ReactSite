@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect, useRef } from "react";
 import "./Counter2.css";
 import "./Counter.css";
 import {Link, useNavigate} from "react-router-dom";
@@ -6,6 +6,7 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import ProfileModal from "../Modal/Profile/ProfileModal";
 import { http } from '../../../http';
+import { useBalance } from "../Modal/Profile/BalanceContext";
 
 export type Counter2Type = {
   className?: string;
@@ -16,12 +17,13 @@ const Counter2: FunctionComponent<Counter2Type> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [profileTab, setProfileTab] = useState<'profile' | 'balance' | 'bonuses' | 'betHistory' | 'favourite'>('profile');
-  const [balanceTab, setBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory'>('Deposit');
+  const [balanceTab, setBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal'>('Deposit');
   // const handleOpen = (tab: typeof profileTab) => {
   //   setProfileTab(tab); // Завжди оновлюйте вкладку при відкритті
   //   setOpen(false); // Закрийте модальне вікно
   //   setTimeout(() => setOpen(true), 0); // Відкрийте модальне вікно з новою вкладкою
   // };
+  const { balanceRef } = useBalance();
   const handleOpen = (tab: typeof profileTab, subTab: typeof balanceTab = 'myBalance') => {
     setProfileTab(tab);
     if (tab === 'balance') setBalanceTab(subTab); 
@@ -41,29 +43,32 @@ const Counter2: FunctionComponent<Counter2Type> = ({
   };
   const {user} = useTypedSelector((store) => store.UserReducer);
 
-  const [balance, setBalance] = useState({
-    money: 0
-  });
+  // const [balance, setBalance] = useState({
+  //   money: 0
+  // });
 
-  const getBalanceByUserId = () => {
-    console.log("userId: " + user.Id);
-    http.get('api/Balance/getByUserId?userId=' + user.Id)
-      .then((res) =>
-      {
-        {
+  // var balanceRef = useRef(balance);
+
+  // const getBalanceByUserId = () => {
+  //   console.log("userId: " + user.Id);
+  //   http.get('api/Balance/getByUserId?userId=' + user.Id)
+  //     .then((res) =>
+  //     {
+  //       {
           
-          var data = res.data.payload[0];
-          console.log("money:", data.money);
-          setBalance(data);
-        }
-      })
-  }
+  //         var data = res.data.payload[0];
+  //         console.log("money:", data.money);
+  //         setBalance(data);
+  //         balanceRef.current.money = data.money;
+  //       }
+  //     })
+  // }
 
-  useEffect(() => {
-    getBalanceByUserId();
+  // useEffect(() => {
+  //   getBalanceByUserId();
 
 
-  }, []);
+  // }, []);
 
   return (
     <>
@@ -85,7 +90,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
             {user.role === "Admin" && (
   <Link to="/admin" className="a3">Admin</Link>
 )}
-              <a className="live" style={{ cursor: "pointer" }}>LIVE</a>
+              {/* <a className="live" style={{ cursor: "pointer" }}>LIVE</a> */}
               <a className="a" style={{ cursor: "pointer" }}>СПОРТ</a>
               <a className="a1" style={{ cursor: "pointer" }}>КІБЕРСПОРТ</a>
               <a className="a2" style={{ cursor: "pointer" }}>АКЦІЇ</a>
@@ -109,7 +114,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
           />
         </div> */}
         <div className="uah-wrapper">
-          <b className="uah">{balance.money} UAH</b>
+          <b className="uah">{balanceRef.current.money} UAH</b>
         </div>
         <div className="group-container">
           <img

@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { getAccessToken } from "./services/api-user-service";
 import store from "./store";
 import { AuthUser } from "./store/action-creators/userActions";
+import { BalanceProvider } from "./pages/defaultPage/Modal/Profile/BalanceContext";
 
 const token = getAccessToken();
 if (token) {
@@ -20,7 +21,9 @@ root.render(
   <Provider store={store}>
     <Router>
       <ToastContainer autoClose={5000} />
+      <BalanceProvider>
       <App />
+      </BalanceProvider>
     </Router>
   </Provider>
 );

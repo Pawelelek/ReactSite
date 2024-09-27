@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import '../style.css';
+import { getbyid } from '../../../../../services/api-user-service';
+import { useTypedSelector } from "../../../../../hooks/useTypedSelector";
+import { http } from '../../../../../http';
+import { toast } from 'react-toastify';
 
 const validationSchemaMyData = Yup.object({
-  name: Yup.string()
+  firstName: Yup.string()
     .min(3, "Ім'я повинно містити мінімум 3 символи")
     .max(20, "Ім'я повинно містити максимум 20 символів")
     .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/, "Ім'я може містити тільки літери")
     .required("Ім'я є обов'язковим"),
-  surname: Yup.string()
+  lastName: Yup.string()
     .min(3, "Прізвище повинно містити мінімум 3 символи")
     .max(20, "Прізвище повинно містити максимум 20 символів")
     .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/, "Прізвище може містити тільки літери")
     .required("Прізвище є обов'язковим"),
   email: Yup.string().email('Некоректна електронна пошта').required('Електронна пошта є обов\'язковою'),
-  phone: Yup.string().matches(/^(\+380|380|0)\d{9}$/, 'Некоректний номер телефону').required('Номер телефону є обов\'язковим')
+  phoneNumber: Yup.string().matches(/^(\+380|380|0)\d{9}$/, 'Некоректний номер телефону').required('Номер телефону є обов\'язковим')
 });
 
 const validationSchemaChangePassword = Yup.object({
@@ -30,6 +34,7 @@ const validationSchemaChangePassword = Yup.object({
   .max(20, 'Пароль не може містити більше 20 символів')
   .matches(/^(?=.*[a-z])(?=.*[A-Z]).*$/, 'Пароль повинен містити принаймні одну велику літеру і одну малу літеру англійського алфавіту')
   .matches(/\d/, 'Пароль повинен містити принаймні одну цифру')
+  .notOneOf([Yup.ref('oldPassword')], 'Новий пароль не може бути таким же, як старий пароль')
   .required('Новий пароль є обов\'язковим'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('newPassword')], 'Паролі не співпадають')
@@ -41,17 +46,40 @@ const Profile = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const {user} = useTypedSelector((store) => store.UserReducer);
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: ''
+  });
   const formikMyData = useFormik({
     initialValues: {
-      name: '',
-      surname: '',
-      email: '',
-      phone: ''
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phoneNumber: data.phoneNumber
     },
+    enableReinitialize: true,
     validationSchema: validationSchemaMyData,
     validateOnMount: true, 
     onSubmit: (values) => {
       console.log('Дані збережено:', values);
+      const setProfile = {
+        id: user.Id,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        phoneNumber: values.phoneNumber
+      };
+    http.put('api/User/UpdatePersonalInfo', setProfile).then(() =>
+        {
+            toast.success("Успішне змінення!", {
+                style: {
+                  backgroundColor: '#333',
+                  color: '#fff',
+                },
+              })
+        })
     }
   });
 
@@ -64,9 +92,45 @@ const Profile = () => {
     validationSchema: validationSchemaChangePassword,
     validateOnMount: true, 
     onSubmit: (values) => {
-      console.log('Пароль змінено:', values);
+      const setPassword = {
+        id: user.Id,
+        oldPassword: values.oldPassword,
+        newPassword: values.newPassword,
+        confirmNewPassword: values.confirmPassword
+      };
+      http.put('api/User/ChangePassword', setPassword).then((res) =>
+        {
+          var data = res.data;
+            toast(data.message, {
+                style: {
+                  backgroundColor: '#333',
+                  color: '#fff',
+                },
+              })
+        })
     }
   });
+
+  useEffect(() => {
+    const fetchUser = async (id: string) => {
+      const result = await getbyid(id);
+      setData({
+        email: result.response.payload[0].email || '',
+        firstName: result.response.payload[0].firstName || '',
+        lastName: result.response.payload[0].lastName || '',
+        phoneNumber: result.response.payload[0].phoneNumber || '',
+      });
+      
+    };
+
+    if (user.Id) {
+      fetchUser(user.Id);
+      console.log(data.email);
+      console.log(data.firstName);
+      console.log(data.lastName);
+      console.log(data.phoneNumber);
+    }
+  }, [user.Id]);
 
   return (
     <div>
@@ -92,8 +156,8 @@ const Profile = () => {
             <input
               type="text"
               placeholder="Введіть ім'я"
-              name="name"
-              value={formikMyData.values.name}
+              name="firstName"
+              value={formikMyData.values.firstName}
               onChange={formikMyData.handleChange}
               onBlur={formikMyData.handleBlur}
               style={{
@@ -106,8 +170,8 @@ const Profile = () => {
                 borderRadius: '10px',
               }}
             />
-            {formikMyData.touched.name && formikMyData.errors.name && (
-              <div className="error-text">{formikMyData.errors.name}</div>
+            {formikMyData.touched.firstName && formikMyData.errors.firstName && (
+              <div className="error-text">{formikMyData.errors.firstName}</div>
             )}
           </div>
 
@@ -116,8 +180,8 @@ const Profile = () => {
             <input
               type="text"
               placeholder="Введіть прізвище"
-              name="surname"
-              value={formikMyData.values.surname}
+              name="lastName"
+              value={formikMyData.values.lastName}
               onChange={formikMyData.handleChange}
               onBlur={formikMyData.handleBlur}
               style={{
@@ -130,8 +194,8 @@ const Profile = () => {
                 borderRadius: '10px',
               }}
             />
-            {formikMyData.touched.surname && formikMyData.errors.surname && (
-              <div className="error-text">{formikMyData.errors.surname}</div>
+            {formikMyData.touched.lastName && formikMyData.errors.lastName && (
+              <div className="error-text">{formikMyData.errors.lastName}</div>
             )}
           </div>
 
@@ -153,6 +217,7 @@ const Profile = () => {
                 padding: '10px',
                 borderRadius: '10px',
               }}
+              readOnly
             />
             {formikMyData.touched.email && formikMyData.errors.email && (
               <div className="error-text">{formikMyData.errors.email}</div>
@@ -164,22 +229,22 @@ const Profile = () => {
             <input
               type="tel"
               placeholder="+380(XX)XXX-XX-XX"
-              name="phone"
-              value={formikMyData.values.phone}
+              name="phoneNumber"
+              value={formikMyData.values.phoneNumber}
               onChange={formikMyData.handleChange}
               onBlur={formikMyData.handleBlur}
               style={{
                 width: '100%',
                 height: '25px',
                 background: '#2d2d2d',
-                color: '#aaa',
+                color: '#fff',
                 border: 'none',
                 padding: '10px',
                 borderRadius: '10px',
               }}
             />
-            {formikMyData.touched.phone && formikMyData.errors.phone && (
-              <div className="error-text">{formikMyData.errors.phone}</div>
+            {formikMyData.touched.phoneNumber && formikMyData.errors.phoneNumber && (
+              <div className="error-text">{formikMyData.errors.phoneNumber}</div>
             )}
           </div>
 

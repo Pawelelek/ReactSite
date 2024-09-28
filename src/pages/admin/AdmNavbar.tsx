@@ -1,8 +1,9 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import "./AdmNavbar.css";
 import {Link, useNavigate} from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import ProfileModal from "../defaultPage/Modal/Profile/ProfileModal";
 
 export type AdmNavbar = {
   className?: string;
@@ -11,6 +12,19 @@ export type AdmNavbar = {
 const AdmNavbar: FunctionComponent<AdmNavbar> = ({
   className = "",
 }) => {
+  const [open, setOpen] = useState(false);
+  const [profileTab, setProfileTab] = useState<'profile' | 'balance' | 'bonuses' | 'betHistory' | 'favourite'>('profile');
+  const [balanceTab, setBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal'>('Deposit');
+  const handleOpen = (tab: typeof profileTab, subTab: typeof balanceTab = 'myBalance') => {
+    setProfileTab(tab);
+    if (tab === 'balance') setBalanceTab(subTab); 
+    setOpen(false);
+    setTimeout(() => setOpen(true), 0);
+  };
+
+  const handleProfileOpen = () => handleOpen('profile');
+
+  const handleClose = () => setOpen(false);
   const navigator = useNavigate();
   const { LogOut } = useActions();
   const Logout = () => {
@@ -19,6 +33,7 @@ const AdmNavbar: FunctionComponent<AdmNavbar> = ({
   };
   const {user} = useTypedSelector((store) => store.UserReducer);
   return (
+    <>
     <header className={`counter ${className}`}>
       <div className="counter-child" />
       <div className="counter-inner">
@@ -73,13 +88,17 @@ const AdmNavbar: FunctionComponent<AdmNavbar> = ({
             loading="lazy"
             alt=""
             src="/Homeimg/account.png"
+            onClick={handleProfileOpen}
+            style={{ cursor: "pointer" }}
           />
         </div>
-        <button className="deposit-button">
+        <button className="deposit-button" onClick={() => handleOpen('balance', 'Deposit')}>
           <a className="a4">ДЕПОЗИТ</a>
         </button>
       </div>
     </header>
+    <ProfileModal show={open} onClose={handleClose} activeTab={profileTab} balanceTab={balanceTab}/>
+    </>
   );
 };
 

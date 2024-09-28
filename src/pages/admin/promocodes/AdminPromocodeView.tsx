@@ -68,73 +68,78 @@ const PromocodesView = () => {
     )} */}
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor:"darkslategray",paddingTop:30 }}>
        <div style={{ maxWidth: '1000px', width: '100%', margin: '0 auto', background:"darkslategray" }}>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Name</TableCell>
-            <TableCell align="center">Key</TableCell>
-            <TableCell align="center">Price money</TableCell>
-            <TableCell align="center">Entries</TableCell>
-            <TableCell align="center">expDate</TableCell>
-            <TableCell align="center" colSpan={2} style={{ padding: 0 }}> 
+       <TableContainer component={Paper}>
+  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableHead>
+      <TableRow>
+        <TableCell align="center">Name</TableCell>
+        <TableCell align="center">Key</TableCell>
+        <TableCell align="center">Price money</TableCell>
+        <TableCell align="center">Entries</TableCell>
+        <TableCell align="center">expDate</TableCell>
+        <TableCell align="center" colSpan={2} style={{ padding: 0 }}>
           <Button
             onClick={handleCreatePromo}
             style={{
               backgroundColor: '#4287f5',
               color: '#f5fafa',
               textTransform: 'none',
-              width: '80%', 
-              height: '100%', 
+              width: '80%',
+              height: '100%',
             }}
           >
             Create New Promocode
           </Button>
         </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {promocodes.map((row: any) => (
-            <TableRow
-              
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row" align="center">
-                {row.name}
-              </TableCell>
-              <TableCell component="th" scope="row" align="center">
-                {row.key}
-              </TableCell>
-              <TableCell component="th" scope="row" align="center">
-                {row.priceMoney}
-              </TableCell>
-              <TableCell component="th" scope="row" align="center">
-                [{row.countEntries}/{row.countAvailable}]
-              </TableCell>
-              <TableCell component="th" scope="row" align="center">
-                {row.expirationDate}
-              </TableCell>
-              <TableCell align="center" style={{ borderTop: '1px solid #ddd'}}>{user.role === 'Admin' && user.Id !== row.id && (
-                  <Button
-                         onClick={() => handleClickOpen(row.id)}
-                         style={{ backgroundColor: '#FF0000', color: '#f5fafa', textTransform: 'none' }}
-                       >
-                         Delete
-                       </Button>
-                )}</TableCell>
-                <TableCell align="center" style={{ borderTop: '1px solid #ddd'}}>{user.role === 'Admin' && (
-                  <Button
-                    onClick={() => handleUpdate(row.id)}
-                    style={{ backgroundColor: '#d95a11', color: '#f5fafa', textTransform: 'none' }}
-                  >
-                    Update
-                  </Button>
-                )}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {promocodes.map((row: any) => (
+        <TableRow
+          key={row.id} // Добавляем уникальный ключ для каждой строки
+          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+        >
+          <TableCell component="th" scope="row" align="center">
+            {row.name}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.key}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.priceMoney}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            [{row.countEntries}/{row.countAvailable}]
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.expirationDate}
+          </TableCell>
+          <TableCell align="center" style={{ borderTop: '1px solid #ddd' }}>
+            {user.role === 'Admin' && user.Id !== row.id && (
+              <Button
+                onClick={() => handleClickOpen(row.id)}
+                style={{ backgroundColor: '#FF0000', color: '#f5fafa', textTransform: 'none' }}
+              >
+                Delete
+              </Button>
+            )}
+          </TableCell>
+          <TableCell align="center" style={{ borderTop: '1px solid #ddd' }}>
+            {user.role === 'Admin' && (
+              <Button
+                onClick={() => handleUpdate(row.id)}
+                style={{ backgroundColor: '#d95a11', color: '#f5fafa', textTransform: 'none' }}
+              >
+                Update
+              </Button>
+            )}
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</TableContainer>
+
     </div>
        <Dialog
          open={open}

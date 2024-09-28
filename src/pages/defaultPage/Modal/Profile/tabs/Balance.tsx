@@ -15,14 +15,7 @@ const validationSchemaDeposit = Yup.object({
       .min(100, 'Мінімальна сума 100 ГРН')
       .max(100000, 'Максимальна сума 100000 ГРН')
       .required('Сума є обов\'язковою'),
-    amount2: Yup.number()
-      .typeError('Введіть коректну суму')
-      .max(100000, 'Максимальна сума 100000 ГРН')
-      .required('Сума є обов\'язковою'),
     cardNumber: Yup.string()
-      .matches(/^\d{16}$/, 'Номер картки повинен містити 16 цифр')
-      .required('Номер картки є обов\'язковим'),
-    cardNumber2: Yup.string()
       .matches(/^\d{16}$/, 'Номер картки повинен містити 16 цифр')
       .required('Номер картки є обов\'язковим'),  
     month: Yup.number()
@@ -105,7 +98,7 @@ const validationSchemaDeposit = Yup.object({
   useEffect(() => {
     setActiveProfileTab(activeTab);
   }, [activeTab]);
-
+  
   // window.onload = function() {
   //   getBalanceByUserId();
   // };
@@ -186,13 +179,18 @@ const validationSchemaDeposit = Yup.object({
               refreshBalance();
                 toast("Успішне поповнення!", {
                     style: {
-                      backgroundColor: '#da0037',
+                      backgroundColor: '#333',
                       color: '#fff',
                     },
                   })
             })
     }
   });
+
+  useEffect(() => {
+    console.log('isValid:', formikDeposit.isValid, 'errors:', formikDeposit.errors, 'touched:', formikDeposit.touched);
+  }, [formikDeposit.values, formikDeposit.isValid, formikDeposit.errors, formikDeposit.touched]);
+  
 
   const formikWithdrawal = useFormik({
     initialValues: {
@@ -202,8 +200,7 @@ const validationSchemaDeposit = Yup.object({
     validationSchema: validationSchemaWithdrawal,
     validateOnMount: true, 
     onSubmit: (values) => {
-        // console.log(parseInt(values.amount))
-        
+    
         
     }
   });
@@ -635,7 +632,7 @@ const validationSchemaDeposit = Yup.object({
               )}
 
 {activeProfileTab === 'Withdrawal' && (
-                <form onSubmit={formikDeposit.handleSubmit}>
+                <form onSubmit={formikWithdrawal.handleSubmit}>
                 <div className="custom-frame-425">
                 <div className="deposit-form">
                   <div className="custom-input-row">

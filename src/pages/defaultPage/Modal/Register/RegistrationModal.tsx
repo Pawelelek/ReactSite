@@ -11,6 +11,8 @@ import { APP_ENV } from '../../../../env';
 import { http } from '../../../../http';
 import { useActions } from '../../../../hooks/useActions';
 import { useDispatch } from 'react-redux';
+import { toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 interface RegistrationModalProps {
   show: boolean;
@@ -113,8 +115,22 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
               confirmPassword: values.password,
             };
             const values2 = { email: user.email, password: user.password, rememberMe: false }
-            http.post("api/User/Create", user).then(() => {
-              handleSubmit(values2);
+            http.post("api/User/Create", user).then((res) => {
+              var data = res.data;
+              console.log("data success:", data.success)
+              if (data.success)
+              {
+                handleSubmit(values2);
+              }
+              else
+              {
+                toast.error(data.message, {
+                  style: {
+                    backgroundColor: '#333',
+                    color: '#fff',
+                  },
+                })
+              }
               navigator("/");
               onClose();
             });

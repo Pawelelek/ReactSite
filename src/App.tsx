@@ -18,6 +18,12 @@ import CategoriesUpdate from "./pages/admin/categories/AdminCategoryUpdate";
 import PromocodesView from "./pages/admin/promocodes/AdminPromocodeView";
 import PromocodeCreate from "./pages/admin/promocodes/AdminPromocodeCreate";
 import PromocodeUpdate from "./pages/admin/promocodes/AdminPromocodeUpdate";
+import SportEventView from "./pages/admin/sportAPI/events/AdminEventView";
+import SportEventCreate from "./pages/admin/sportAPI/events/AdminEventCreate";
+import SportEventUpdate from "./pages/admin/sportAPI/events/AdminEventUpdate";
+import SportMatchView from "./pages/admin/sportAPI/matches/AdminMatchView";
+import SportMatchCreate from "./pages/admin/sportAPI/matches/AdminMatchCreate";
+import SportMatchUpdate from "./pages/admin/sportAPI/matches/AdminMatchUpdate";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
@@ -27,20 +33,32 @@ function App() {
         <>
           {user.role === "Admin" && (
             <Route path="/admin" element={<Outlet />}>
+              {/* USERS */}
               <Route index element={<AdminHomePage />} />
               <Route path="users" element={<AllUsers />} />
               <Route path="user/create" element={<CreateUser />} />
               <Route path="user/update/:userId" element={<UpdateUser />} />
+              {/* ROLES */}
               <Route path="roles" element={<AllRoles />} />
               <Route path="role/create" element={<CreateRole />} />
               <Route path="role/update" element={<UpdateRole />} />
+              {/* CATEGORY */}
               <Route path="categories" element={<CategoriesView />} />
               <Route path="category/create" element={<CategoriesCreate />} />
               <Route path="category/update" element={<CategoriesUpdate />} />
+              {/* PROMO */}
               <Route path='promocodes' element={<PromocodesView/>}/>
               <Route path="promocode/create" element={<PromocodeCreate/>} />
               <Route path="promocode/update" element={<PromocodeUpdate />} />
-
+              {/* SPORT API */}
+              {/* Sport event */}
+              <Route path = "sport/events" element={<SportEventView/>}/>
+              <Route path = "sport/event/create" element={<SportEventCreate/>}/>
+              <Route path = "sport/event/update" element={<SportEventUpdate/>}/>
+              {/* Sport match */}
+              <Route path = "sport/matches" element={<SportMatchView/>}/>
+              <Route path = "sport/match/create" element={<SportMatchCreate/>}/>
+              <Route path = "sport/match/update" element={<SportMatchUpdate/>}/>
             </Route>
             
           )}

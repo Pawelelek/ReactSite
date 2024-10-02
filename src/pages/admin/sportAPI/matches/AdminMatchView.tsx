@@ -1,33 +1,33 @@
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useEffect, useState } from "react";
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
-import { useActions } from "../../../hooks/useActions";
+import { useActions } from "../../../../hooks/useActions";
 import { useNavigate } from 'react-router-dom';
 import { Modal } from "bootstrap"
-import { http } from "../../../http"
-import AdmNavbar from "../AdmNavbar";
+import { http } from "../../../../http"
+import AdmNavbar from "../../AdmNavbar";
 
-const CategoriesView = () => {
+const SportMatchView = () => {
   const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
    //const [deleteId, setId] = useState<any>();
    const { GetAllUsers, DeleteById } = useActions();
    const [open, setOpen] = useState(false);
    const [deleteId, setDeleteId] = useState<string | null>(null);
-   const [categories, setCategories] = useState<any>([]);
+   const [sportMatches, setSportMatches] = useState<any>([]);
    const navigate = useNavigate();
-   const loadCategories = () => {
+   const loadSportMatches = () => {
   
-        http.get("api/Category/get")
+        http.get("api/SportMatch/get")
           .then(resp => {
             const {payload} = resp.data;
     
-            setCategories(payload);
+            setSportMatches(payload);
             console.log(payload);
           });
       }
   useEffect(() => {
-    loadCategories()
+    loadSportMatches()
   }, []);
 
 
@@ -43,34 +43,37 @@ const CategoriesView = () => {
 
   const handleConfirmDelete = () => {
     if (deleteId) {
-      http.delete('api/Category/delete/' + deleteId)
+      http.delete('api/SportMatch/delete/' + deleteId)
             .then(() => {
-                loadCategories();
+                loadSportMatches();
             });
     }
     handleClose();
   };
 
   const handleCreateRole = () => {
-    navigate('/admin/category/create');
+    navigate('/admin/sport/match/create');
   };
 
   const handleUpdate = (id: string) => {
-    navigate('/admin/category/update?id=' + id);
+    navigate('/admin/sport/match/update?id=' + id);
  };
   return (
     <>
     <AdmNavbar/>
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor:"darkslategray",paddingTop:30 }}>
-       <div style={{ maxWidth: '1000px', width: '100%', margin: '0 auto', background:"darkslategray" }}>
+       <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', background:"darkslategray" }}>
     <TableContainer component={Paper}>
   <Table sx={{ minWidth: 650 }} aria-label="simple table">
     <TableHead>
       <TableRow>
         <TableCell align="center">Name</TableCell>
-        <TableCell align="center">Description</TableCell>
-        <TableCell align="center">ParentName</TableCell>
-        <TableCell align="center">Subcategories</TableCell>
+        <TableCell align="center">EventName</TableCell>
+        <TableCell align="center">DateCreated</TableCell>
+        <TableCell align="center">DateStart</TableCell>
+        <TableCell align="center">DateEnd</TableCell>
+        <TableCell align="center">BettingFund</TableCell>
+        <TableCell align="center">CountBets</TableCell>
         <TableCell align="center" colSpan={2} style={{ padding: 0 }}>
           <Button
             onClick={handleCreateRole}
@@ -82,13 +85,13 @@ const CategoriesView = () => {
               height: '100%',
             }}
           >
-            Create New Category
+            Create New Sport Match
           </Button>
         </TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
-      {categories.map((row: any) => (
+      {sportMatches.map((row: any) => (
         <TableRow
           key={row.id} // Добавляем ключ здесь
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -97,13 +100,22 @@ const CategoriesView = () => {
             {row.name}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.description}
+            {row.sportEventName}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.parentName}
+            {row.dateCreated}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.countSubcategories}
+            {row.dateStart}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.dateEnd}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.bettingFund}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.countBets}
           </TableCell>
           <TableCell align="center" style={{ borderTop: '1px solid #ddd' }}>
             {user.role === 'Admin' && user.Id !== row.id && (
@@ -156,4 +168,4 @@ const CategoriesView = () => {
    );
 };
 
-export default CategoriesView;
+export default SportMatchView;

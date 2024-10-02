@@ -1,33 +1,33 @@
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useEffect, useState } from "react";
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
-import { useActions } from "../../../hooks/useActions";
+import { useActions } from "../../../../hooks/useActions";
 import { useNavigate } from 'react-router-dom';
 import { Modal } from "bootstrap"
-import { http } from "../../../http"
-import AdmNavbar from "../AdmNavbar";
+import { http } from "../../../../http"
+import AdmNavbar from "../../AdmNavbar";
 
-const CategoriesView = () => {
+const SportEventView = () => {
   const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
    //const [deleteId, setId] = useState<any>();
    const { GetAllUsers, DeleteById } = useActions();
    const [open, setOpen] = useState(false);
    const [deleteId, setDeleteId] = useState<string | null>(null);
-   const [categories, setCategories] = useState<any>([]);
+   const [sportEvents, setSportEvents] = useState<any>([]);
    const navigate = useNavigate();
-   const loadCategories = () => {
+   const loadSportEvents = () => {
   
-        http.get("api/Category/get")
+        http.get("api/SportEvent/get")
           .then(resp => {
             const {payload} = resp.data;
     
-            setCategories(payload);
+            setSportEvents(payload);
             console.log(payload);
           });
       }
   useEffect(() => {
-    loadCategories()
+    loadSportEvents();
   }, []);
 
 
@@ -43,34 +43,37 @@ const CategoriesView = () => {
 
   const handleConfirmDelete = () => {
     if (deleteId) {
-      http.delete('api/Category/delete/' + deleteId)
+      http.delete('api/SportEvent/delete/' + deleteId)
             .then(() => {
-                loadCategories();
+                loadSportEvents();
             });
     }
     handleClose();
   };
 
   const handleCreateRole = () => {
-    navigate('/admin/category/create');
+    navigate('/admin/sport/event/create');
   };
 
   const handleUpdate = (id: string) => {
-    navigate('/admin/category/update?id=' + id);
+    navigate('/admin/sport/event/update?id=' + id);
  };
   return (
     <>
     <AdmNavbar/>
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor:"darkslategray",paddingTop:30 }}>
-       <div style={{ maxWidth: '1000px', width: '100%', margin: '0 auto', background:"darkslategray" }}>
+       <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', background:"darkslategray" }}>
     <TableContainer component={Paper}>
   <Table sx={{ minWidth: 650 }} aria-label="simple table">
     <TableHead>
       <TableRow>
         <TableCell align="center">Name</TableCell>
         <TableCell align="center">Description</TableCell>
-        <TableCell align="center">ParentName</TableCell>
-        <TableCell align="center">Subcategories</TableCell>
+        <TableCell align="center">Matches</TableCell>
+        <TableCell align="center">Status</TableCell>
+        <TableCell align="center">DateCreated</TableCell>
+        <TableCell align="center">DateStart</TableCell>
+        <TableCell align="center">DateEnd</TableCell>
         <TableCell align="center" colSpan={2} style={{ padding: 0 }}>
           <Button
             onClick={handleCreateRole}
@@ -88,7 +91,7 @@ const CategoriesView = () => {
       </TableRow>
     </TableHead>
     <TableBody>
-      {categories.map((row: any) => (
+      {sportEvents.map((row: any) => (
         <TableRow
           key={row.id} // Добавляем ключ здесь
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -100,10 +103,19 @@ const CategoriesView = () => {
             {row.description}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.parentName}
+            {row.countSportMatches}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.countSubcategories}
+            {row.status}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.dateCreated}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.dateStart}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.dateEnd}
           </TableCell>
           <TableCell align="center" style={{ borderTop: '1px solid #ddd' }}>
             {user.role === 'Admin' && user.Id !== row.id && (
@@ -156,4 +168,4 @@ const CategoriesView = () => {
    );
 };
 
-export default CategoriesView;
+export default SportEventView;

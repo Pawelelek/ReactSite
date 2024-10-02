@@ -55,9 +55,18 @@ const AdmNavbar: FunctionComponent<AdmNavbar> = ({
               <Link to={"/admin/roles"} className="a">Roles</Link>
               <Link to={"/admin/categories"} className="a1">Categories</Link>
               <Link to={"/admin/promocodes"} className="a2">Promocodes</Link>
+              {/* SportAPI */}
               <Link to={"/admin/sports"} className="a3">SportAPI</Link>
+              
             </nav>
+            <Link to={"/admin/sport/persons"} className="a3">SportAPI/Person</Link>
+              <Link to={"/admin/sport/opponents"} className="a3">SportAPI/Opponent</Link>
+              <Link to={"/admin/sport/bets"} className="a3">SportAPI/Bet</Link>
+              <Link to={"/admin/sport/odds"} className="a3">SportAPI/Odds</Link>
+              <Link to={"/admin/sport/matches"} className="a3">SportAPI/Matches</Link>
+              <Link to={"/admin/sport/events"} className="a3">SportAPI/Events</Link>
           </nav>
+          
         </div>
       </div>
       <div className="account">

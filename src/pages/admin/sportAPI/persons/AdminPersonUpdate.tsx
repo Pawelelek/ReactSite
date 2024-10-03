@@ -8,75 +8,87 @@ import { Modal } from "bootstrap"
 import { http } from "../../../../http"
 import AdmNavbar from "../../AdmNavbar";
 
-const SportOpponentUpdate = () => {
+const SportPersonUpdate = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   useEffect(() => {
-    loadCategory();
-    loadSportEvents();
+    loadOpponents();
+    loadPerson();
   }, []);
-  const [sportMatches, setSportMatches] = useState<any>();
-  const [opponent, setOpponent] = useState({
-    id: searchParams.get("id"),
-    name: '',
-    sportMatchId: ''
-  });
-  const loadSportEvents = () => {
+  const [opponents, setOpponents] = useState<any>();
+  const loadOpponents = () => {
   
-    http.get("api/SportMatch/get")
+    http.get("api/Opponent/get")
       .then(resp => {
         const {payload} = resp.data;
 
-        setSportMatches(payload);
+        setOpponents(payload);
         console.log(payload);
       });
   }
-  const loadCategory = () => {
+  const [person, setPerson] = useState({
+    id: '',
+    name: '',
+    position: '',
+    opponentId: ''
+  });
+  const loadPerson = () => {
   
-    http.get("api/Opponent/get/" + searchParams.get("id"))
+    http.get("api/Person/get/" + searchParams.get("id"))
       .then(resp => {
         const payload = resp.data.payload[0];
         console.log("Payload: "+ payload)
-        setOpponent(payload);
-        setOpponent({
+        setPerson(payload);
+        setPerson({
           id: payload.id,
           name: payload.name || '',
-          sportMatchId: payload.sportMatchId || '',
+          position: payload.position || '',
+          opponentId: payload.opponentId || '',
         });
-        console.log("SetCategory: "+opponent);
+        console.log("SetCategory: "+person);
       });
   }
 
   const isFormValid = () => {
-    return Object.values(opponent);
+    return Object.values(person);
   };
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setOpponent((prevOpponent) => ({
-      ...prevOpponent,
+    setPerson((prevPerson) => ({
+      ...prevPerson,
       [name]: value,
     }));
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("Submit: "+ opponent)
-    http.put("api/Opponent/edit", opponent)
+    console.log("Submit: "+ person)
+    http.put("api/Person/edit", person)
       .then(() => {
-        navigate('/admin/sport/opponents');
+        navigate('/admin/sport/persons');
       });
     
   };
 
   return (
     <Paper style={{ padding: 20, maxWidth: 400, margin: '0 auto' }}>
-      <h1>Update Opponent</h1>
+      <h1>Update Person</h1>
       <form onSubmit={handleSubmit}>
-      <TextField
-          label="Sport Match name"
+        <TextField
+          label="Person name"
           name="name"
-          value={opponent.name}
+          value={person.name}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          style={{ marginBottom: 10 }}
+          required
+        />       
+        <TextField
+          label="Person position"
+          name="position"
+          value={person.position}
           onChange={handleChange}
           variant="outlined"
           fullWidth
@@ -84,15 +96,15 @@ const SportOpponentUpdate = () => {
           required
         />       
         <FormControl variant="outlined" fullWidth style={{ marginBottom: 10 }}>
-          <InputLabel>ParentId</InputLabel>
-          <Select name="sportMatchId" id="sportMatchId" value={opponent.sportMatchId} onChange={handleChange}>
-            {sportMatches?.map((sportMatch:any) => (
-              <MenuItem key={sportMatch.id} value={sportMatch.id}>
-                {sportMatch.name}
+          <InputLabel>OpponentId</InputLabel>
+          <Select name="opponentId" id="opponentId" value={person.opponentId} onChange={handleChange} required>
+            {opponents?.map((opponent:any) => (
+              <MenuItem key={opponent.id} value={opponent.id}>
+                {opponent.name}
               </MenuItem>
             ))}
           </Select>
-        </FormControl>      
+        </FormControl>       
         <Button
           type="submit"
           variant="contained"
@@ -100,7 +112,7 @@ const SportOpponentUpdate = () => {
           style={{ marginTop: 10 }}
           disabled={!isFormValid()}
         >
-          Update Sport Opponent
+          Update Person
         </Button>
       </form>
     </Paper>
@@ -108,4 +120,4 @@ const SportOpponentUpdate = () => {
   );
 };
 
-export default SportOpponentUpdate;
+export default SportPersonUpdate;

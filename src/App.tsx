@@ -24,6 +24,18 @@ import SportEventUpdate from "./pages/admin/sportAPI/events/AdminEventUpdate";
 import SportMatchView from "./pages/admin/sportAPI/matches/AdminMatchView";
 import SportMatchCreate from "./pages/admin/sportAPI/matches/AdminMatchCreate";
 import SportMatchUpdate from "./pages/admin/sportAPI/matches/AdminMatchUpdate";
+import SportOpponentView from "./pages/admin/sportAPI/opponents/AdminOpponentView";
+import SportOpponentCreate from "./pages/admin/sportAPI/opponents/AdminOpponentCreate";
+import SportOpponentUpdate from "./pages/admin/sportAPI/opponents/AdminOpponentUpdate";
+import SportOddView from "./pages/admin/sportAPI/odds/AdminOddView";
+import SportOddCreate from "./pages/admin/sportAPI/odds/AdminOddCreate";
+import SportOddUpdate from "./pages/admin/sportAPI/odds/AdminOddUpdate";
+import SportPersonView from "./pages/admin/sportAPI/persons/AdminPersonView";
+import SportPersonCreate from "./pages/admin/sportAPI/persons/AdminPersonCreate";
+import SportPersonUpdate from "./pages/admin/sportAPI/persons/AdminPersonUpdate";
+import SportBetView from "./pages/admin/sportAPI/bets/AdminBetView";
+import SportBetCreate from "./pages/admin/sportAPI/bets/AdminBetCreate";
+import SportBetUpdate from "./pages/admin/sportAPI/bets/AdminBetUpdate";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
@@ -59,6 +71,22 @@ function App() {
               <Route path = "sport/matches" element={<SportMatchView/>}/>
               <Route path = "sport/match/create" element={<SportMatchCreate/>}/>
               <Route path = "sport/match/update" element={<SportMatchUpdate/>}/>
+              {/* Opponent */}
+              <Route path = "sport/opponents" element={<SportOpponentView/>}/>
+              <Route path = "sport/opponent/create" element={<SportOpponentCreate/>}/>
+              <Route path = "sport/opponent/update" element={<SportOpponentUpdate/>}/>
+              {/* Odd */}
+              <Route path = "sport/odds" element={<SportOddView/>}/>
+              <Route path = "sport/odd/create" element={<SportOddCreate/>}/>
+              <Route path = "sport/odd/update" element={<SportOddUpdate/>}/>
+              {/* Person */}
+              <Route path = "sport/persons" element={<SportPersonView/>}/>
+              <Route path = "sport/person/create" element={<SportPersonCreate/>}/>
+              <Route path = "sport/person/update" element={<SportPersonUpdate/>}/>
+              {/* Person */}
+              <Route path = "sport/bets" element={<SportBetView/>}/>
+              <Route path = "sport/bet/create" element={<SportBetCreate/>}/>
+              <Route path = "sport/bet/update" element={<SportBetUpdate/>}/>
             </Route>
             
           )}

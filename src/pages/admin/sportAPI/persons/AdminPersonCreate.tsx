@@ -8,57 +8,68 @@ import { Modal } from "bootstrap"
 import { http } from "../../../../http"
 import AdmNavbar from "../../AdmNavbar";
 
-const SportOpponentCreate = () => {
-  const [sportMatches, setSportMatches] = useState<any>();
+const SportPersonCreate = () => {
+  const [opponents, setOpponents] = useState<any>();
   const navigate = useNavigate();
   useEffect(() => {
-    loadSportEvents();
+    loadOpponents();
   }, []);
-  const loadSportEvents = () => {
+  const loadOpponents = () => {
   
-    http.get("api/SportMatch/get")
+    http.get("api/Opponent/get")
       .then(resp => {
         const {payload} = resp.data;
 
-        setSportMatches(payload);
+        setOpponents(payload);
         console.log(payload);
       });
   }
-  const [opponent, setOpponent] = useState({
+  const [person, setPerson] = useState({
     name: '',
-    sportMatchId: ''
+    position: '',
+    opponentId: ''
   });
 
   const isFormValid = () => {
-    return Object.values(opponent);
+    return Object.values(person);
   };
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setOpponent((prevOpponent) => ({
-      ...prevOpponent,
+    setPerson((prevPerson) => ({
+      ...prevPerson,
       [name]: value,
     }));
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("Submit: "+ opponent)
-    http.post("api/Opponent/create", opponent)
+    console.log("Submit: "+ person)
+    http.post("api/Person/create", person)
       .then(() => {
-        navigate('/admin/sport/opponents');
+        navigate('/admin/sport/persons');
       });
     
   };
 
   return (
     <Paper style={{ padding: 20, maxWidth: 400, margin: '0 auto' }}>
-      <h1>Create Opponent</h1>
+      <h1>Create Person</h1>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Sport Match name"
+          label="Person name"
           name="name"
-          value={opponent.name}
+          value={person.name}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          style={{ marginBottom: 10 }}
+          required
+        />       
+        <TextField
+          label="Person position"
+          name="position"
+          value={person.position}
           onChange={handleChange}
           variant="outlined"
           fullWidth
@@ -66,11 +77,11 @@ const SportOpponentCreate = () => {
           required
         />       
         <FormControl variant="outlined" fullWidth style={{ marginBottom: 10 }}>
-          <InputLabel>ParentId</InputLabel>
-          <Select name="sportMatchId" id="sportMatchId" value={opponent.sportMatchId} onChange={handleChange}>
-            {sportMatches?.map((sportMatch:any) => (
-              <MenuItem key={sportMatch.id} value={sportMatch.id}>
-                {sportMatch.name}
+          <InputLabel>OpponentId</InputLabel>
+          <Select name="opponentId" id="opponentId" value={person.opponentId} onChange={handleChange}>
+            {opponents?.map((opponent:any) => (
+              <MenuItem key={opponent.id} value={opponent.id}>
+                {opponent.name}
               </MenuItem>
             ))}
           </Select>
@@ -82,7 +93,7 @@ const SportOpponentCreate = () => {
           style={{ marginTop: 10 }}
           disabled={!isFormValid()}
         >
-          Create Opponent
+          Create Person
         </Button>
       </form>
     </Paper>
@@ -90,4 +101,4 @@ const SportOpponentCreate = () => {
   );
 };
 
-export default SportOpponentCreate;
+export default SportPersonCreate;

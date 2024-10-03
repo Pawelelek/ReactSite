@@ -8,7 +8,7 @@ import { Modal } from "bootstrap"
 import { http } from "../../../../http"
 import AdmNavbar from "../../AdmNavbar";
 
-const SportOpponentView = () => {
+const SportPersonView = () => {
   const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
    //const [deleteId, setId] = useState<any>();
    const { GetAllUsers, DeleteById } = useActions();
@@ -16,9 +16,9 @@ const SportOpponentView = () => {
    const [deleteId, setDeleteId] = useState<string | null>(null);
    const [opponents, setOpponents] = useState<any>([]);
    const navigate = useNavigate();
-   const loadSportOpponents = () => {
+   const loadSportPersons = () => {
   
-        http.get("api/Opponent/get")
+        http.get("api/Person/get")
           .then(resp => {
             const {payload} = resp.data;
     
@@ -27,7 +27,7 @@ const SportOpponentView = () => {
           });
       }
   useEffect(() => {
-    loadSportOpponents()
+    loadSportPersons();
   }, []);
 
 
@@ -43,20 +43,20 @@ const SportOpponentView = () => {
 
   const handleConfirmDelete = () => {
     if (deleteId) {
-      http.delete('api/Opponent/delete/' + deleteId)
+      http.delete('api/Person/delete/' + deleteId)
             .then(() => {
-                loadSportOpponents();
+                loadSportPersons();
             });
     }
     handleClose();
   };
 
   const handleCreateRole = () => {
-    navigate('/admin/sport/opponent/create');
+    navigate('/admin/sport/person/create');
   };
 
   const handleUpdate = (id: string) => {
-    navigate('/admin/sport/opponent/update?id=' + id);
+    navigate('/admin/sport/person/update?id=' + id);
  };
   return (
     <>
@@ -68,9 +68,8 @@ const SportOpponentView = () => {
     <TableHead>
       <TableRow>
         <TableCell align="center">Name</TableCell>
-        <TableCell align="center">MatchName</TableCell>
-        <TableCell align="center">DateCreated</TableCell>
-        <TableCell align="center">CountTeammates</TableCell>
+        <TableCell align="center">Position</TableCell>
+        <TableCell align="center">OpponentName</TableCell>
         <TableCell align="center" colSpan={2} style={{ padding: 0 }}>
           <Button
             onClick={handleCreateRole}
@@ -82,7 +81,7 @@ const SportOpponentView = () => {
               height: '100%',
             }}
           >
-            Create New Sport Opponent
+            Create New Sport Person
           </Button>
         </TableCell>
       </TableRow>
@@ -97,13 +96,10 @@ const SportOpponentView = () => {
             {row.name}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.sportMatchName}
+            {row.position}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.dateCreated}
-          </TableCell>
-          <TableCell component="th" scope="row" align="center">
-            {row.countTeammates}
+            {row.opponentName}
           </TableCell>
           <TableCell align="center" style={{ borderTop: '1px solid #ddd' }}>
             {user.role === 'Admin' && user.Id !== row.id && (
@@ -156,4 +152,4 @@ const SportOpponentView = () => {
    );
 };
 
-export default SportOpponentView;
+export default SportPersonView;

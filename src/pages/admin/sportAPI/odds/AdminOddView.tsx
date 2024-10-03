@@ -8,21 +8,21 @@ import { Modal } from "bootstrap"
 import { http } from "../../../../http"
 import AdmNavbar from "../../AdmNavbar";
 
-const SportOpponentView = () => {
+const SportOddView = () => {
   const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
    //const [deleteId, setId] = useState<any>();
    const { GetAllUsers, DeleteById } = useActions();
    const [open, setOpen] = useState(false);
    const [deleteId, setDeleteId] = useState<string | null>(null);
-   const [opponents, setOpponents] = useState<any>([]);
+   const [odds, setOdds] = useState<any>([]);
    const navigate = useNavigate();
    const loadSportOpponents = () => {
   
-        http.get("api/Opponent/get")
+        http.get("api/Odd/get")
           .then(resp => {
             const {payload} = resp.data;
     
-            setOpponents(payload);
+            setOdds(payload);
             console.log(payload);
           });
       }
@@ -43,7 +43,7 @@ const SportOpponentView = () => {
 
   const handleConfirmDelete = () => {
     if (deleteId) {
-      http.delete('api/Opponent/delete/' + deleteId)
+      http.delete('api/Odd/delete/' + deleteId)
             .then(() => {
                 loadSportOpponents();
             });
@@ -52,11 +52,11 @@ const SportOpponentView = () => {
   };
 
   const handleCreateRole = () => {
-    navigate('/admin/sport/opponent/create');
+    navigate('/admin/sport/odd/create');
   };
 
   const handleUpdate = (id: string) => {
-    navigate('/admin/sport/opponent/update?id=' + id);
+    navigate('/admin/sport/odd/update?id=' + id);
  };
   return (
     <>
@@ -68,9 +68,12 @@ const SportOpponentView = () => {
     <TableHead>
       <TableRow>
         <TableCell align="center">Name</TableCell>
+        <TableCell align="center">Type</TableCell>
+        <TableCell align="center">Value</TableCell>
         <TableCell align="center">MatchName</TableCell>
-        <TableCell align="center">DateCreated</TableCell>
-        <TableCell align="center">CountTeammates</TableCell>
+        <TableCell align="center">OpponentName</TableCell>
+        <TableCell align="center">BettingFund</TableCell>
+        <TableCell align="center">CountBets</TableCell>
         <TableCell align="center" colSpan={2} style={{ padding: 0 }}>
           <Button
             onClick={handleCreateRole}
@@ -82,13 +85,13 @@ const SportOpponentView = () => {
               height: '100%',
             }}
           >
-            Create New Sport Opponent
+            Create New Sport Odd
           </Button>
         </TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
-      {opponents.map((row: any) => (
+      {odds.map((row: any) => (
         <TableRow
           key={row.id} // Добавляем ключ здесь
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -97,13 +100,22 @@ const SportOpponentView = () => {
             {row.name}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
+            {row.type}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.value}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
             {row.sportMatchName}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.dateCreated}
+            {row.opponentName}
           </TableCell>
           <TableCell component="th" scope="row" align="center">
-            {row.countTeammates}
+            {row.bettingFund}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center">
+            {row.countBets}
           </TableCell>
           <TableCell align="center" style={{ borderTop: '1px solid #ddd' }}>
             {user.role === 'Admin' && user.Id !== row.id && (
@@ -156,4 +168,4 @@ const SportOpponentView = () => {
    );
 };
 
-export default SportOpponentView;
+export default SportOddView;

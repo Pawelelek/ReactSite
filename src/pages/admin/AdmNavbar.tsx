@@ -56,7 +56,7 @@ const AdmNavbar: FunctionComponent<AdmNavbar> = ({
               <Link to={"/admin/categories"} className="a1">Categories</Link>
               <Link to={"/admin/promocodes"} className="a2">Promocodes</Link>
               {/* SportAPI */}
-              <Link to={"/admin/sports"} className="a3">SportAPI</Link>
+              {/* <Link to={"/admin/sports"} className="a3">SportAPI</Link> */}
               
             </nav>
             <Link to={"/admin/sport/persons"} className="a3">SportAPI/Person</Link>

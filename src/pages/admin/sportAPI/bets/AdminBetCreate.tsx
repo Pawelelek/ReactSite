@@ -8,73 +8,76 @@ import { Modal } from "bootstrap"
 import { http } from "../../../../http"
 import AdmNavbar from "../../AdmNavbar";
 
-const SportOpponentCreate = () => {
-  const [sportMatches, setSportMatches] = useState<any>();
+const SportBetCreate = () => {
+  const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
+  const [odds, setSportOdds] = useState<any>();
+  const [opponents, setOpponents] = useState<any>();
   const navigate = useNavigate();
   useEffect(() => {
-    loadSportEvents();
+    loadSportOdds();
   }, []);
-  const loadSportEvents = () => {
-  
-    http.get("api/SportMatch/get")
+  const loadSportOdds= () => {
+  console.log(user.id)
+    http.get("api/Odd/get")
       .then(resp => {
         const {payload} = resp.data;
 
-        setSportMatches(payload);
+        setSportOdds(payload);
         console.log(payload);
       });
   }
-  const [opponent, setOpponent] = useState({
-    name: '',
-    sportMatchId: ''
+  const [bet, setBet] = useState({
+    amount: 0,
+    oddId: '',
+    userId: user.id,
   });
 
   const isFormValid = () => {
-    return Object.values(opponent);
+    return Object.values(bet);
   };
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setOpponent((prevOpponent) => ({
-      ...prevOpponent,
-      [name]: value,
+    setBet((prevBet) => ({
+      ...prevBet,
+      [name]: value === '' ? null : value,
     }));
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("Submit: "+ opponent)
-    http.post("api/Opponent/create", opponent)
+    console.log("Submit: "+ bet)
+    http.post("api/Bet/create", bet)
       .then(() => {
-        navigate('/admin/sport/opponents');
+        navigate('/admin/sport/bets');
       });
     
   };
 
   return (
     <Paper style={{ padding: 20, maxWidth: 400, margin: '0 auto' }}>
-      <h1>Create Opponent</h1>
+      <h1>Create Bet</h1>
       <form onSubmit={handleSubmit}>
         <TextField
-          label="Sport Match name"
-          name="name"
-          value={opponent.name}
+          label="Bet Amount"
+          name="amount"
+          value={bet.amount}
           onChange={handleChange}
           variant="outlined"
           fullWidth
           style={{ marginBottom: 10 }}
           required
-        />       
+        /> 
         <FormControl variant="outlined" fullWidth style={{ marginBottom: 10 }}>
-          <InputLabel>ParentId</InputLabel>
-          <Select name="sportMatchId" id="sportMatchId" value={opponent.sportMatchId} onChange={handleChange}>
-            {sportMatches?.map((sportMatch:any) => (
-              <MenuItem key={sportMatch.id} value={sportMatch.id}>
-                {sportMatch.name}
+          <InputLabel>OddId</InputLabel>
+          <Select name="oddId" id="oddId" value={bet.oddId} onChange={handleChange} required>
+            {odds?.map((odd:any) => (
+              <MenuItem key={odd.id} value={odd.id}>
+                {odd.name}
               </MenuItem>
             ))}
           </Select>
-        </FormControl>       
+        </FormControl>        
         <Button
           type="submit"
           variant="contained"
@@ -82,7 +85,7 @@ const SportOpponentCreate = () => {
           style={{ marginTop: 10 }}
           disabled={!isFormValid()}
         >
-          Create Opponent
+          Create Bet
         </Button>
       </form>
     </Paper>
@@ -90,4 +93,4 @@ const SportOpponentCreate = () => {
   );
 };
 
-export default SportOpponentCreate;
+export default SportBetCreate;

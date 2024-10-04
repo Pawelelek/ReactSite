@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import "../mainModal.css";
 import "./Forgot.css";
+import { http } from '../../../../http';
+import { useEmail } from './EmailContext';
+import { toast } from 'react-toastify';
 
 interface Step1ModalProps {
   show: boolean;
@@ -13,8 +16,9 @@ interface Step1ModalProps {
 }
 
 const Step1Modal: React.FC<Step1ModalProps> = ({ show, onClose, onSwitchToLogin, onSwitchToStep2 }) => {
+  const { email, setEmail } = useEmail();
   if (!show) return null;
-
+  
   const validationSchema = Yup.object({
     email: Yup.string()
       .email('Невірна електронна адреса')
@@ -26,9 +30,22 @@ const Step1Modal: React.FC<Step1ModalProps> = ({ show, onClose, onSwitchToLogin,
       onClose();
     }
   };
-
   const handleSubmit = async (values: { email: string }) => {
-    onSwitchToStep2();
+    http.post("api/User/ForgotPasswordStep1", values)
+      .then((res) => {
+        const data= res.data
+        toast(data.message, {
+          style: {
+            backgroundColor: '#333',
+            color: '#fff',
+          },
+        });
+        console.log(data.success)
+        if(data.success) {
+          setEmail(values.email);
+          onSwitchToStep2();
+        }
+      });
   };
 
   const handleImageClick = () => {

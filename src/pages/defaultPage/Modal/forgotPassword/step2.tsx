@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import "../mainModal.css";
 import "./Forgot.css";
+import { http } from '../../../../http';
+import { useEmail } from './EmailContext';
+import { toast } from 'react-toastify';
 
 interface Step2ModalProps {
   show: boolean;
@@ -13,10 +16,10 @@ interface Step2ModalProps {
 }
 
 const Step2Modal: React.FC<Step2ModalProps> = ({ show, onClose, onSwitchToStep1, onSwitchToStep3 }) => {
+  const { email, setEmail } = useEmail();
   if (!show) return null;
-
   const validationSchema = Yup.object().shape({
-    code: Yup.string()
+    receivedCodeFromEmail: Yup.string()
       .length(6, 'Код повинен містити 6 символів')
       .required('Обов’язкове поле'),
   });
@@ -31,8 +34,22 @@ const Step2Modal: React.FC<Step2ModalProps> = ({ show, onClose, onSwitchToStep1,
     onSwitchToStep1();
   };
 
-  const handleSubmit = () => {
-    onSwitchToStep3();
+  const handleSubmit = async (values: { email: string, receivedCodeFromEmail: string }) => {
+    http.post("api/User/ForgotPasswordStep2", values)
+    .then((res) => {
+      const data= res.data
+      toast(data.message, {
+        style: {
+          backgroundColor: '#333',
+          color: '#fff',
+        },
+      });
+      console.log(data.success)
+      if(data.success) {
+        setEmail(values.email);
+        onSwitchToStep3();
+      }
+    });
   };
 
   return (
@@ -56,7 +73,8 @@ const Step2Modal: React.FC<Step2ModalProps> = ({ show, onClose, onSwitchToStep1,
 
         <Formik
           initialValues={{
-            code: '',
+            email: email,
+            receivedCodeFromEmail: '',
           }}
           validationSchema={validationSchema}
           validateOnMount={true}
@@ -66,13 +84,13 @@ const Step2Modal: React.FC<Step2ModalProps> = ({ show, onClose, onSwitchToStep1,
             <Form>
               <div className="code-input-container">
                 <Field 
-                  name="code"
+                  name="receivedCodeFromEmail"
                   type="text" 
                   placeholder="00-00-00"
                   className="input-field code-input"
                   maxLength={6}
                 />
-                <ErrorMessage name="code" component="div" className="error-message2" />
+                <ErrorMessage name="receivedCodeFromEmail" component="div" className="error-message2" />
               </div>
 
               <p className="resend-code-text">

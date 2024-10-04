@@ -8,6 +8,8 @@ import { getAccessToken } from "./services/api-user-service";
 import store from "./store";
 import { AuthUser } from "./store/action-creators/userActions";
 import { BalanceProvider } from "./pages/defaultPage/Modal/Profile/BalanceContext";
+import { EmailProvider } from "./pages/defaultPage/Modal/forgotPassword/EmailContext";
+import Step1Modal from "./pages/defaultPage/Modal/forgotPassword/step1";
 
 const token = getAccessToken();
 if (token) {
@@ -21,8 +23,11 @@ root.render(
   <Provider store={store}>
     <Router>
       <ToastContainer autoClose={5000} />
+      
       <BalanceProvider>
-      <App />
+      <EmailProvider>
+        <App/>
+      </EmailProvider>
       </BalanceProvider>
     </Router>
   </Provider>

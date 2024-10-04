@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useActionData } from 'react-router-dom';
 import * as Yup from 'yup';
 import "../mainModal.css";
 import "./Forgot.css";
+import { http } from '../../../../http';
+import { toast } from 'react-toastify';
+import { useEmail } from './EmailContext';
+import { useActions } from '../../../../hooks/useActions';
 
 interface Step3ModalProps {
   show: boolean;
@@ -12,6 +16,8 @@ interface Step3ModalProps {
 }
 
 const Step3Modal: React.FC<Step3ModalProps> = ({ show, onClose, onSwitchToStep2 }) => {
+  const { email, setEmail } = useEmail();
+  const { LoginUser } = useActions();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
@@ -51,9 +57,35 @@ const Step3Modal: React.FC<Step3ModalProps> = ({ show, onClose, onSwitchToStep2 
       .required('Обов’язкове поле'),
   });
 
-  const handleSubmit = (values: { password: string; confirmPassword: string }) => {
+  const handleSubmit1 = (values: { password: string; confirmPassword: string }) => {
     console.log("Form submitted:", values);
     onClose();
+  };
+  const handleSubmit = async (values: { email: string, password: string; confirmPassword: string }) => {
+    const loginForm = {
+      email: values.email,
+      password: values.password,
+      rememberMe: false
+    }
+    http.post("api/User/ForgotPasswordStep3", values)
+    .then((res) => {
+      const data= res.data
+      toast(data.message, {
+        style: {
+          backgroundColor: '#333',
+          color: '#fff',
+        },
+      });
+      console.log(data.success)
+      if(data.success) {
+        setEmail(values.email);
+        
+        LoginUser(loginForm);
+        onClose();
+      }
+      
+    });
+    //await LoginUser(loginForm);
   };
 
   return (
@@ -73,6 +105,7 @@ const Step3Modal: React.FC<Step3ModalProps> = ({ show, onClose, onSwitchToStep2 
 
         <Formik
           initialValues={{
+            email: email,
             password: '',
             confirmPassword: '',
           }}

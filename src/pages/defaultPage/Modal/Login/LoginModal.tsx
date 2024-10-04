@@ -71,7 +71,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, setShowModal, on
   };
 
     const handleSubmit = async (values: { email: string; password: string; rememberMe: boolean }) => {
-    await LoginUser(values);
     setShowModal(false);
     onClose();
   };

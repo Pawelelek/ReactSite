@@ -8,6 +8,9 @@ import { http } from '../../../../../http';
 import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { useBalance } from '../BalanceContext';
+import TransactionHistory from './TransactionHistoryComponent';
+import { userInfo } from 'os';
+import { useTypedSelector } from '../../../../../hooks/useTypedSelector';
 
 const validationSchemaDeposit = Yup.object({
     amount: Yup.number()
@@ -46,6 +49,7 @@ const validationSchemaDeposit = Yup.object({
   });
 
   const Balance: React.FC<{ activeTab: 'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal'}> = ({ activeTab}) => {
+    const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
   const [activeProfileTab, setActiveProfileTab] = useState<'myBalance' | 'Deposit'| 'transactionHistory' | 'Withdrawal'>('myBalance');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
@@ -319,7 +323,31 @@ const validationSchemaDeposit = Yup.object({
       formikDeposit.setFieldValue('amount', '100');
     }
   };
-
+  // const transactions = [
+  //   { id: "1", value: '123', description: "100", moneyState: '123', balanceId: '123', transactionType: "100", dateCreated: '123' },
+  //   { id: "1", value: '123', description: "100", moneyState: '123', balanceId: '123', transactionType: "100", dateCreated: '123' },
+  //   { id: "1", value: '123', description: "100", moneyState: '123', balanceId: '123', transactionType: "100", dateCreated: '123' },
+  //   { id: "1", value: '123', description: "100", moneyState: '123', balanceId: '123', transactionType: "100", dateCreated: '123' },
+  //   { id: "1", value: '123', description: "100", moneyState: '123', balanceId: '123', transactionType: "100", dateCreated: '123' },
+  //   { id: "1", value: '123', description: "100", moneyState: '123', balanceId: '123', transactionType: "100", dateCreated: '123' },
+  //   { id: "1", value: '123', description: "100", moneyState: '123', balanceId: '123', transactionType: "100", dateCreated: '123' },
+  //   // Більше транзакцій...
+  // ];
+  
+  const [transactions, setTransactions] = useState<any>([]);
+  const loadTransactionHistoryByUserId = () => {
+  console.log(user.Id);
+    http.get("api/Balance/getByUserId?userId="+user.Id)
+      .then(resp => {
+        const transactions = resp.data.payload[0].transactions;
+        console.log(transactions)
+        setTransactions(transactions);
+        console.log(transactions);
+      });
+  }
+  useEffect(() => {
+    loadTransactionHistoryByUserId();
+    }, []);
   return (
     <div>
               <div className="custom-frame-440">
@@ -605,7 +633,8 @@ const validationSchemaDeposit = Yup.object({
               </div>
             </div>
           </div>
-
+          {/*=================================== TRANSACTION HISTORY ======================*/}
+      <div className="App"><TransactionHistory transactions={transactions} /></div>
       <div className="custom-center-text">Немає транзакцій для показу</div>
     </div>
   </div>

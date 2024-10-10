@@ -1,0 +1,25 @@
+.custom-bets-frame-825,
+.custom-bets-frame-825 * {
+  box-sizing: border-box;
+}
+.custom-bets-frame-825 {
+  background: #da0037;
+  border-radius: 2px;
+  padding: 20px 40px 20px 40px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 40px;
+  position: relative;
+}
+.custom-bets-text {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", Helvetica;
+  font-size: 16px;
+  position: relative;
+  text-wrap: nowrap;
+}

@@ -1,17 +1,19 @@
 import { FunctionComponent } from "react";
 import "./Events.css";
+import {useNavigate} from "react-router-dom";
 
 export type EventsType = {
   className?: string;
 };
 
 const Events: FunctionComponent<EventsType> = ({ className = "" }) => {
+  const navigator = useNavigate();
   return (
     <div className={`events ${className}`}>
       <div className="events-title">
         <div className="div12">Популярні події</div>
         <div className="events-button">
-          <div className="div13" style={{ cursor: "pointer" }}>Показати усі</div>
+          <div className="div13" onClick={()=>navigator("/bets")} style={{ cursor: "pointer" }}>Показати усі</div>
         </div>
       </div>
       <div className="leagues">
@@ -52,7 +54,7 @@ const Events: FunctionComponent<EventsType> = ({ className = "" }) => {
             </div>
             <div className="div15">Кубок Америки 2024</div>
           </div>
-          <div className="rectangle-parent1">
+          {/* <div className="rectangle-parent1">
             <div className="frame-child1" />
             <div className="frame-wrapper3">
               <div className="frame-wrapper4">
@@ -68,7 +70,7 @@ const Events: FunctionComponent<EventsType> = ({ className = "" }) => {
               </div>
             </div>
             <div className="lpl-2024-summer">LPL 2024 Summer Placements</div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

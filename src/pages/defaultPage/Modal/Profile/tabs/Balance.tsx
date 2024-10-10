@@ -103,6 +103,7 @@ const validationSchemaDeposit = Yup.object({
 
   useEffect(() => {
     setActiveProfileTab(activeTab);
+    loadTransactionHistoryByUserId();
   }, [activeTab]);
   
   // window.onload = function() {
@@ -347,9 +348,9 @@ const validationSchemaDeposit = Yup.object({
         console.log(transactions);
       });
   }
-  useEffect(() => {
-    loadTransactionHistoryByUserId();
-    }, []);
+  // useEffect(() => {
+    
+  //   }, []);
   return (
     <div>
               <div className="custom-frame-440">

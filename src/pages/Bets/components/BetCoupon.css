@@ -1,0 +1,177 @@
+.custom-coupon-detailed-frame {
+    border-radius: 20px;
+    background: #2d2d2d;
+    padding: 15px;
+    width: 237px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .custom-coupon-header2 {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+  }
+  
+  .custom-coupon-title2,
+  .custom-coupon-tab2 {
+    font-family: "Roboto-Bold", sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .custom-coupon-tabs2 {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .custom-coupon-tab-button2 {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-family: "Roboto-Regular", sans-serif;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .custom-coupon-tab-button2.active {
+    background: #444;
+    border-radius: 5px;
+  }
+  
+  .custom-coupon-bet2 {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .custom-coupon-bet-info2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .custom-coupon-bet-type2 {
+    font-family: "Roboto-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+    color: #ffffff;
+  }
+  
+  .custom-coupon-bet-odds2 {
+    font-family: "Roboto-Regular", sans-serif;
+    color: #ffffff;
+  }
+  
+  .custom-coupon-remove2 {
+    background: none;
+    border: none;
+    color: #ff0000;
+    cursor: pointer;
+  }
+  
+  .custom-coupon-bet-detail2 {
+    font-family: "Roboto-Regular", sans-serif;
+    color: #b0b0b0;
+  }
+  
+  .custom-coupon-stake2 {
+    display: flex;
+    flex-direction: column; /* Ensure the input is above the buttons */
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Container for input and UAH */
+  .custom-coupon-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    background: #000; /* Black background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 5px 10px;
+    width: 100%; /* Ensure it matches the container width */
+    box-sizing: border-box;
+  }
+  
+  /* Style for the input */
+  .custom-coupon-input2 {
+    flex: 1; /* Take up full available space */
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 16px;
+    outline: none;
+    text-align: right; /* Align text to the right */
+    width: 100%;
+  }
+  
+  /* Style for the UAH text */
+  .custom-coupon-currency {
+    color: #808080; /* Gray color for UAH */
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 16px;
+  }
+  
+  /* Buttons section */
+  .custom-coupon-stake-buttons2 {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+  }
+
+  .stake-button {
+    flex: 1; /* Ensure equal width for all buttons */
+    padding: 10px;
+    background: #444;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Roboto-Regular", sans-serif;
+    text-align: center;
+  }
+  
+  /* Active button style */
+  .stake-button.active2 {
+    background: #555; /* Lighter gray for active button */
+  }
+  
+  .custom-coupon-summary2 {
+    margin-top: 10px;
+  }
+  
+  .custom-coupon-summary-row2 {
+    display: flex;
+    justify-content: space-between;
+    font-family: "Roboto-Regular", sans-serif;
+    color: #ffffff;
+  }
+  
+  .custom-coupon-submit2 {
+    background: #da0037;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+    margin-top: 10px;
+    border-radius: 2px;
+  }
+  
+  .custom-coupon-clear2 {
+    background: none;
+    border: none;
+    color: #ffffff;
+    margin-top: 5px;
+    cursor: pointer;
+  }
+  

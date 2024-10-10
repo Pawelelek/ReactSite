@@ -14,11 +14,13 @@ interface ProfileModalProps {
   onClose: () => void;
   activeTab?: 'profile' | 'balance' | 'bonuses' | 'betHistory' | 'favourite';
   balanceTab?: 'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal';
+  bonusesTab?: 'Funds' | 'Promocode';
 }
 
-const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='profile', balanceTab='myBalance' }) => {
+const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='profile', balanceTab='myBalance', bonusesTab='Funds' }) => {
   const [activeMainTab, setActiveMainTab] = useState<'profile' | 'balance' | 'bonuses' | 'betHistory' | 'favourite'>(activeTab);
   const [activeBalanceTab, setActiveBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal'>(balanceTab);
+  const [bonusTab, setBonusTab] = useState<'Funds' | 'Promocode'>(bonusesTab);
   const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -35,11 +37,10 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='p
   useEffect(() => {
     if (show) {
       setActiveMainTab(activeTab);
-      if (activeTab === 'balance') {
-        setActiveBalanceTab(balanceTab);
-      }
+      setActiveBalanceTab(balanceTab);
+      setBonusTab(bonusesTab);
     }
-  }, [show, activeTab, balanceTab]);
+  }, [show, activeTab, balanceTab, bonusesTab]);
 
   const {user} = useTypedSelector((store) => store.UserReducer);
 
@@ -101,7 +102,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='p
             </div>
 
             <div className={`custom-frame-75 ${activeMainTab === 'bonuses' ? 'active-main-tab' : ''}`}
-              onClick={() => setActiveMainTab('bonuses')}>
+              onClick={() => {setActiveMainTab('bonuses'); setBonusTab('Funds');}}>
               <div className="custom-frame-752">
                 <img className="custom-gift" src="/Profileimg/bonus.png" />
                 <div className="custom-div3">БОНУСИ</div>
@@ -154,7 +155,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ show, onClose, activeTab='p
             )}
 
             {activeMainTab === 'bonuses' && (
-            <Bonuses onDepositClick={() => {
+            <Bonuses bonusesSelTab={bonusTab} onDepositClick={() => {
               setActiveMainTab('balance');
               setActiveBalanceTab('Deposit');
             }} />

@@ -1,0 +1,141 @@
+.custom-bets-rectangle-79,
+.custom-bets-rectangle-79 * {
+  box-sizing: border-box;
+}
+.custom-bets-rectangle-79 {
+  background: linear-gradient(
+      2.63deg,
+      rgba(14, 5, 13, 0) 0%,
+      rgba(14, 5, 13, 0.2) 100%
+    ),
+    linear-gradient(180deg, rgba(0, 0, 14, 0) 0%, rgba(14, 5, 13, 0.2) 100%);
+  border-radius: 20px;
+  width: 5px;
+  height: 5px;
+  position: relative;
+  object-fit: cover;
+}
+
+.custom-bets-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; 
+  width: 100%;
+}
+
+.custom-bets-frame-980,
+.custom-bets-frame-980 * {
+  box-sizing: border-box;
+}
+.custom-bets-frame-980 {
+  background: var(
+    --linear,
+    linear-gradient(
+      270deg,
+      rgba(45, 45, 45, 1) 75.99999904632568%,
+      rgba(218, 0, 55, 1) 100%
+    )
+  );
+  padding: 10px 15px 10px 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  width: 96%;
+  margin: 1px 0px 0px 20px;
+}
+.custom-bets-frame-577 {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-frame-576 {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-frame-571 {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-frame-570 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-football2 {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-text2 {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+}
+
+.custom-bets-frame-973,
+.custom-bets-frame-973 * {
+  box-sizing: border-box;
+}
+.custom-bets-frame-973 {
+  background: rgba(218, 0, 55, 1);
+  border-radius: 2px;
+  padding: 15px 20px 15px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 96%;
+  margin: 0px 0px 0px 19px;
+}
+.custom-bets-frame-927 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-football3 {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-text3 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+  width: 320.3px;
+}

@@ -11,7 +11,7 @@ const FooterLinks: FunctionComponent<FooterLinksType> = ({
   return (
     <footer className={`footer-links ${className}`}>
       <div className="footer-links-container">
-        <div className="footer-links-content">
+        {/* <div className="footer-links-content">
           <div className="footer-links-columns">
             <div className="vector-wrapper">
               <img
@@ -44,7 +44,7 @@ const FooterLinks: FunctionComponent<FooterLinksType> = ({
               src="Homeimg/clip-path-group-2.svg"
             />
           </div>
-        </div>
+        </div> */}
         <div className="information-parent">
           <div className="information">
             <div className="div16">Інформація</div>
@@ -82,13 +82,13 @@ const FooterLinks: FunctionComponent<FooterLinksType> = ({
               <div className="facebook">facebook</div>
             </div>
           </div>
-          <div className="stats">
+          {/* <div className="stats">
             <div className="div31">Статистика</div>
             <div className="stats-links">
               <div className="div32">Статистика</div>
               <div className="div33">Результати</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

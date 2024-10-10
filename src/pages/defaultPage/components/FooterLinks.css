@@ -237,7 +237,7 @@
   font-size: var(--font-size-base);
   color: var(--color-darkgray);
 }
-.information-parent,
+/* .information-parent, */
 .stats {
   justify-content: center;
   gap: var(--gap-6xl);
@@ -246,7 +246,7 @@
   align-self: stretch;
   flex-direction: row;
   justify-content: space-between;
-  gap: var(--gap-xl);
+
 }
 .footer-links,
 .footer-links-container {
@@ -255,7 +255,7 @@
   max-width: 100%;
 }
 .footer-links-container {
-  width: 1066.7px;
+  width: 1000px;
   flex-direction: column;
   justify-content: flex-start;
   gap: var(--gap-61xl);

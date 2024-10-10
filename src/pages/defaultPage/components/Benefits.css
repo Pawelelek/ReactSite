@@ -68,7 +68,7 @@
   flex: 1;
   display: grid;
   gap: var(--gap-lgi-5);
-  grid-template-columns: repeat(3, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, minmax(650px, 1fr));
 }
 .benefits {
   align-self: stretch;

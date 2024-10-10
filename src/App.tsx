@@ -1,7 +1,5 @@
 import "./App.css";
 import { Routes, Route, Outlet } from "react-router-dom";
-import SignIn from "./pages/auth/signin";
-import SignUp from "./pages/auth/signup";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import NotFound from "./pages/notFound";
 import DefaultPage from "./pages/defaultPage/DefaultPage";
@@ -36,6 +34,8 @@ import SportPersonUpdate from "./pages/admin/sportAPI/persons/AdminPersonUpdate"
 import SportBetView from "./pages/admin/sportAPI/bets/AdminBetView";
 import SportBetCreate from "./pages/admin/sportAPI/bets/AdminBetCreate";
 import SportBetUpdate from "./pages/admin/sportAPI/bets/AdminBetUpdate";
+import Promotions from "./pages/Promotions/Promotions";
+import BetsPage from "./pages/Bets/BetsPage";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
@@ -98,6 +98,8 @@ function App() {
         </>
       )}
       <Route path="/" element={<DefaultPage/>} />
+      <Route path="/promotions" element={<Promotions/>} />
+      <Route path="/bets" element={<BetsPage/>} />
       {/* <Route path="/dashboard" element={<DefaultPage/>} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp/>} /> */}

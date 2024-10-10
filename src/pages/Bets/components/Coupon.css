@@ -1,0 +1,96 @@
+.custom-coupon-frame-936,
+.custom-coupon-frame-936 * {
+  box-sizing: border-box;
+}
+.custom-coupon-frame-936 {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 277px;
+  position: relative;
+  padding-bottom: 10px;
+}
+.custom-coupon-frame-22 {
+  background: #2d2d2d;
+  border-radius: 20px 20px 0px 0px;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0px 0px 0.3px 0px;
+  padding: 10px 20px 10px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 36px;
+  position: relative;
+}
+.custom-coupon-div {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Black", sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  position: relative;
+}
+.custom-coupon-frame-801 {
+  background: #2d2d2d;
+  border-radius: 0px 0px 20px 20px;
+  padding: 20px 0px 20px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-coupon-free-icon-font-ticket-3916614-2 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.custom-coupon-frame-800 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-coupon-frame-637 {
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-coupon-div2 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+}
+.custom-coupon-div3 {
+  color: var(--ededed, #ededed);
+  text-align: center;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}

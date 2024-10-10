@@ -16,7 +16,7 @@ const Benefits: FunctionComponent<BenefitsType> = ({ className = "" }) => {
           prop1="Великий вибір "
           prop2="ставок на спорт"
         />
-        <div className="benefits-list1">
+        {/* <div className="benefits-list1">
           <img
             className="benefits-list-child"
             loading="lazy"
@@ -30,7 +30,7 @@ const Benefits: FunctionComponent<BenefitsType> = ({ className = "" }) => {
               <p className="p5">улюблені команди</p>
             </h3>
           </div>
-        </div>
+        </div> */}
         <div className="benefits-list1">
           <img
             className="benefits-list-child"

@@ -8,10 +8,11 @@ import { useBalance } from '../BalanceContext';
 
 interface BonusesProps {
   onDepositClick: () => void;
+  bonusesSelTab?: 'Funds' | 'Promocode';
 }
 
-const Bonuses: React.FC<BonusesProps> = ({ onDepositClick }) => {
-  const [activeProfileTab, setActiveProfileTab] = useState<'Funds' | 'Promocode'>('Funds');
+const Bonuses: React.FC<BonusesProps> = ({ onDepositClick, bonusesSelTab='Funds' }) => {
+  const [activeProfileTab, setActiveProfileTab] = useState<'Funds' | 'Promocode'>(bonusesSelTab);
   const [promo, setPromo] = useState('');
   const {user} = useTypedSelector((store) => store.UserReducer);
   const initialHours = 7; 

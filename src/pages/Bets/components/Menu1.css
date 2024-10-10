@@ -1,0 +1,948 @@
+.custom-bets-ukrain-futbol,
+.custom-bets-ukrain-futbol * {
+  box-sizing: border-box;
+}
+.custom-bets-ukrain-futbol {
+  background: #2d2d2d;
+  border-radius: 20px;
+  padding: 20px 15px 20px 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.custom-bets-frame-532 {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 240px;
+  position: relative;
+}
+.custom-bets-frame-511 {
+  background: var(--171717, #171717);
+  border-radius: 10px;
+  padding: 20px 15px 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 50px;
+  position: relative;
+}
+.custom-bets-frame-510 {
+  display: flex;
+  flex-direction: row;
+  gap: 17px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-search {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: hidden;
+}
+.custom-bets-group {
+  width: 99.99%;
+  height: 100%;
+  position: absolute;
+  right: 0%;
+  left: 0%;
+  bottom: 0%;
+  top: 0%;
+  overflow: visible;
+}
+.custom-bets-div {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  position: relative;
+}
+.custom-bets-frame-514 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-div2 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+  align-self: stretch;
+}
+.custom-bets-frame-513 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-sport {
+  background: var(--444444, #444444);
+  border-radius: 2px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 40px;
+  position: relative;
+}
+.custom-bets-frame-512 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 190px;
+  position: relative;
+}
+.custom-bets-rectangle-47 {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  object-fit: cover;
+}
+.custom-bets-u-19-2024 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+  width: 130px;
+}
+.custom-bets-frame-516 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-frame-515 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-bets-sportt {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 240px;
+  position: relative;
+}
+.custom-bets-sport2 {
+  background: var(--444444, #444444);
+  border-radius: 2px 2px 0px 0px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+}
+.custom-bets-frame-5122 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 195px;
+  position: relative;
+}
+.custom-bets-football {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-div3 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+  width: 185px;
+}
+.custom-bets-vector {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-523 {
+  background: var(--444444, #444444);
+  padding: 7px 10px 7px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  transition: height 0.4s ease, opacity 0.4s ease;
+}
+.custom-bets-vector {
+  transition: transform 0.3s ease; /* Smooth rotation for the arrow */
+}
+
+.custom-bets-vector.rotated {
+  transform: rotate(180deg); /* Rotate 180 degrees when expanded */
+}
+.custom-bets-frame-522 {
+  background: var(--2d2d2d, #2d2d2d);
+  border-radius: 10px;
+  padding: 11px 10px 11px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 220px;
+  position: relative;
+}
+.custom-bets-frame-543 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-frame-518 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 155px;
+  position: relative;
+}
+.custom-bets-frame-525:hover, .custom-bets-frame-544:hover, .custom-bets-frame-539:hover {
+  background-color: #696969;
+  cursor: pointer; 
+  transition: background-color 0.3s ease;
+}
+.custom-bets-rectangle-51 {
+  flex-shrink: 0;
+  width: 25px;
+  height: 16px;
+  position: relative;
+  object-fit: cover;
+}
+.custom-bets-div4 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+  width: 108px;
+}
+.custom-bets-frame-519 {
+  background: var(--706e6e, #706e6e);
+  border-radius: 2px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+}
+.custom-bets-_00 {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  position: relative;
+  width: 14.32px;
+}
+.custom-bets-vector2 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-525 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector3 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-544 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector4 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-526 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector5 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-5322 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector6 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-533 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector7 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-534 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector8 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-535 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector9 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-536 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector10 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-537 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector11 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-538 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector12 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-539 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector13 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-540 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector14 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-frame-541 {
+  background: #444444;
+  border-radius: 2px;
+  padding: 0px 15px 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+.custom-bets-vector15 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-sport3 {
+  background: var(--444444, #444444);
+  border-radius: 2px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+}
+.custom-bets-tennis {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector16 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-basketball {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector17 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-volleyball {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector18 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-ping-pong {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector19 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-rugby {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector20 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-rugby-a {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector21 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-volleyball-a {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector22 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-hockey {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector23 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-football-a {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector24 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-baseball {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector25 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-boxing {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector26 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-rugby-7 {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector27 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-cricet {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector28 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-biking {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector29 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-dart {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector30 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-fencing {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: hidden;
+}
+.custom-bets-group2 {
+  height: auto;
+  position: absolute;
+  left: 0px;
+  top: 1.74px;
+  overflow: visible;
+}
+.custom-bets-vector31 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-football2 {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector32 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-golf {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector33 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-uniform {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector34 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-hand {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector35 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-flag {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector36 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-football3 {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector37 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-swimmer {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector38 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-chess {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  position: relative;
+  overflow: visible;
+}
+.custom-bets-vector39 {
+  flex-shrink: 0;
+  width: 12px;
+  height: 16.68px;
+  position: relative;
+  overflow: visible;
+}

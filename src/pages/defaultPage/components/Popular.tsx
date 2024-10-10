@@ -1,12 +1,14 @@
 import { FunctionComponent } from "react";
 import FrameComponent1 from "./FrameComponent1";
 import "./Popular.css";
+import {useNavigate} from "react-router-dom";
 
 export type PopularType = {
   className?: string;
 };
 
 const Popular: FunctionComponent<PopularType> = ({ className = "" }) => {
+  const navigator = useNavigate();
   return (
     <div className={`popular ${className}`}>
       <div className="action-header-parent">
@@ -43,7 +45,7 @@ const Popular: FunctionComponent<PopularType> = ({ className = "" }) => {
           <div className="promotion-header-parent">
             <div className="promotion-header">
               <div className="all-promotions-button">
-                <div className="div3" style={{ cursor: "pointer" }}>Усі акції</div>
+                <div className="div3" onClick={()=>navigator("/promotions")} style={{ cursor: "pointer" }}>Усі акції</div>
               </div>
               <div className="risk-free">
                 <div className="risk-free-child" />
@@ -60,7 +62,7 @@ const Popular: FunctionComponent<PopularType> = ({ className = "" }) => {
               </div>
             </div>
             <div className="show-all-button">
-              <div className="div4" style={{ cursor: "pointer" }}>Показати усі</div>
+              <div className="div4" onClick={()=>navigator("/bets")} style={{ cursor: "pointer" }}>Показати усі</div>
             </div>
           </div>
         </div>

@@ -1,0 +1,177 @@
+.custom-card-frame-498,
+.custom-card-frame-498 * {
+  box-sizing: border-box;
+}
+.custom-card-frame-498 {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-card-rectangle-10 {
+  background: linear-gradient(
+    to left,
+    rgba(132, 29, 190, 0.2),
+    rgba(132, 29, 190, 0.2)
+  );
+  border-radius: 20px 20px 0px 0px;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 250px;
+  position: relative;
+  object-fit: cover;
+}
+.custom-card-frame-497 {
+  background: var(--2d2d2d, #2d2d2d);
+  border-radius: 0px 0px 20px 20px;
+  padding: 45px 0px 45px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-card-frame-496 {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-card-frame-501 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 355px;
+  position: relative;
+}
+.custom-card-frame-495 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-card-_3000 {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Roboto-SemiBold", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  position: relative;
+  align-self: stretch;
+}
+.custom-card-frame-555 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 239px;
+  position: relative;
+}
+.custom-card-div {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+  width: 249px;
+  height: 19px;
+}
+.custom-card-frame-549 {
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0px 0px 1px 0px;
+  padding: 0px 0px 5px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-card-frame-554 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.custom-card-div2 {
+  color: var(--ffffff, #ffffff);
+  text-align: center;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: relative;
+}
+.custom-card-frame-394 {
+  background: #da0037;
+  border-radius: 2px;
+  padding: 10px 20px 10px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 380px;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+}
+.custom-card-div3 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.custom-league-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center; 
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.custom-events, .custom-leagues {
+    padding: 0;
+    margin: 0 auto; 
+}
+
+.custom-leagues {
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+.custom-card-frame-498 {
+    width: 430px; 
+    margin: 0 auto; 
+}

@@ -40,9 +40,9 @@ const Counter: React.FC<CounterType> = ({ className = "" }) => {
           <nav className="counter-parent">
             <nav className="live-label">
               {/* <a className="live" style={{ cursor: "pointer" }}>LIVE</a> */}
-              <a className="a" style={{ cursor: "pointer" }}>СПОРТ</a>
-              <a className="a1" style={{ cursor: "pointer" }}>КІБЕРСПОРТ</a>
-              <a className="a2" style={{ cursor: "pointer" }}>АКЦІЇ</a>
+              <a className="a" style={{ cursor: "pointer", left:'0px' }} onClick={()=>navigator("/bets")}>СПОРТ</a>
+              {/* <a className="a1" style={{ cursor: "pointer" }} onClick={()=>navigator("/bets")}>КІБЕРСПОРТ</a> */}
+              <a className="a2" style={{ cursor: "pointer", left:'120px' }} onClick={()=>navigator("/promotions")}>АКЦІЇ</a>
             </nav>
           </nav>
         </div>

@@ -10,9 +10,9 @@ const Favourite = () => {
   const [favoutiteGames, setFavouriteGames] = useState<any>([]);
   const loadFavouriteGamesByUserId = () => {
   console.log(user.Id);
-    http.get("api/Balance/getByUserId?userId="+user.Id)
+    http.get("api/User/GetFavouriteSportMatches?userId="+user.Id)
       .then(resp => {
-        const transactions = resp.data.payload[0].transactions;
+        const transactions = resp.data.payload;
         console.log(transactions)
         setFavouriteGames(transactions);
         console.log(transactions);
@@ -61,12 +61,10 @@ const Favourite = () => {
     <TableHead>
       <TableRow>
         <TableCell align="center" sx={{ color: "#ffffff" }}>Id</TableCell> {/* Текст білий */}
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Сумма</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Опис</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Баланс</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Id Балансу</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Тип</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Дата</TableCell>
+        <TableCell align="center" sx={{ color: "#ffffff" }}>Назва Матчу</TableCell>
+        <TableCell align="center" sx={{ color: "#ffffff" }}>Назва Івенту</TableCell>
+        <TableCell align="center" sx={{ color: "#ffffff" }}>Початок/Кінець</TableCell>
+        <TableCell align="center" sx={{ color: "#ffffff" }}>Опоненти</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
@@ -76,28 +74,30 @@ const Favourite = () => {
           sx={{
             "&:last-child td, &:last-child th": { border: 0 },
             backgroundColor: "#2e2e2e", // Темний фон для рядків
+            cursor: 'pointer'
           }}
         >
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.id}
+            {row.sportMatch.id}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.value}
+            {row.sportMatch.name}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.description}
+            {row.sportMatch.sportEventName}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
+            {row.sportMatch.dateStart}/{row.sportMatch.dateEnd}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
+            
+
+          {row.sportMatch.opponents.map((row1: any) => (
+            <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>({row1.name})</TableCell>        
+          ))}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
             {row.money}
-          </TableCell>
-          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.balanceId}
-          </TableCell>
-          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.transactionType}
-          </TableCell>
-          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.dateCreated}
           </TableCell>
         </TableRow>
       ))}

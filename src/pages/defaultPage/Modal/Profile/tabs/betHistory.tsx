@@ -41,9 +41,9 @@ const BetHistory = () => {
   const [bettingHistory, setBettingHistory] = useState<any>([]);
   const loadBettingHistoryByUserId = () => {
   console.log(user.Id);
-    http.get("api/Balance/getByUserId?userId="+user.Id)
+    http.get("api/User/GetBettingHistory?userId="+user.Id)
       .then(resp => {
-        const transactions = resp.data.payload[0].transactions;
+        const transactions = resp.data.payload;
         console.log(transactions)
         setBettingHistory(transactions);
         console.log(transactions);
@@ -140,13 +140,13 @@ const BetHistory = () => {
   <Table sx={{ backgroundColor: "#1e1e1e" }} aria-label="simple table"> {/* Темний фон для таблиці */}
     <TableHead>
       <TableRow>
+      <TableCell align="center" sx={{ color: "#ffffff" }}>Статус Ставки</TableCell>
         <TableCell align="center" sx={{ color: "#ffffff" }}>Id</TableCell> {/* Текст білий */}
+        <TableCell align="center" sx={{ color: "#ffffff" }}>Назва Ставки</TableCell>
         <TableCell align="center" sx={{ color: "#ffffff" }}>Сумма</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Опис</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Баланс</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Id Балансу</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Тип</TableCell>
+        <TableCell align="center" sx={{ color: "#ffffff" }}>Коеф</TableCell>
         <TableCell align="center" sx={{ color: "#ffffff" }}>Дата</TableCell>
+        <TableCell align="center" sx={{ color: "#ffffff" }}>Категорія</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
@@ -159,25 +159,27 @@ const BetHistory = () => {
           }}
         >
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
+            Активна/Завершенна
+          </TableCell>
+          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
             {row.id}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
+            {row.oddName}
+          </TableCell>
+          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
+            {row.amount}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
             {row.value}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.description}
+            {row.betTime}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.money}
+            {row.categoryName}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.balanceId}
-          </TableCell>
-          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.transactionType}
-          </TableCell>
-          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.dateCreated}
           </TableCell>
         </TableRow>
       ))}

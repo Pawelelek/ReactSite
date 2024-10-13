@@ -1,9 +1,38 @@
+import { useEffect, useState } from 'react';
 import './Table1.css'
+import { http } from '../../../http';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
 const Table3 = ({ onCoefficientSelect } : any) => {
+  const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
+  const [sportMatches, setSportMatches] = useState<any>([]);
   const handleClick = (coefficient: any, team1: any, team2: any) => {
-    onCoefficientSelect(coefficient, team1, team2);
+    onCoefficientSelect(coefficient, team1, team2); 
   };
+  const setStarClick = (matchId: string) => {
+    const form = {
+      userId: user.Id,
+      sportMatchId: matchId
+    }
+    console.log("FORM: ",form)
+    http.put("api/SportMatch/setOrOffSetFavouriteSportMatch", form)
+    .then(resp => {
+      console.log("Success ",resp.data.message);
+    })
+  }
+  const loadSportMatches = () => {
+    //console.log(user.Id);
+      http.get("api/SportMatch/get")
+        .then(resp => {
+          const transactions = resp.data.payload;
+          console.log(transactions)
+          setSportMatches(transactions);
+          console.log(transactions);
+        });
+    }
+    useEffect(() => {
+      loadSportMatches();
+      }, []);
   return (
     <div className="custom-table-frame-963" style={{paddingBottom:'50px'}}>
       <div className="custom-table-frame-9632">
@@ -32,50 +61,51 @@ const Table3 = ({ onCoefficientSelect } : any) => {
       <div className="custom-table-frame-962">
 
         {/* First Row - Верес vs Динамо Київ */}
-        <div className="custom-table-frame-939">
-          <div className="custom-table-frame-930">
-            <img className="custom-table-star-1" src="/Homeimg/star1.svg" />
+        {sportMatches.map((match: any) => (
+          <div className="custom-table-frame-939" key={match.id}>
+          <div className="custom-table-frame-930" >
+          <img className="custom-table-star-1" onClick={() => setStarClick(match.id)} src="/Homeimg/star1.svg" />
             <div className="custom-table-frame-929">
-              <div className="custom-table-_09-08">09.08</div>
-              <div className="custom-table-_22-00">22:00</div>
+              <div className="custom-table-_09-08">-{new Date(match.dateStart).toLocaleDateString([], { day: '2-digit', month: '2-digit' })}</div>
+              <div className="custom-table-_22-00">{new Date(match.dateStart).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
             </div>
             <div className="custom-table-frame-928">
-              <div className="custom-table-div3">Верес</div>
-              <div className="custom-table-div3">Динамо Київ</div>
+              <div className="custom-table-div3">{match.opponents[0].name}</div>
+              <div className="custom-table-div3">{match.opponents[1].name}</div>
             </div>
           </div>
           <div className="custom-table-frame-926">
             <div className="custom-table-frame-914">
               <div className="custom-table-frame-911">
-                <div className="custom-table-_1-67" onClick={() => handleClick(1.93, "Верес", "Динамо Київ")}>1.93</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(1.93, match.opponents[0].name, match.opponents[1].name)}>1.93</div>
               </div>
               <div className="custom-table-frame-912">
-                <div className="custom-table-_1-67" onClick={() => handleClick(7.70, "Верес", "Динамо Київ")}>7.70</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(7.70, match.opponents[0].name, match.opponents[1].name)}>7.70</div>
               </div>
               <div className="custom-table-frame-913">
-                <div className="custom-table-_1-67" onClick={() => handleClick(2.30, "Верес", "Динамо Київ")}>2.30</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(2.30, match.opponents[0].name, match.opponents[1].name)}>2.30</div>
               </div>
             </div>
             <div className="custom-table-frame-934">
               <div className="custom-table-frame-911">
-                <div className="custom-table-_1-67" onClick={() => handleClick(1.74, "Верес", "Динамо Київ")}>1.74</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(1.74, match.opponents[0].name, match.opponents[1].name)}>1.74</div>
               </div>
               <div className="custom-table-frame-912">
-                <div className="custom-table-_1-672" onClick={() => handleClick(0.0, "Верес", "Динамо Київ")}>0.0</div>
+                <div className="custom-table-_1-672" onClick={() => handleClick(0.0, match.opponents[0].name, match.opponents[1].name)}>0.0</div>
               </div>
               <div className="custom-table-frame-913">
-                <div className="custom-table-_1-67" onClick={() => handleClick(2.00, "Верес", "Динамо Київ")}>2.00</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(2.00, match.opponents[0].name, match.opponents[1].name)}>2.00</div>
               </div>
             </div>
             <div className="custom-table-frame-935">
               <div className="custom-table-frame-911">
-                <div className="custom-table-_1-67" onClick={() => handleClick(1.83, "Верес", "Динамо Київ")}>1.83</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(1.83, match.opponents[0].name, match.opponents[1].name)}>1.83</div>
               </div>
               <div className="custom-table-frame-912">
-                <div className="custom-table-_1-672" onClick={() => handleClick(4.5, "Верес", "Динамо Київ")}>4.5</div>
+                <div className="custom-table-_1-672" onClick={() => handleClick(4.5, match.opponents[0].name, match.opponents[1].name)}>4.5</div>
               </div>
               <div className="custom-table-frame-913">
-                <div className="custom-table-_1-67" onClick={() => handleClick(2.39, "Верес", "Динамо Київ")}>2.39</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(2.39, match.opponents[0].name, match.opponents[1].name)}>2.39</div>
               </div>
             </div>
             <div className="custom-table-frame-936">
@@ -83,6 +113,9 @@ const Table3 = ({ onCoefficientSelect } : any) => {
             </div>
           </div>
         </div>
+        ))
+        }
+        
 
         {/* Second Row - ФК Полісся vs Оболонь */}
         <div className="custom-table-frame-939">

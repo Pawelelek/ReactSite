@@ -174,7 +174,7 @@ const BetHistory = () => {
             {row.value}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.betTime}
+            [{new Date(row.betTime).toLocaleDateString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', })}]
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
             {row.categoryName}

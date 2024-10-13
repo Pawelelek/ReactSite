@@ -87,7 +87,9 @@ const Favourite = () => {
             {row.sportMatch.sportEventName}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.sportMatch.dateStart}/{row.sportMatch.dateEnd}
+          [{new Date(row.sportMatch.dateStart).toLocaleDateString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', })}]
+
+          [{new Date(row.sportMatch.dateEnd).toLocaleDateString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', })}]
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
             

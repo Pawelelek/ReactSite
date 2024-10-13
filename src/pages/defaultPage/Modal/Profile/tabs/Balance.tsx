@@ -702,7 +702,7 @@ const validationSchemaDeposit = Yup.object({
             {row.transactionType}
           </TableCell>
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.dateCreated}
+          [{new Date(row.dateCreated).toLocaleDateString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', })}]
           </TableCell>
         </TableRow>
       ))}

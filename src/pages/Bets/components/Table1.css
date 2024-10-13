@@ -158,6 +158,7 @@
   height: 24px;
   position: relative;
   overflow: visible;
+  cursor: pointer;
 }
 .custom-table-frame-929 {
   display: flex;
@@ -259,6 +260,17 @@
   position: relative;
 }
 .custom-table-frame-913 {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 63px;
+  position: relative;
+}
+.custom-table-frame-915 {
   padding: 20px;
   display: flex;
   flex-direction: row;

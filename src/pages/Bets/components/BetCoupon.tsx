@@ -3,13 +3,14 @@ import {useState, useEffect} from "react";
 import RegistrationModal from '../../defaultPage/Modal/Register/RegistrationModal';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import LoginModal from '../../defaultPage/Modal/Login/LoginModal';
+import { usePotentialWinnings } from './PotentialWinningsContext';
 
 const BetCoupon = ({coefficient, teams}: any) => {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { isAuth } = useTypedSelector((state) => state.UserReducer);
   const [stake, setStake] = useState('50');
-  const [potentialWinnings, setPotentialWinnings] = useState('0');
+  const { potentialWinnings, setPotentialWinnings } = usePotentialWinnings();
 
   const handleOpenRegistrationModal = () => setShowRegistrationModal(true);
   const handleCloseRegistrationModal = () => setShowRegistrationModal(false);
@@ -49,7 +50,7 @@ const BetCoupon = ({coefficient, teams}: any) => {
   useEffect(() => {
     const winnings = (parseFloat(stake) * coefficient).toFixed(2);
     setPotentialWinnings(winnings);
-  }, [stake, coefficient]);
+  }, [stake, coefficient, setPotentialWinnings]);
 
   return (
     <>

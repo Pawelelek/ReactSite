@@ -86,6 +86,7 @@
 .div22 {
   position: relative;
   font-weight: 500;
+  cursor: pointer;
 }
 .div20 {
   letter-spacing: -0.01px;
@@ -120,6 +121,7 @@
 .div25 {
   position: relative;
   font-weight: 500;
+  cursor: pointer;
 }
 .div25 {
   align-self: stretch;
@@ -155,6 +157,7 @@
 .div29,
 .vip {
   font-weight: 500;
+  cursor: pointer;
 }
 .promotions,
 .promotions-links {
@@ -184,6 +187,7 @@
   font-weight: 500;
   display: inline-block;
   min-width: 72.6px;
+  cursor: pointer;
 }
 .youtube {
   text-decoration: none;
@@ -195,6 +199,7 @@
   font-weight: 500;
   display: inline-block;
   min-width: 72.6px;
+  cursor: pointer;
 }
 .social,
 .social-links {

@@ -17,7 +17,7 @@ const SportBetCreate = () => {
     loadSportOdds();
   }, []);
   const loadSportOdds= () => {
-  console.log(user.id)
+  console.log(user.Id)
     http.get("api/Odd/get")
       .then(resp => {
         const {payload} = resp.data;
@@ -29,7 +29,7 @@ const SportBetCreate = () => {
   const [bet, setBet] = useState({
     amount: 0,
     oddId: '',
-    userId: user.id,
+    userId: user.Id,
   });
 
   const isFormValid = () => {
@@ -46,8 +46,13 @@ const SportBetCreate = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("Submit: "+ bet)
-    http.post("api/Bet/create", bet)
+    const form = {
+      amount : bet.amount,
+      userId: user.Id,
+      oddId: bet.oddId
+    }
+    console.log("Submit: "+ form)
+    http.post("api/Bet/create", form)
       .then(() => {
         navigate('/admin/sport/bets');
       });

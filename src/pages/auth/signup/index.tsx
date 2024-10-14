@@ -12,7 +12,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Formik, Field } from "formik";
 import { RegisterSchema } from "../validation";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import Loader from "../../../components/loader";
 import { useDispatch } from "react-redux";
 import { UserActionTypes } from "../../../store/reducers/userReducer/types";
 import { createUser} from "../../../services/api-user-service";
@@ -34,10 +33,6 @@ export default function SignIn() {
 
   if (isAuth) {
     return <Navigate to="/dashboard" />;
-  }
-
-  if (loading) {
-    return <Loader />;
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

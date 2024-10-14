@@ -29,7 +29,7 @@ const Copyright: FunctionComponent<CopyrightType> = ({ className = "" }) => {
                 className="free-icon-font-angle-left-39161"
                 loading="lazy"
                 alt=""
-                src="Homeimg/freeiconfontangleleft3916931-2@2x.png"
+                src="/Homeimg/freeiconfontangleleft3916931-2@2x.png"
               />
             </div>
           </div>

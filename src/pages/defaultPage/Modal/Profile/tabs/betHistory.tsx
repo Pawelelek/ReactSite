@@ -72,7 +72,7 @@ const BetHistory = () => {
                 <>
                 <div className='custom-frame-425'>
     <div className="transaction-history-form">
-      <div className="custom-input-row">
+      {/* <div className="custom-input-row">
         <div className="custom-input-group">
           <label className="custom-input-label">Назва спорту</label>
           <div className="select-field-wrapper">
@@ -110,7 +110,7 @@ const BetHistory = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
       {/*=================================== TRANSACTION HISTORY ======================*/}
       <div>
       {(bettingHistory.length > 0) ? (
@@ -195,7 +195,7 @@ const BetHistory = () => {
         </div>
     </div>
   </div>
-                <div className="custom-modal-footer">
+                {/* <div className="custom-modal-footer">
                 <div className="custom-frame-2" style={{
                       backgroundColor: '#da0037',
                       cursor: 'pointer',
@@ -213,7 +213,7 @@ const BetHistory = () => {
                     ПОКАЗАТИ
                   </button>
                 </div>
-              </div>
+              </div> */}
               </>
             </div>
   );

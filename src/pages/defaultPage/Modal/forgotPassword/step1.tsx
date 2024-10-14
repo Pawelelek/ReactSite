@@ -7,6 +7,7 @@ import "./Forgot.css";
 import { http } from '../../../../http';
 import { useEmail } from './EmailContext';
 import { toast } from 'react-toastify';
+import { useLoading } from '../../../../components/loader/LoadingContext';
 
 interface Step1ModalProps {
   show: boolean;
@@ -17,6 +18,7 @@ interface Step1ModalProps {
 
 const Step1Modal: React.FC<Step1ModalProps> = ({ show, onClose, onSwitchToLogin, onSwitchToStep2 }) => {
   const { email, setEmail } = useEmail();
+  const { setLoading } = useLoading();
   if (!show) return null;
   
   const validationSchema = Yup.object({
@@ -33,6 +35,7 @@ const Step1Modal: React.FC<Step1ModalProps> = ({ show, onClose, onSwitchToLogin,
   const handleSubmit = async (values: { email: string }) => {
     http.post("api/User/ForgotPasswordStep1", values)
       .then((res) => {
+        setLoading(true);
         const data= res.data
         toast(data.message, {
           style: {
@@ -45,6 +48,7 @@ const Step1Modal: React.FC<Step1ModalProps> = ({ show, onClose, onSwitchToLogin,
           setEmail(values.email);
           onSwitchToStep2();
         }
+        setLoading(false);
       });
   };
 

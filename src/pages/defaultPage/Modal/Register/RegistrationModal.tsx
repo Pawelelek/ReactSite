@@ -13,6 +13,7 @@ import { useActions } from '../../../../hooks/useActions';
 import { useDispatch } from 'react-redux';
 import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { useLoading } from '../../../../components/loader/LoadingContext';
 
 interface RegistrationModalProps {
   show: boolean;
@@ -23,6 +24,7 @@ interface RegistrationModalProps {
 const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, onSwitchToLogin }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigator = useNavigate();
+  const { setLoading } = useLoading();
   const { LoginUser } = useActions();
   useEffect(() => {
     const start = () => {
@@ -91,6 +93,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
   };
 
   return (
+    <>
     <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div className="modal-content">
         <h2 className="modal-title">РЕЄСТРАЦІЯ</h2>
@@ -109,6 +112,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
           validateOnMount={true}
           onSubmit={(values) => {
             //alert('Хелоу ворлд');
+            setLoading(true);
             const user = {
               email: values.email,
               password: values.password,
@@ -131,6 +135,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
                   },
                 })
               }
+              setLoading(false);
               navigator("/");
               onClose();
             });
@@ -236,6 +241,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ show, onClose, on
         <p className="signin-signup-prompt">Маєте акаунт? <button className="text-link" onClick={onSwitchToLogin}>Увійти</button></p>
       </div>
     </div>
+    </>
   );
 };
 

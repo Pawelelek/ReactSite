@@ -36,10 +36,23 @@ import SportBetCreate from "./pages/admin/sportAPI/bets/AdminBetCreate";
 import SportBetUpdate from "./pages/admin/sportAPI/bets/AdminBetUpdate";
 import Promotions from "./pages/Promotions/Promotions";
 import BetsPage from "./pages/Bets/BetsPage";
+import About from "./pages/info/About";
+import Questions from "./pages/help/Questions";
+import General from "./pages/info/General";
+import Offer from "./pages/info/Offer";
+import Protection from './pages/info/Protection';
+import Game from './pages/info/Game';
+import Contacts from './pages/help/Contacts';
+import Bonus from './pages/Prom/Bonus';
+import Loader from "./components/loader/Loader";
+import { useLoading } from "./components/loader/LoadingContext";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
+  const { loading } = useLoading();
   return (
+    <>
+    {loading && <Loader />}
     <Routes>
       {isAuth && (
         <>
@@ -100,11 +113,20 @@ function App() {
       <Route path="/" element={<DefaultPage/>} />
       <Route path="/promotions" element={<Promotions/>} />
       <Route path="/bets" element={<BetsPage/>} />
+      <Route path="/info/about" element={<About/>} />
+      <Route path="/help/questions" element={<Questions/>} />
+      <Route path="/info/general" element={<General/>} />
+      <Route path="/info/offer" element={<Offer/>} />
+      <Route path="/info/protection" element={<Protection/>} />
+      <Route path="/info/game" element={<Game/>} />
+      <Route path="/help/contacts" element={<Contacts/>} />
+      <Route path="/prom/bonus" element={<Bonus/>} />
       {/* <Route path="/dashboard" element={<DefaultPage/>} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp/>} /> */}
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </>
   );
 }
 

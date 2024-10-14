@@ -531,7 +531,7 @@ const validationSchemaDeposit = Yup.object({
                 <>
                 <div className='custom-frame-425'>
     <div className="transaction-history-form">
-      <div className="custom-input-row">
+      {/* <div className="custom-input-row">
         <div className="custom-input-group">
           <label className="custom-input-label">Тип транзакції</label>
           <div className="select-field-wrapper">
@@ -635,7 +635,7 @@ const validationSchemaDeposit = Yup.object({
                 />
               </div>
             </div>
-          </div>
+          </div> */}
           {/*=================================== TRANSACTION HISTORY ======================*/}
       <div>
       {(transactions.length > 0) ? (
@@ -719,7 +719,7 @@ const validationSchemaDeposit = Yup.object({
       {/* <div className="custom-center-text">Немає транзакцій для показу</div> */}
     </div>
   </div>
-                <div className="custom-modal-footer">
+                {/* <div className="custom-modal-footer">
                 <div className="custom-frame-2" style={{
                       backgroundColor: '#da0037',
                       cursor: 'pointer',
@@ -737,7 +737,7 @@ const validationSchemaDeposit = Yup.object({
                     ПОКАЗАТИ
                   </button>
                 </div>
-              </div>
+              </div> */}
               </>
               )}
 

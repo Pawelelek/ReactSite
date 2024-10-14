@@ -9,6 +9,7 @@ import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 import Step1Modal from '../forgotPassword/step1';
 import Step2Modal from '../forgotPassword/step2';
 import Step3Modal from '../forgotPassword/step3';
+import { useLoading } from '../../../../components/loader/LoadingContext';
 
 interface LoginModalProps {
   show: boolean;
@@ -21,6 +22,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, setShowModal, on
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [showStep2, setShowStep2] = useState(false);
   const [showStep3, setShowStep3] = useState(false);
+  const { setLoading } = useLoading();
   const { LoginUser } = useActions();
     const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -71,7 +73,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ show, onClose, setShowModal, on
   };
 
     const handleSubmit = async (values: { email: string; password: string; rememberMe: boolean }) => {
+      setLoading(true);
       await LoginUser(values);
+      setLoading(false);
       setShowModal(false);
     onClose();
   };

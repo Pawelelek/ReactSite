@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import "./FooterLinks.css";
+import {useNavigate} from "react-router-dom";
 
 export type FooterLinksType = {
   className?: string;
@@ -8,6 +9,7 @@ export type FooterLinksType = {
 const FooterLinks: FunctionComponent<FooterLinksType> = ({
   className = "",
 }) => {
+  const navigator = useNavigate();
   return (
     <footer className={`footer-links ${className}`}>
       <div className="footer-links-container">
@@ -49,37 +51,37 @@ const FooterLinks: FunctionComponent<FooterLinksType> = ({
           <div className="information">
             <div className="div16">Інформація</div>
             <div className="information-links">
-              <div className="div17">Про нас</div>
-              <div className="div18">Загальні правила</div>
-              <div className="div19">Публічна афера</div>
-              <div className="div20">Політика захисту інформації</div>
-              <div className="div21">Відповідальна гра</div>
-              <div className="div22">Умови бонусів</div>
+            <div className="div17" onClick={()=>navigator("/info/about")}>Про нас</div>
+              <div className="div18" onClick={()=>navigator("/info/general")}>Загальні правила</div>
+              <div className="div19" onClick={()=>navigator("/info/offer")}>Публічна афера</div>
+              <div className="div20" onClick={()=>navigator("/info/protection")}>Політика захисту інформації</div>
+              <div className="div21" onClick={()=>navigator("/info/game")}>Відповідальна гра</div>
+              {/* <div className="div22">Умови бонусів</div> */}
             </div>
           </div>
           <div className="help">
             <div className="div23">Допомога</div>
             <div className="help-links">
-              <div className="div24">Поширені питання</div>
-              <div className="div25">Звязатися з нами</div>
+            <div className="div24" onClick={()=>navigator("/help/questions")}>Поширені питання</div>
+            <div className="div25" onClick={()=>navigator("/help/contacts")}>Зв'язатися з нами</div>
             </div>
           </div>
           <div className="promotions">
             <div className="div26">Акції</div>
             <div className="promotions-links">
-              <div className="div27">Акції</div>
-              <div className="vip">VIP Клуб</div>
-              <div className="div28">Бонуси</div>
-              <div className="div29">Привести друга</div>
+             {/* <div className="div27">Акції</div>
+              <div className="vip">VIP Клуб</div> */}
+              <div className="div28" onClick={()=>navigator("/prom/bonus")}>Бонуси</div>
+              {/* <div className="div29">Привести друга</div> */}
             </div>
           </div>
           <div className="social">
             <div className="div30">Соціальні мережі</div>
             <div className="social-links">
-              <div className="instagram">Instagram</div>
-              <div className="telegram">Telegram</div>
-              <a className="youtube">YouTube</a>
-              <div className="facebook">facebook</div>
+              <a className="youtube" href="https://www.instagram.com/">Instagram</a>
+              <a className="youtube" href="https://web.telegram.org/k/">Telegram</a>
+              <a className="youtube" href="https://www.youtube.com/">YouTube</a>
+              <a className="youtube" href="https://www.facebook.com/?locale=uk_UA">Facebook</a>
             </div>
           </div>
           {/* <div className="stats">

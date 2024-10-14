@@ -16,7 +16,6 @@ import { Formik, Field } from "formik";
 import { LoginSchema } from "../validation";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import Loader from "../../../components/loader";
 import { jwtDecode } from "jwt-decode";
 import { gapi } from "gapi-script";
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
@@ -30,10 +29,6 @@ export default function SignIn() {
 
   if (isAuth) {
     return <Navigate to="/" />;
-  }
-
-  if (loading) {
-    return <Loader />;
   }
 
   // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

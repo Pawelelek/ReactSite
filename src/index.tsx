@@ -9,7 +9,10 @@ import store from "./store";
 import { AuthUser } from "./store/action-creators/userActions";
 import { BalanceProvider } from "./pages/defaultPage/Modal/Profile/BalanceContext";
 import { EmailProvider } from "./pages/defaultPage/Modal/forgotPassword/EmailContext";
-import Step1Modal from "./pages/defaultPage/Modal/forgotPassword/step1";
+import { LoadingProvider } from "./components/loader/LoadingContext";
+import Loader from "./components/loader/Loader";
+import { useLoading } from "./components/loader/LoadingContext";
+import { PotentialWinningsProvider } from "./pages/Bets/components/PotentialWinningsContext";
 
 const token = getAccessToken();
 if (token) {
@@ -21,14 +24,17 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
+    <LoadingProvider>
     <Router>
       <ToastContainer autoClose={5000} />
-      
+      <PotentialWinningsProvider>
       <BalanceProvider>
       <EmailProvider>
         <App/>
       </EmailProvider>
       </BalanceProvider>
+      </PotentialWinningsProvider>
     </Router>
+    </LoadingProvider>
   </Provider>
 );

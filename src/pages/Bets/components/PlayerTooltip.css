@@ -1,0 +1,48 @@
+.tooltip {
+    position: absolute;
+    background-color: black;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    width: 300px;
+    font-size: 12px;
+    transform: translateY(0%) translateX(65%);
+  }
+  
+  .tooltip-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .tooltip-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tooltip-player-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .tooltip-flag {
+    width: 20px;
+    height: 14px;
+    margin-right: 10px;
+  }
+  
+  .tooltip-player-name {
+    flex-grow: 1;
+  }
+  
+  .tooltip-player-number {
+    width: 30px;
+    text-align: right;
+  }
+  
+  .tooltip-player-position {
+    width: 30px;
+    text-align: right;
+  }
+  

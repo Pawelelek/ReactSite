@@ -7,6 +7,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import ProfileModal from "../Modal/Profile/ProfileModal";
 import { http } from '../../../http';
 import { useBalance } from "../Modal/Profile/BalanceContext";
+import { useLoading } from "../../../components/loader/LoadingContext";
 
 export type Counter2Type = {
   className?: string;
@@ -16,6 +17,7 @@ const Counter2: FunctionComponent<Counter2Type> = ({
   className = "",
 }) => {
   const [open, setOpen] = useState(false);
+  const { setLoading } = useLoading();
   const [profileTab, setProfileTab] = useState<'profile' | 'balance' | 'bonuses' | 'betHistory' | 'favourite'>('profile');
   const [balanceTab, setBalanceTab] = useState<'myBalance' | 'Deposit' | 'transactionHistory' | 'Withdrawal'>('Deposit');
   // const handleOpen = (tab: typeof profileTab) => {
@@ -37,9 +39,10 @@ const Counter2: FunctionComponent<Counter2Type> = ({
 
   const navigator = useNavigate();
   const { LogOut } = useActions();
-  const Logout = () => {
-    LogOut(user.Id);
-
+  const Logout = async() => {
+    setLoading(true);
+    await LogOut(user.Id);
+    setLoading(false);
   };
   const {user} = useTypedSelector((store) => store.UserReducer);
 

@@ -8,6 +8,7 @@ import { http } from '../../../../http';
 import { toast } from 'react-toastify';
 import { useEmail } from './EmailContext';
 import { useActions } from '../../../../hooks/useActions';
+import { useLoading } from '../../../../components/loader/LoadingContext';
 
 interface Step3ModalProps {
   show: boolean;
@@ -17,6 +18,7 @@ interface Step3ModalProps {
 
 const Step3Modal: React.FC<Step3ModalProps> = ({ show, onClose, onSwitchToStep2 }) => {
   const { email, setEmail } = useEmail();
+  const { setLoading } = useLoading();
   const { LoginUser } = useActions();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -69,6 +71,7 @@ const Step3Modal: React.FC<Step3ModalProps> = ({ show, onClose, onSwitchToStep2 
     }
     http.post("api/User/ForgotPasswordStep3", values)
     .then((res) => {
+      setLoading(true);
       const data= res.data
       toast(data.message, {
         style: {
@@ -83,7 +86,7 @@ const Step3Modal: React.FC<Step3ModalProps> = ({ show, onClose, onSwitchToStep2 
         LoginUser(loginForm);
         onClose();
       }
-      
+      setLoading(false);
     });
     //await LoginUser(loginForm);
   };
@@ -152,7 +155,7 @@ const Step3Modal: React.FC<Step3ModalProps> = ({ show, onClose, onSwitchToStep2 
               </div>
               <ErrorMessage name="confirmPassword" component="div" className="error-message" />
 
-              <div className="checkbox-container">
+              {/* <div className="checkbox-container">
                 <label className="checkbox-label">
                   <Field 
                     type="checkbox" 
@@ -161,7 +164,7 @@ const Step3Modal: React.FC<Step3ModalProps> = ({ show, onClose, onSwitchToStep2 
                   />
                   Запам'ятати мене
                 </label>
-              </div>
+              </div> */}
 
               <button 
                 type="submit"

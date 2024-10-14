@@ -1,14 +1,52 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import './Menu1.css'
+import { http } from "../../../http";
 
 const Menu1 = ({onCountryFootballSelect, onSportSelect}: any) => {
   const [expandedSport, setExpandedSport] = useState<string>('football');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [sportUkrMatches, setSportUkrMatches] = useState<any>([]);
+  const [sportEurMatches, setSportEurMatches] = useState<any>([]);
+  const [sportUSAMatches, setSportUSAMatches] = useState<any>([]);
   const handleSportClick = (sport: string) => {
     setExpandedSport(prev => (prev === sport ? '' : sport));
     onSportSelect(sport);
   };
-
+  const loadSportUkrainianMatches = () => {
+    //console.log(user.Id);
+      http.get("api/SportMatch/getByEventName/УКРАЇНА | ПРЕМЄР ЛІГА")
+        .then(resp => {
+          const transactions = resp.data.payload;
+          console.log(transactions)
+          //console.log("ODDS: " ,transactions[3].odds[2].value);
+          setSportUkrMatches(transactions);
+        });
+    }
+    const loadSportEuropeanMatches = () => {
+      //console.log(user.Id);
+        http.get("api/SportMatch/getByEventName/ЄВРОПА | ЛІГА ЧЕМПІОНІВ. КВАЛІФІКАЦІЯ")
+          .then(resp => {
+            const transactions = resp.data.payload;
+            console.log(transactions)
+            //console.log("ODDS: " ,transactions[3].odds[2].value);
+            setSportEurMatches(transactions);
+          });
+      }
+      const loadSportAmericanMatches = () => {
+        //console.log(user.Id);
+          http.get("api/SportMatch/getByEventName/США | КУБОК АМЕРИКИ")
+            .then(resp => {
+              const transactions = resp.data.payload;
+              console.log(transactions)
+              //console.log("ODDS: " ,transactions[3].odds[2].value);
+              setSportUSAMatches(transactions);
+            });
+        }
+    useEffect(() => {
+      loadSportUkrainianMatches();
+      loadSportEuropeanMatches();
+      loadSportAmericanMatches();
+    }, []);
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value.toLowerCase());
     console.log(searchQuery);
@@ -71,7 +109,7 @@ const Menu1 = ({onCountryFootballSelect, onSportSelect}: any) => {
                   <div className="custom-bets-div4">Україна</div>
                 </div>
                 <div className="custom-bets-frame-519">
-                  <div className="custom-bets-_00">4</div>
+                  <div className="custom-bets-_00">{sportUkrMatches.length}</div>
                 </div>
               </div>
               )}
@@ -82,7 +120,7 @@ const Menu1 = ({onCountryFootballSelect, onSportSelect}: any) => {
                   <div className="custom-bets-div4">Європа</div>
                 </div>
                 <div className="custom-bets-frame-519">
-                  <div className="custom-bets-_00">8</div>
+                  <div className="custom-bets-_00">{sportEurMatches.length}</div>
                 </div>
               </div>
               )}
@@ -93,7 +131,7 @@ const Menu1 = ({onCountryFootballSelect, onSportSelect}: any) => {
                   <div className="custom-bets-div4">Америка</div>
                 </div>
                 <div className="custom-bets-frame-519">
-                  <div className="custom-bets-_00">2</div>
+                  <div className="custom-bets-_00">{sportUSAMatches.length}</div>
                 </div>
               </div>
               )}

@@ -146,7 +146,7 @@ const BetHistory = () => {
         <TableCell align="center" sx={{ color: "#ffffff" }}>Сумма</TableCell>
         <TableCell align="center" sx={{ color: "#ffffff" }}>Коеф</TableCell>
         <TableCell align="center" sx={{ color: "#ffffff" }}>Дата</TableCell>
-        <TableCell align="center" sx={{ color: "#ffffff" }}>Категорія</TableCell>
+
       </TableRow>
     </TableHead>
     <TableBody>
@@ -176,11 +176,7 @@ const BetHistory = () => {
           <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
             [{new Date(row.betTime).toLocaleDateString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', })}]
           </TableCell>
-          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-            {row.categoryName}
-          </TableCell>
-          <TableCell component="th" scope="row" align="center" sx={{ color: "#ffffff" }}>
-          </TableCell>
+
         </TableRow>
       ))}
     </TableBody>

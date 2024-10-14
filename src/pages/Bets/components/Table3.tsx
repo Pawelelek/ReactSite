@@ -6,60 +6,11 @@ import './PlayerTooltip.css';
 import RegistrationModal from '../../defaultPage/Modal/Register/RegistrationModal';
 import LoginModal from '../../defaultPage/Modal/Login/LoginModal';
 
-const playersList: { [key: string]: { name: string; number: string; position: string }[] } = {
-  "Верес": [
-    { name: "Головаченко, Микола", number: "#47", position: "ГК" },
-    { name: "Карасевич, Тарас", number: "#23", position: "ГК" },
-    { name: "Приходько, Степан", number: "#1", position: "ГК" },
-    { name: "Малинович, Сергій", number: "#95", position: "ЗАХ" },
-    { name: "Голуб, Андрій", number: "#33", position: "ЗАХ" },
-    { name: "Полюхович, Роман", number: "#3", position: "ЗАХ" },
-    { name: "Кротевич, Олександр", number: "#67", position: "ЗАХ" },
-    { name: "Овчаренко, Денис", number: "#57", position: "ЗАХ" },
-    { name: "Кухотко, Олександр", number: "#71", position: "ЗАХ" },
-    { name: "Стадник, Станіслав", number: "#17", position: "ЗАХ" },
-    { name: "Маринич, Дмитро", number: "#29", position: "ПЗХ" },
-    { name: "Шаповал, Ігор", number: "#10", position: "ПЗХ" },
-    { name: "Станько, Ігор", number: "#6", position: "ПЗХ" },
-    { name: "Тарасюк, Вадим", number: "#87", position: "ПЗХ" }
-],
-};
-
-const PlayerTooltip = ({ team }: { team: string }) => {
-  const players = playersList[team];
-
-  if (!players) return null;
-
-  return (
-    <div className="tooltip">
-      <div className="tooltip-header">{team}</div>
-      <div className="tooltip-content">
-        {players.map((player: any, index: any) => (
-          <div key={index} className="tooltip-player-row">
-            <img className="tooltip-flag" src="/Betsimg/ukraine.png" alt="Flag" />
-            <div className="tooltip-player-name">{player.name}</div>
-            <div className="tooltip-player-number">{player.number}</div>
-            <div className="tooltip-player-position">{player.position}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const Table3 = ({ onCoefficientSelect } : any) => {
-  const [hoveredTeam, setHoveredTeam] = useState<string | null>(null);
   const [favoriteMatches, setFavoriteMatches] = useState<{ [key: string]: boolean }>({});
   const { isAuth } = useTypedSelector((store) => store.UserReducer);
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const handleMouseEnter = (team: string) => {
-    setHoveredTeam(team);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredTeam(null);
-  };
   const handleOpenRegistrationModal = () => setShowRegistrationModal(true);
   const handleCloseRegistrationModal = () => setShowRegistrationModal(false);
 
@@ -75,9 +26,9 @@ const Table3 = ({ onCoefficientSelect } : any) => {
   };
   const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
   const [sportMatches, setSportMatches] = useState<any>([]);
-  const handleClick = (coefficient: any, team1: any, team2: any) => {
+  const handleClick = (oddId:any, coefficient: any, team1: any, team2: any) => {
 
-    onCoefficientSelect(coefficient, team1, team2); 
+    onCoefficientSelect(oddId, coefficient, team1, team2); 
   };
   const setStarClick = (matchId: string) => {
     if (!isAuth)
@@ -106,7 +57,7 @@ const Table3 = ({ onCoefficientSelect } : any) => {
   }
   const loadSportMatches = () => {
     //console.log(user.Id);
-      http.get("api/SportMatch/get")
+      http.get("api/SportMatch/getByEventName/УКРАЇНА | ПРЕМЄР ЛІГА")
         .then(resp => {
           const transactions = resp.data.payload;
           console.log(transactions)
@@ -115,28 +66,18 @@ const Table3 = ({ onCoefficientSelect } : any) => {
           console.log(transactions);
         });
     }
-    // {match.odds.length < 1 ? null : match.odds[2].value}
-    const method1 = (odds: { value:any, name: any, type: any }[]) => {
-      
-      odds.forEach(element => {
-        const v = element.type == "";
-      });
-      const value = odds.length < 1 ? null : odds[2].value
-      return value;
-    }
-    const OddsComponent = (type:string, odds: { value:any, name: string, type: string, id: string }[]) => {
+    const OddsValue = (type:string, odds: { value:any, name: string, type: string, id: string }[]) => {
       // Знайти об'єкт, де type дорівнює "Goal1"
       const goal1Odd = odds.find((odd) => odd.type === type);
-    console.log(goal1Odd?.id)
       return (
         goal1Odd?.value
-        // <div>
-        //   {goal1Odd ? (
-        //     <div>Value for Goal1: {goal1Odd.value}</div>
-        //   ) : (
-        //     <div>No Goal1 odds found</div>
-        //   )}
-        // </div>
+      );
+    };
+    const OddsId = (type:string, odds: { value:any, name: string, type: string, id: string }[]) => {
+      // Знайти об'єкт, де type дорівнює "Goal1"
+      const goal1Odd = odds.find((odd) => odd.type === type);
+      return (
+        goal1Odd?.id
       );
     };
     const loadFavoriteMatches = () => {
@@ -151,7 +92,7 @@ const Table3 = ({ onCoefficientSelect } : any) => {
       }, []);
   return (
     <>
-    <div className="custom-table-frame-963" style={{paddingBottom:'50px'}}>
+    <div className="custom-table-frame-963" style={{paddingBottom:''}}>
       <div className="custom-table-frame-9632">
         <div className="custom-table-frame-927">
           <img className="custom-table-rectangle-51" src="/Betsimg/ukraine.png" />
@@ -177,7 +118,7 @@ const Table3 = ({ onCoefficientSelect } : any) => {
       </div>
       <div className="custom-table-frame-962">
 
-        {/* First Row - Верес vs Динамо Київ */}
+        
         {sportMatches.map((match: any) => (
           <div className="custom-table-frame-939" key={match.id}>
           <div className="custom-table-frame-930" >
@@ -187,49 +128,47 @@ const Table3 = ({ onCoefficientSelect } : any) => {
               <div className="custom-table-_22-00">{new Date(match.dateStart).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
             </div>
             <div className="custom-table-frame-928">
-              <div className="custom-table-div3" onMouseEnter={() => handleMouseEnter(match.opponents.length < 1 ? "None" :match.opponents[0].name)}
-              onMouseLeave={handleMouseLeave}>{match.opponents.length < 1 ? "None" :match.opponents[0].name}</div>
-              <div className="custom-table-div3">{match.opponents.length < 1 ? "None" :match.opponents[1].name}</div>
+              <div className="custom-table-div3">{match.opponents.length < 1 ? "None" : "1-" + match.opponents[1].name}</div>
+              <div className="custom-table-div3">{match.opponents.length < 1 ? "None" : "2-" + match.opponents[0].name}</div>
             </div>
-            {hoveredTeam === match.opponents[0].name && <PlayerTooltip team={match.opponents.length < 1 ? "None" :match.opponents[0].name} />}
-            {hoveredTeam === "Динамо Київ" && <PlayerTooltip team="Динамо Київ" />}
+            
           </div>
           <div className="custom-table-frame-926">
             <div className="custom-table-frame-914">
               <div className="custom-table-frame-911">
-                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 1 ? null : OddsComponent("Win1", match.odds), match.opponents[0].name, match.opponents[1].name)}>{match.odds.length < 1 ? null : OddsComponent("Win1", match.odds)}</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 1 ? null : OddsId("Win1", match.odds), match.odds.length < 1 ? null : OddsValue("Win1", match.odds), match.opponents[1].name, match.opponents[0].name)}>{match.odds.length < 1 ? null : OddsValue("Win1", match.odds)}</div>
               </div>
               <div className="custom-table-frame-912">
-                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 2 ? null : OddsComponent("Draw", match.odds), match.opponents[0].name, match.opponents[1].name)}>{match.odds.length < 2 ? null : OddsComponent("Draw", match.odds)}</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 1 ? null : OddsId("Draw", match.odds), match.odds.length < 2 ? null : OddsValue("Draw", match.odds), match.opponents[1].name, match.opponents[0].name)}>{match.odds.length < 2 ? null : OddsValue("Draw", match.odds)}</div>
               </div>
               <div className="custom-table-frame-913">
-                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 3 ? null : OddsComponent("Win2", match.odds), match.opponents[0].name, match.opponents[1].name)}>{match.odds.length < 3 ? null : OddsComponent("Win2", match.odds)}</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 1 ? null : OddsId("Win2", match.odds), match.odds.length < 3 ? null : OddsValue("Win2", match.odds), match.opponents[1].name, match.opponents[0].name)}>{match.odds.length < 3 ? null : OddsValue("Win2", match.odds)}</div>
               </div>
             </div>
             <div className="custom-table-frame-934">
               <div className="custom-table-frame-911">
-                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 4 ? null : OddsComponent("Goal1", match.odds), match.opponents[0].name, match.opponents[1].name)}>{match.odds.length < 4 ? null : OddsComponent("Goal1", match.odds)}</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 1 ? null : OddsId("Goal1", match.odds), match.odds.length < 4 ? null : OddsValue("Goal1", match.odds), match.opponents[1].name, match.opponents[0].name)}>{match.odds.length < 4 ? null : OddsValue("Goal1", match.odds)}</div>
               </div>
               <div className="custom-table-frame-915">
                 <div className="custom-table-_1-672">X</div>
               </div>
               <div className="custom-table-frame-913">
-                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 5 ? null : OddsComponent("Goal2", match.odds), match.opponents[0].name, match.opponents[1].name)}>{match.odds.length < 5 ? null : OddsComponent("Goal2", match.odds)}</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 1 ? null : OddsId("Goal2", match.odds), match.odds.length < 5 ? null : OddsValue("Goal2", match.odds), match.opponents[1].name, match.opponents[0].name)}>{match.odds.length < 5 ? null : OddsValue("Goal2", match.odds)}</div>
               </div>
             </div>
             <div className="custom-table-frame-935">
               <div className="custom-table-frame-911">
-                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 6 ? null : OddsComponent("Total1", match.odds), match.opponents[0].name, match.opponents[1].name)}>{match.odds.length < 6 ? null : OddsComponent("Total1", match.odds)}</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 1 ? null : OddsId("Total1", match.odds), match.odds.length < 6 ? null : OddsValue("Total1", match.odds), match.opponents[1].name, match.opponents[0].name)}>{match.odds.length < 6 ? null : OddsValue("Total1", match.odds)}</div>
               </div>
               <div className="custom-table-frame-915">
                 <div className="custom-table-_1-672">4.5</div>
               </div>
               <div className="custom-table-frame-913">
-                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 7 ? null : OddsComponent("Total2", match.odds), match.opponents[0].name, match.opponents[1].name)}>{match.odds.length < 7 ? null : OddsComponent("Total2", match.odds)}</div>
+                <div className="custom-table-_1-67" onClick={() => handleClick(match.odds.length < 1 ? null : OddsId("Total2", match.odds), match.odds.length < 7 ? null : OddsValue("Total2", match.odds), match.opponents[1].name, match.opponents[0].name)}>{match.odds.length < 7 ? null : OddsValue("Total2", match.odds)}</div>
               </div>
             </div>
             <div className="custom-table-frame-936">
-              <div className="custom-table-_1-67">(0:0)</div>
+              <div className="custom-table-_1-67"></div>
             </div>
           </div>
         </div>

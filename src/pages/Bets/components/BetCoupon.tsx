@@ -4,13 +4,18 @@ import RegistrationModal from '../../defaultPage/Modal/Register/RegistrationModa
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import LoginModal from '../../defaultPage/Modal/Login/LoginModal';
 import { usePotentialWinnings } from './PotentialWinningsContext';
+import { http } from '../../../http';
+import { toast } from 'react-toastify';
+import { useBalance } from '../../defaultPage/Modal/Profile/BalanceContext';
 
-const BetCoupon = ({coefficient, teams}: any) => {
+const BetCoupon = ({oddId, coefficient, teams}: any) => {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { isAuth } = useTypedSelector((state) => state.UserReducer);
+  const { allUsers, user } = useTypedSelector((store) => store.UserReducer);
   const [stake, setStake] = useState('50');
   const { potentialWinnings, setPotentialWinnings } = usePotentialWinnings();
+  const { balanceRef, refreshBalance } = useBalance();
 
   const handleOpenRegistrationModal = () => setShowRegistrationModal(true);
   const handleCloseRegistrationModal = () => setShowRegistrationModal(false);
@@ -40,6 +45,28 @@ const BetCoupon = ({coefficient, teams}: any) => {
   };
 
   const handleBet = () => {
+    if(isAuth) {
+      console.log("OddID: "+oddId + " Value: " + coefficient + " STAKE: " + stake)
+      const form = {
+        amount : stake,
+        userId: user.Id,
+        oddId: oddId
+      }
+      console.log("Submit: "+ form)
+      http.post("api/Bet/create", form)
+        .then((res) => {
+          refreshBalance();
+          toast(res.data.message, {
+            style: {
+              backgroundColor: '#333',
+              color: '#fff',
+            },
+            
+          })
+          
+        });
+    }
+    
     if (!isAuth) {
       handleOpenRegistrationModal();
       return;

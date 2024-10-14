@@ -18,11 +18,14 @@ import BetCoupon from "./components/BetCoupon";
 const BetsPage = () => {
   const {user} = useTypedSelector((store) => store.UserReducer);
   const [selectedCoefficient, setSelectedCoefficient] = useState(null); 
+  const [selectedOddId, setSelectedOddId] = useState({ oddId: '' });
   const [selectedTeams, setSelectedTeams] = useState({ team1: '', team2: '' });
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [selectedSport, setSelectedSport] = useState<string | null>('football');
 
-  const handleCoefficientSelect = (coefficient: any, team1: any, team2: any) => {
+  const handleCoefficientSelect = (oddId:any, coefficient: any, team1: any, team2: any) => {
+    console.log("OddID: "+oddId + " Value: " + coefficient)
+    setSelectedOddId(oddId);
     setSelectedCoefficient(coefficient);
     setSelectedTeams({ team1, team2 });
   };
@@ -47,17 +50,17 @@ const BetsPage = () => {
       <Menu1 onCountryFootballSelect={handleCountrySelect} onSportSelect={handleSportSelect}/>
           <section className="frame-parent" style={{ width: "960px", flex: 1 }}>
           <div className="custom-bets-frame-980">
-  <div className="custom-bets-frame-577">
-    <div className="custom-bets-frame-576">
-      <div className="custom-bets-frame-571">
-        <div className="custom-bets-frame-570">
-          <img className="custom-bets-football2" src="/Betsimg/ballsport.png" />
-          <div className="custom-bets-text2">Футбол</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            <div className="custom-bets-frame-577">
+              <div className="custom-bets-frame-576">
+                <div className="custom-bets-frame-571">
+                  <div className="custom-bets-frame-570">
+                    <img className="custom-bets-football2" src="/Betsimg/ballsport.png" />
+                    <div className="custom-bets-text2">Футбол</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 <FrameComponent4/>
 
 
@@ -72,23 +75,46 @@ const BetsPage = () => {
           {selectedCountry === 'Україна' ? (
             <>
             <div className="custom-bets-frame-973" style={{backgroundColor:'#2d2d2d'}}>
-            <div className="custom-bets-frame-927">
-              <img className="custom-bets-football3" src="/Betsimg/ballsport.png" />
-              <div className="custom-bets-text3">Футбол Україна</div>
+              <div className="custom-bets-frame-927">
+                <img className="custom-bets-football3" src="/Betsimg/ballsport.png" />
+                <div className="custom-bets-text3">Футбол Україна</div>
+              </div>
             </div>
-          </div>
             <Table3 onCoefficientSelect={handleCoefficientSelect} />
             </>
-          ) : selectedSport === 'football' ? (
+          ) : selectedCountry === 'Європа' ? (
             <>
-            <div className="custom-bets-frame-973">
-  <div className="custom-bets-frame-927">
-    <img className="custom-bets-football3" src="/Betsimg/ballsport.png" />
-    <div className="custom-bets-text3">Футбол популярне</div>
-  </div>
-</div>
+            <div className="custom-bets-frame-973" style={{backgroundColor:'#2d2d2d'}}>
+              <div className="custom-bets-frame-927">
+                <img className="custom-bets-football3" src="/Betsimg/ballsport.png" />
+                <div className="custom-bets-text3">Футбол Європа</div>
+              </div>
+            </div>
+            <Table2 onCoefficientSelect={handleCoefficientSelect} />
+            </>
+          ) : selectedCountry === 'Америка' ? (
+            <>
+            <div className="custom-bets-frame-973" style={{backgroundColor:'#2d2d2d'}}>
+              <div className="custom-bets-frame-927">
+                <img className="custom-bets-football3" src="/Betsimg/ballsport.png" />
+                <div className="custom-bets-text3">Футбол Америка</div>
+              </div>
+            </div>
+            <Table1 onCoefficientSelect={handleCoefficientSelect} />
+            </>
+          ): selectedSport === 'football' ? (
+            <>
+              <div className="custom-bets-frame-973">
+                <div className="custom-bets-frame-927">
+                  <img className="custom-bets-football3" src="/Betsimg/ballsport.png" />
+                  <div className="custom-bets-text3">Футбол популярне</div>
+                </div>
+              </div>
+              
+              <Table3 onCoefficientSelect={handleCoefficientSelect} />
               <Table1 onCoefficientSelect={handleCoefficientSelect} />
               <Table2 onCoefficientSelect={handleCoefficientSelect} />
+              
             </>
           ) : null}
             <FooterLinks />
@@ -127,7 +153,7 @@ const BetsPage = () => {
         {/* <Coupon/> */}
         {/* <BetCoupon/> */}
         {selectedCoefficient ? (
-          <BetCoupon coefficient={selectedCoefficient} teams={selectedTeams} />
+          <BetCoupon oddId={selectedOddId} coefficient={selectedCoefficient} teams={selectedTeams} />
         ) : (
           <Coupon />
         )}

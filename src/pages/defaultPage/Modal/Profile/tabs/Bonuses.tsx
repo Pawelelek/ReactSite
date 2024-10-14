@@ -102,95 +102,35 @@ const Bonuses: React.FC<BonusesProps> = ({ onDepositClick, bonusesSelTab='Funds'
               {activeProfileTab === 'Funds' && (
                 <div className="custom-frame-425">
                 <div className="custom-funds-tab">
-                <div className="custom-bonus-item">
-        <img src="/Profileimg/money.png" alt="Money Stack" className="custom-bonus-image" />
-        <div style={{marginLeft:'-100px'}}>
-          <h3 className="custom-bonus-details">Вітальний бонус - 100%</h3>
-          <h3 className="custom-bonus-details">до депозиту</h3>
-          <h3 className="custom-bonus-details" style={{marginTop:'20px'}}>Бонус: 3000$</h3>
-        </div>
-        <div className="custom-bonus-timer">
-          <p style={{marginRight:'40px', marginTop:'0px', marginBottom: '11px'}}>час до депозиту</p>
-          <div className="custom-timer">
-            <span style={{marginLeft:'3px', fontSize:'20px'}}>07</span> 
-            <span style={{marginLeft:'7px', fontSize:'20px'}}>{String(timeLeft.hours).padStart(2, '0')}</span>
-            <span style={{marginLeft:'15px', fontSize:'20px'}}>{String(timeLeft.minutes).padStart(2, '0')}</span>
-            <span style={{marginLeft:'22px', fontSize:'20px'}}>{String(timeLeft.seconds).padStart(2, '0')}</span>
-          </div>
-          <div className="custom-timer">
-            <span style={{fontSize:'13px'}}>днів</span>  
-            <span style={{fontSize:'13px'}}>годин</span> 
-            <span style={{fontSize:'13px'}}>хвилин</span>  
-            <span style={{fontSize:'13px'}}>секунд</span> 
-          </div>
-        </div>
-        <div className="custom-deposit-button">
-          <button onClick={onDepositClick}>ДЕПОЗИТ</button>
-        </div>
-      </div>     
-    </div>
+                  <div className="custom-bonus-item">
+                    <img src="/Profileimg/money.png" alt="Money Stack" className="custom-bonus-image" />
+                    <div style={{marginLeft:'-100px'}}>
+                      <h3 className="custom-bonus-details">Вітальний бонус - 100%</h3>
+                      <h3 className="custom-bonus-details">до депозиту</h3>
+                      <h3 className="custom-bonus-details" style={{marginTop:'20px'}}>Бонус: 3000$</h3>
+                    </div>
+                    <div className="custom-bonus-timer">
+                      <p style={{marginRight:'40px', marginTop:'0px', marginBottom: '11px'}}>час до депозиту</p>
+                      <div className="custom-timer">
+                        <span style={{marginLeft:'3px', fontSize:'20px'}}>07</span> 
+                        <span style={{marginLeft:'7px', fontSize:'20px'}}>{String(timeLeft.hours).padStart(2, '0')}</span>
+                        <span style={{marginLeft:'15px', fontSize:'20px'}}>{String(timeLeft.minutes).padStart(2, '0')}</span>
+                        <span style={{marginLeft:'22px', fontSize:'20px'}}>{String(timeLeft.seconds).padStart(2, '0')}</span>
+                      </div>
+                      <div className="custom-timer">
+                        <span style={{fontSize:'13px'}}>днів</span>  
+                        <span style={{fontSize:'13px'}}>годин</span> 
+                        <span style={{fontSize:'13px'}}>хвилин</span>  
+                        <span style={{fontSize:'13px'}}>секунд</span> 
+                      </div>
+                    </div>
+                    <div className="custom-deposit-button">
+                      <button onClick={onDepositClick}>ДЕПОЗИТ</button>
+                    </div>
+                  </div>     
+                </div>
 
-
-
-    <div className="custom-funds-tab">
-                <div className="custom-bonus-item">
-        <img src="/Profileimg/money.png" alt="Money Stack" className="custom-bonus-image" />
-        <div style={{marginLeft:'-100px'}}>
-          <h3 className="custom-bonus-details">Вітальний бонус - 100%</h3>
-          <h3 className="custom-bonus-details">до депозиту</h3>
-          <h3 className="custom-bonus-details" style={{marginTop:'20px'}}>Бонус: 3000$</h3>
-        </div>
-        <div className="custom-bonus-timer">
-          <p style={{marginRight:'40px', marginTop:'0px', marginBottom: '11px'}}>час до депозиту</p>
-          <div className="custom-timer">
-            <span style={{marginLeft:'3px', fontSize:'20px'}}>07</span> 
-            <span style={{marginLeft:'7px', fontSize:'20px'}}>{String(timeLeft.hours).padStart(2, '0')}</span>
-            <span style={{marginLeft:'15px', fontSize:'20px'}}>{String(timeLeft.minutes).padStart(2, '0')}</span>
-            <span style={{marginLeft:'22px', fontSize:'20px'}}>{String(timeLeft.seconds).padStart(2, '0')}</span>
-          </div>
-          <div className="custom-timer">
-            <span style={{fontSize:'13px'}}>днів</span>  
-            <span style={{fontSize:'13px'}}>годин</span> 
-            <span style={{fontSize:'13px'}}>хвилин</span>  
-            <span style={{fontSize:'13px'}}>секунд</span> 
-          </div>
-        </div>
-        <div className="custom-deposit-button">
-          <button onClick={onDepositClick}>ДЕПОЗИТ</button>
-        </div>
-      </div>     
-    </div>
-
-
-
-    <div className="custom-funds-tab">
-                <div className="custom-bonus-item">
-        <img src="/Profileimg/money.png" alt="Money Stack" className="custom-bonus-image" />
-        <div style={{marginLeft:'-100px'}}>
-          <h3 className="custom-bonus-details">Вітальний бонус - 100%</h3>
-          <h3 className="custom-bonus-details">до депозиту</h3>
-          <h3 className="custom-bonus-details" style={{marginTop:'20px'}}>Бонус: 3000$</h3>
-        </div>
-        <div className="custom-bonus-timer">
-          <p style={{marginRight:'40px', marginTop:'0px', marginBottom: '11px'}}>час до депозиту</p>
-          <div className="custom-timer">
-            <span style={{marginLeft:'3px', fontSize:'20px'}}>07</span> 
-            <span style={{marginLeft:'7px', fontSize:'20px'}}>{String(timeLeft.hours).padStart(2, '0')}</span>
-            <span style={{marginLeft:'15px', fontSize:'20px'}}>{String(timeLeft.minutes).padStart(2, '0')}</span>
-            <span style={{marginLeft:'22px', fontSize:'20px'}}>{String(timeLeft.seconds).padStart(2, '0')}</span>
-          </div>
-          <div className="custom-timer">
-            <span style={{fontSize:'13px'}}>днів</span>  
-            <span style={{fontSize:'13px'}}>годин</span> 
-            <span style={{fontSize:'13px'}}>хвилин</span>  
-            <span style={{fontSize:'13px'}}>секунд</span> 
-          </div>
-        </div>
-        <div className="custom-deposit-button">
-          <button onClick={onDepositClick}>ДЕПОЗИТ</button>
-        </div>
-      </div>     
-    </div>
+   
               </div>
               /* CUSTOM |BONUS */
               
